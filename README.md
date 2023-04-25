@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# ProLog
+___
+ProLog is a logistics business management application for
+manage logistics operations such as customer management,
+deliveries and carriers. It was developed in
+the framework of my graduation project using Spring Boot for the Backend
+and React for the frontend.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The two parts of the project are separated into two different repositories:
 
-## Available Scripts
+* [ProLog Frontend](https://github.com/abdellahfanidi/prolog-frontend)
 
-In the project directory, you can run:
+* [ProLog Backend](https://github.com/ouzlimnadir/prolog-backend)
 
-### `npm start`
+## functionality
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Customer Management: Add, Edit, Delete and View Customers, Manage Customer Status
+  and their follow-up.
+- Package management: Add, modify, delete and display deliveries, manage their status, assign a carrier and track their progress.
+- Invoice management: Add, edit, delete and view invoices.
+- Management of carriers: Add, modify, delete and display carriers,
+  manage their information and availability.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## technologies used
 
-### `npm test`
+- **Frontend** : html , css , js -> React (material ui ,react-router-dom ...), bootstrap , Axios
+- **Backend** : java -> Spring Boot... ( You will find more details in the backend repo)
+- **Base de données** : MySQL
+- **Outils de développement** : WebStorm , Git
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## requirement
 
-### `npm run build`
+- Java JDK 17 or higher
+- Node.js and npm installed
+- MySQL installed and configured
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Clone the repository from GitHub: `git clone https://github.com/abdellahfanidi/Frontend-Prolog`
+2. Import Frontend into your preferred IDE
+3.  Install dependencies by running npm install.
+4. Launch the frontend application by running npm start.
+5. Open a web browser and access the http://localhost:3000 URL to use the application
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Clone the repository for the backend and follow the steps above:
+1. Import the backend into your preferred IDE as a Maven project.
+2. Configure the MySQL database by updating the access information in the backend’s application.properties file (The schema automatically initializes).
+3. Install the configured dependencies in the `pom.xml`
+4. Launch the backend application by running the master class NomDeVotreApplication.java.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Captures d'écran
+- **Home Page**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Home Page]()
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Login**
 
-## ProLog ()
+![Login]()
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Registration**
 
-### Code Splitting
+![Registration]()
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## contribute
 
-### Analyzing the Bundle Size
+If you want to contribute to this project, you can open a new issue to report a bug, propose an improvement or submit a request for a merger (pull request) with your changes.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Auteur
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Fanidi Abdellah  - [Contactez-moi](mailto:abdellahfanidi997@gmail.com)
