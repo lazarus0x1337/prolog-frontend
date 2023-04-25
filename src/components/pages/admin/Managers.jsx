@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./css/manager.css";
 import { Table } from 'react-bootstrap';
 import Nav from "./Nav";
-import  manager  from "../data/Manager_data";
+import  manager  from "../services/Manager_data";
 import {Link,useNavigate} from 'react-router-dom';
 import { Button } from "@mui/material";
 const Managers = ({Toggle}) => {

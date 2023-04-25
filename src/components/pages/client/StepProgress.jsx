@@ -1,7 +1,7 @@
 import "./Step.css";
 import React from "react";
 import Nav from "../admin/Nav";
-import info_colis from '../data/info_colis';
+import info_colis from '../services/info_colis';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { Button, Typography } from "@mui/material";

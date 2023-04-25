@@ -5,7 +5,7 @@ import Colis from "../client/Colis";
 import Vehicules from "../client/Vehicules";
 import StepProgress from "../client/StepProgress";
 import Image from '../../images/new.png';
-
+import axios from "axios";
 const divStyle = {
     backgroundImage: `url(${Image})`,
     backgroundSize: 'cover',
@@ -15,6 +15,7 @@ const divStyle = {
 };
 
 function Client() {
+    const navigate = useNavigate();
     const location = useLocation();
     const [id,setId] = useState(new URLSearchParams(location.search).get('id')) // Récupérer la valeur de l'id à partir des query parameters
     const [tk,setTk] = useState(new URLSearchParams(location.search).get('tk'))
@@ -42,6 +43,16 @@ function Client() {
         setShowStep(false);
     }
 
+
+    const handleLogout = () => {
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${tk}` // Ajouter le token dans l'en-tête d'autorisation
+            }
+        };
+        axios.post("http://localhost:8080/api/v1/auth/logout",{},config)
+            .then(()=>{navigate('/home');})
+    }
 
     return (
 
@@ -82,7 +93,7 @@ function Client() {
 
                                 <a className='list-group-item py-2' >
                                     <i className="bi bi-power fs-5 me-3"/>
-                                    <NavLink to="/home"
+                                    <NavLink onClick={handleLogout}
                                              style={{ color: "black",textDecoration:'none'}}
                                              className={ (navClass) =>
                                                  navClass.isActive ? "nav__active nav__link" : "nav__link"}>Logout</NavLink>

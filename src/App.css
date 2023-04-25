@@ -161,14 +161,14 @@ nav ul li {
 }
 
 .income-form button[type="submit"]{
-    font-family: "Georgia", sans-serif;
+    font-family: "Arial Black", sans-serif;
     font-weight: bold;
     margin-top: 10px;
     position: relative;
     border-radius:  25px 25px ;
     width: 170px;
     height: 47px;
-    font-size: 16px;
+    font-size: 13px;
     border:none;
     outline: none;
     cursor: pointer;

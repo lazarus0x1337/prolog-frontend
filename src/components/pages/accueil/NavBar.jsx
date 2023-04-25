@@ -33,9 +33,6 @@ const NavBar = () => {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    let [access_token, setAccesToken] = useState(null);
-    let [id, setId] = useState(null);
-    let [role, setRole] = useState(null);
     async function useLogin(event){
         event.preventDefault();
         try{
@@ -47,7 +44,6 @@ const NavBar = () => {
 
                     if(response.status===200) {
                         const { access_token } = response.data;
-                        setAccesToken(access_token);
 
                         const config = {
                             headers: {
@@ -58,8 +54,6 @@ const NavBar = () => {
                         axios.get(`http://localhost:8080/api/v1/user/email/${email}`, config)
                             .then( response => {
                                 const { id, role, fullname } = response.data;
-                                setId(id);
-                                setRole(role);
                                 if(role==="ADMIN") navigate('/admin');
                                 else if(role==="CLIENT") navigate(`/client?id=${id}&tk=${access_token}&fullname=${fullname}`);
                             })
@@ -85,7 +79,7 @@ const NavBar = () => {
     async function useRegister(event){
         event.preventDefault();
         try{
-            await axios.post("http://localhost:8080/api/v1/auth/authenticate",
+            await axios.post("http://localhost:8080/api/v1/auth/register",
                 {
                     fullname:fullName,
                     email:emailRegister,
@@ -94,7 +88,6 @@ const NavBar = () => {
 
                 if(response.status===200) {
                     const { access_token } = response.data;
-                    setAccesToken(access_token);
 
                     const config = {
                         headers: {
@@ -102,20 +95,17 @@ const NavBar = () => {
                         }
                     };
 
-                    axios.get(`http://localhost:8080/api/v1/user/email/${email}`, config)
+                    axios.get(`http://localhost:8080/api/v1/user/email/${emailRegister}`, config)
                         .then( response => {
-                            const { id, role, fullname } = response.data;
-                            setId(id);
-                            setRole(role);
-                            if(role==="ADMIN") navigate('/admin');
-                            else if(role==="CLIENT") navigate(`/client?id=${id}&tk=${access_token}&fullname=${fullname}`);
+                            const { id, fullname } = response.data;
+                            navigate(`/client?id=${id}&tk=${access_token}&fullname=${fullname}`);
                         })
 
-                } else if (response.status===401 || response.status===403) alert("incorrect email and password");
+                } else if (response.status===401 || response.status===403) alert("Email is already exist");
 
 
             },fail=>{
-                alert("incorrect email and password not mutch");
+                alert("Email is already exist");
                 console.error(fail); //error
             });
         }
@@ -147,9 +137,9 @@ const NavBar = () => {
     //                 );
     //             }
     //         })
-    //         .then((data) => {
-    //             if (data) {
-    //                 user.setJwt(data);
+    //         .then((services) => {
+    //             if (services) {
+    //                 user.setJwt(services);
     //                 navigate("/admin");
     //             }
     //         });
@@ -340,7 +330,7 @@ const NavBar = () => {
                                     {/*    </label>*/}
 
                                     {/*</div>*/}
-                                    <button type="submit" className="btn"onClick={useLogin}>Login</button>
+                                    <button type="submit" className="btn" onClick={useLogin}>Login</button>
                                     <div className="login-register">
                                         <p>Don't have an account?
                                             <a className="register-link"  onClick={handleRegisterOpen}>Register</a>
@@ -371,7 +361,7 @@ const NavBar = () => {
                                                value={fullName}
                                                onChange={(e) => setFullName(e.target.value)}
                                                required/>
-                                        <label>Username</label>
+                                        <label>Full Name</label>
                                     </div>
                                     <div className="input-box">
                                         <span className="icon"><ion-icon name="mail"/></span>

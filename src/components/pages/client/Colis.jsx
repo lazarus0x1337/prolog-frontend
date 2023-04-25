@@ -1,7 +1,7 @@
 import { useState } from "react";
 import  Nav from "../admin/Nav";
 import { Table } from "react-bootstrap";
-import colis_data from "../data/colis_data_client";
+import colis_data from "../services/colis_data_client";
 import { Button, Typography } from "@mui/material";
 import React from "react";
 import Box from "@mui/material/Box";
