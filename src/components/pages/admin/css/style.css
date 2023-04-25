@@ -1,0 +1,18 @@
+.list-group a:hover{
+    background-color: #59EBFF ;
+    color : #000000;
+    cursor: pointer;
+}
+
+/*-----------------------sidebar precedent---------------------*/
+
+/*.sidebar__top img{*/
+/*    font-weight: 10 !important;*/
+/*    font-size: 10px;*/
+/*}*/
+.sidebar__top {
+    text-align: center;
+    margin-left: 11px;
+   /*color:var(--primary-blue);*/
+}
+

@@ -1,0 +1,546 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&display=swap');
+:root {
+    --primary-white: #ffffff;
+    --primary-blue: #00FFF0;
+    --primary-grey: #ccd1d9;
+    --primary-light-grey: #f4f4f4;
+    --primary-dark-grey: #9e9e9e;
+    --primary-dark: rgba(255, 255, 255, 0);
+    --primary-red: #35efef;
+    --primary-hover-red: #01f3eb;
+    --primary-black: #000000;
+    --primary-transparent-black: rgba(0,0,0,0.7);
+    --primary-green: green;
+    --secondary-color: #ffffff;
+    --body-bg: #0b0c28;
+    --card-01-bg: linear-gradient(#ef621c, #e1424e);
+    --card-02-bg: linear-gradient(#01d293, #56c57a);
+    --card-03-bg: #725cff;
+    --card-04-bg: #2884ff;
+    --heading-color: #fff;
+    --small-text-color: #808191;
+
+}
+.App{
+    text-align: center;
+    padding-top: 320px;
+    padding-left: 46%;
+}
+
+body {
+    font-family: "Roboto Condensed", sans-serif !important;
+}
+
+
+.navbar-toggler{
+    border-color: white ;
+    color: var(--primary-dark);
+}
+/************************ NAVBAR *********************************/
+
+/*.popupWrapper {*/
+/*    height: 0rem;*/
+/*    overflow: hidden;*/
+/*    transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);*/
+/*}*/
+
+/*.slideDown {*/
+/*    height: 20rem;*/
+/*}*/
+/*.navbar-expand-lg{*/
+/*    margin-bottom: 100px;*/
+/*}*/
+nav {
+    z-index: 2;
+
+}
+
+.logo {
+    width: 122px;
+}
+
+/*----- MENU LINKS --------*/
+
+nav .nav-link {
+    font-size: .8rem;
+    letter-spacing: 0.0375rem;
+    cursor: pointer;
+
+}
+
+nav ul li {
+    text-transform: uppercase;
+}
+
+.navbar-nav > li > a {
+    margin-right: 0.75rem;
+    margin-left: 0.75rem;
+    color: var(--primary-white) !important;
+    border-top: 0.1875rem solid var(--primary-dark);
+}
+
+.navbar-brand {
+    max-width: 17.25rem;
+    padding: 0 !important;
+    height: 6rem !important;
+}
+
+@media(max-width: 768px) {
+    .navbar-brand {
+        width: 7rem;
+    }
+}
+
+.navbar-nav > li > a.active,  .navbar-nav > li > a:focus {
+    border-top: 0.1875rem solid var(--primary-blue);
+}
+
+.navbar-nav > li > a:hover {
+    border-top: 0.1875rem solid var(--primary-blue);
+}
+
+.navbar-nav > li > Button .login-btn{
+   background-color: #00FFF0;
+}
+
+/************************ HEADER *********************************/
+.header-wrapper {
+    position: relative;
+    background: url("components/images/back1.png") no-repeat ;
+    background-size: cover;
+    background-position: center ;
+    height: 100vh;
+    /*backdrop-filter: blur(0.125rem);*/
+
+}
+.main-info {
+
+    display: flex;
+    position: absolute;
+    top: -20%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 1;
+
+}
+
+.main-info h1 {
+    color : white;
+    text-transform: uppercase;
+
+}
+
+.main-info h1 span{
+
+    color: var(--primary-blue) !important;
+}
+
+.income-form input{
+  position: relative;
+    display: inline-block;
+    font-size: 26px;
+    box-sizing: border-box;
+    transition: .5s;
+}
+
+.income-form input[type="text"]{
+    margin-top: 50px;
+    background: #fff;
+    width: 340px;
+    height: 50px;
+    border: none;
+    outline: none;
+    padding: 0 26px;
+    border-radius: 25px  25px;
+    font-size: 16px;
+}
+
+.income-form button[type="submit"]{
+    font-family: "Georgia", sans-serif;
+    font-weight: bold;
+    margin-top: 10px;
+    position: relative;
+    border-radius:  25px 25px ;
+    width: 170px;
+    height: 47px;
+    font-size: 16px;
+    border:none;
+    outline: none;
+    cursor: pointer;
+    background: var(--primary-blue);
+    color: #173636;
+}
+.income-form input[type="submit"]:hover{
+    background:var(--primary-dark-grey) ;
+}
+/*-------- TYPED TEXT ---------------*/
+.typed-text {
+    font-size: 2rem;
+    color: var(--primary-blue);
+    /*font-family: "Bodoni MT";*/
+    backdrop-filter: blur(.2rem) ;
+}
+
+@media(max-width: 768px) {
+    .main-info h1 {
+        font-size: 1.7rem !important;
+    }
+    .typed-text {
+        font-size: 1.3rem !important;
+
+    }
+}
+
+/*-------- HEADER MAIN OFFER BUTTON ---------------*/
+
+
+
+.btn-main-offer {
+    border: 1px solid var(--primary-red);
+    text-transform: uppercase;
+    border-radius: 20px;
+    padding: 0.625rem 0.75rem 0.75rem 0.75rem;
+    color: var(--primary-white);
+    margin: 2rem;
+
+}
+
+.btn-main-offer:hover {
+    text-decoration: none;
+    background-color: var(--primary-hover-red);
+    color: var(--primary-white);
+    transition:  .2s ease-in-out;
+    margin-bottom: 22rem;
+}
+
+
+
+/*-------- ABOUT US---------------*/
+
+
+.photo-wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.profile-img{
+    width: 30rem;
+    height: 20rem;
+    border-radius: 5%;
+    padding: .3rem;
+}
+.about-heading{
+    color : var(--primary-blue);
+    text-transform: uppercase;
+}
+
+@media(max-width: 468px) {
+    .profile-img {
+        width: 10rem;
+    }
+}
+
+
+
+/************************ SERVICES *********************************/
+.services {
+    text-align: center;
+    padding-bottom: 5rem;
+    background: var(--primary-light-grey);
+}
+
+.services h1 {
+    color: black !important;
+    text-transform: uppercase;
+}
+
+/*.services .circle {*/
+/*    position: relative;*/
+/*    margin: 0.375rem auto;*/
+/*    background: var(--primary-blue);*/
+/*    border-radius: 50%;*/
+/*    width: 3.125rem;*/
+/*    height: 3.125rem;*/
+/*}*/
+
+.services .icon {
+    font-size: 1.4rem;
+    color: var(--primary-white);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.services .box {
+    height: 16rem;
+    border-bottom: 0.3125rem solid var(--primary-blue);
+    padding: 0.625rem;
+    margin-bottom: 1.875rem;
+    background: var(--primary-white);
+}
+
+.services .box:hover {
+    background: var(--primary-blue);
+    border-bottom: 0.3125rem solid var(--primary-dark);
+}
+
+.services .box:hover .icon {
+    color: var(--primary-dark);
+}
+
+.services .box:hover .circle {
+    background: var(--primary-white);
+}
+
+.services .box:hover p {
+    color: var(--primary-white);
+}
+
+/************************ TESTIMONIALS *********************************/
+.testimonials {
+    background-image: url(components/images/testimonials-bg.jpg);
+    background-size: cover;
+    background-color: black;
+    text-align: center;
+    padding-bottom: 4rem;
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.testimonials h1 {
+    color: var(--primary-blue);
+    padding: 3rem 0;
+    text-transform: uppercase;
+}
+
+.testimonials-content {
+    text-align: center;
+    max-width: 53.125rem;
+    margin: 0 auto 2rem auto;
+    background: var(--primary-transparent-black);
+}
+
+.myCarousel {
+    color: var(--primary-white);
+    background: transparent;
+    margin-top: -6%;
+    width: 54%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 6%;
+    padding-bottom: 8%;
+    padding-left: 5%;
+    padding-right: 5%;
+    height: 17.875rem;
+}
+
+.myCarousel h3 {
+    color: var(--primary-blue);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.myCarousel p {
+    color: grey;
+}
+
+.carousel .slide img {
+    width: 10rem !important;
+    border-radius: 50%;
+}
+
+.carousel .slide {
+    background: transparent !important;
+    height: 100% !important;
+    padding-top: 2rem;
+}
+
+.carousel-root {
+    margin: auto !important;
+    margin-top: 3% !important;
+}
+
+/************************ CONTACTS COMPONENT *********************************/
+.contacts {
+    background-color: var(--primary-dark);
+    padding: 3rem 0;
+}
+
+.contacts h1 {
+    color: var(--primary-blue);
+    padding: 1.3rem 0;
+    text-transform: uppercase;
+}
+
+.contacts p {
+    color: var(--primary-light-grey);
+    font-size: 1.2rem;
+}
+/*--------------------------- INPUT --============-------------*/
+.contacts input, .contacts textarea {
+    width: 100%;
+    box-sizing: border-box;
+    background: none;
+    resize: none;
+    border: 0;
+    border-bottom: 0.125rem solid var(--primary-dark-grey);
+    border-radius: 0;
+    color: var(--primary-blue);
+    outline: 0 !important;
+    box-shadow: none !important;
+    margin-bottom: 1rem;
+    padding-left: 0 !important;
+}
+
+.contacts .container {
+    padding: 4rem 0;
+}
+
+.contacts input:focus, .contacts textarea:focus {
+    background: transparent;
+    color: var(--primary-blue);
+    border-bottom: 0.125rem solid var(--primary-dark-grey);
+}
+
+.contacts textarea {
+    height: 12.2rem !important;
+}
+
+.contact-btn {
+    margin: 1rem 0 0 0;
+    width: 100%;
+    background: none;
+}
+
+.line,.line_text {
+    position: relative;
+    top: -2rem;
+    width: 0;
+    height: 0.1rem;
+    background: var(--primary-blue);
+    display: inline-block;
+
+}
+
+
+input:focus+.line, textarea:focus+.line {
+    width: 100%;
+    transition: width 0.5s ease-in-out;
+}
+
+
+textarea.form-control {
+    margin: -0.3rem 0;
+}
+
+/*---------------- MEDIA -----------------------*/
+@media(max-width: 768px) {
+    .contacts {
+        overflow-x: hidden;
+    }
+
+    .contacts .container {
+        padding: 0 1rem;
+    }
+
+    .contacts p {
+        padding: 0 0.4rem;
+    }
+}
+.error-message {
+    color: var(--primary-white);
+    background: var(--primary-hover-red);
+    text-align: left;
+}
+
+.success-message {
+    font-weight: 900;
+    color: var(--primary-green);
+}
+
+/*-------- Footer ---------------*/
+.footer {
+    background: var(--primary-black);
+    color: var(--primary-dark-grey);
+    padding: 3rem;
+}
+
+.footer a {
+    text-decoration: none;
+    color: var(--primary-dark-grey);
+}
+
+.footer a:hover {
+    text-decoration: none;
+    color: var(--primary-blue);
+    cursor:pointer;
+}
+
+.footer p {
+    margin-bottom: 0;
+}
+
+/*-------- search ---------------*/
+.form-outline input{
+    width: 100%;
+    height: 120%;
+    display: block;
+    border-radius: 16px;
+    font-size: 20px;
+    padding: 8px 40px 8px 20px;
+    border: none;
+}
+.form-outline input:focus{
+    outline: none;
+}
+
+.form-outline button{
+    position: absolute;
+    top: 0;
+    right: 71%;
+
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 18px;
+}
+
+.form-outline button i{
+    color: rgb(93, 94, 95);
+}
+
+.form-outline button:hover i{
+    color: rgb(162, 163, 163);
+}
+
+/*----------------------------search-----------------------------*/
+
+input#form1.form-control{
+    margin: 5px;
+    width: 30%;
+    height: 10%;
+    border-radius: 5px;
+}
+.search-form Button{
+    margin-top: 5px;
+    margin-left: 10px;
+    color:black;
+    background-color: var(--primary-blue);
+}
+
+
+/*------------------------------interfaces------------------------*/
+
+#interface.container-fluid{
+    color: var(--primary-blue);
+}
+
+
