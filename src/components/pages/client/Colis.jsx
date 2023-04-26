@@ -25,15 +25,7 @@ function Colis(props){
     function nextPage(){
         if(currentPage !== npage) setCurrentPage(currentPage + 1)
     }
-    const style = {
-        backgroundColor:'white',
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 500,
-        p: 4,
-    };
+
 
     const [loginOpen, setLoginOpen] = React.useState(false);
     const handleLoginOpen = () => {
@@ -72,12 +64,7 @@ function Colis(props){
                     </div>
                 </div>
                 <Modal open={loginOpen} onClose={handleLoginClose}>
-                    <Box sx={style}>
-                        <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
-                            <FormColis/>
-                        </Typography>
-
-                    </Box>
+                    <FormColis/>
                 </Modal>
               <br/>
                 <div>
@@ -104,8 +91,8 @@ function Colis(props){
                                 <td>{item.colis.destinataire.adresse}</td>
                                 <td>{item.colis.poids}</td>
                                 <td>{item.colis.longueur*item.colis.largeur*item.colis.hauteur}</td>
-                                <td>{item.colis.fragile ? <i className="bi bi-box-fill " style={{color:"#00FF03",paddingLeft:"12px"}}></i> : <i className="bi bi-box-fill " style={{color:"#FF0000",paddingLeft:"12px"}}></i>}</td>
-                                <td>{item.colis.froid ? <i className="bi bi-box-fill " style={{color:"#00FF03",paddingLeft:"12px"}}></i> : <i className="bi bi-box-fill " style={{color:"#FF0000",paddingLeft:"12px"}}></i>}</td>
+                                <td>{item.colis.fragile ? <i className="bi bi-box-fill " style={{color:"#00FF03",paddingLeft:"12px"}}/> : <i className="bi bi-box-fill " style={{color:"#FF0000",paddingLeft:"12px"}}/>}</td>
+                                <td>{item.colis.froid ? <i className="bi bi-box-fill " style={{color:"#00FF03",paddingLeft:"12px"}}/> : <i className="bi bi-box-fill " style={{color:"#FF0000",paddingLeft:"12px"}}/>}</td>
                                 <td><a href="">Imprimer</a></td>
                             </tr>
                         ))}

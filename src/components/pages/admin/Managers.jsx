@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./css/manager.css";
+import "../css/manager.css";
 import { Table } from 'react-bootstrap';
 import Nav from "./Nav";
 import  manager  from "../services/Manager_data";

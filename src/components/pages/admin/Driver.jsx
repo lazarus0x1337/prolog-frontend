@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DriverData from "../services/Driver_data";
 import { Table } from "react-bootstrap";
-import './css/client.css';
+import '../css/client.css';
 import Nav from "./Nav";
 
 const Driver = ({Toggle}) => {

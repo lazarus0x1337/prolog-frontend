@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./css/client.css";
+import "../css/client.css";
 import ClientData from "../services/Client_data";
 import { Table } from "react-bootstrap";
 import Nav from "./Nav";

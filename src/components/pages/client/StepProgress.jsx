@@ -1,4 +1,4 @@
-import "./Step.css";
+import "../css/Step.css";
 import React from "react";
 import Nav from "../admin/Nav";
 import info_colis from '../services/info_colis';

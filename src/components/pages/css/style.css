@@ -1,0 +1,54 @@
+.list-group a:hover{
+    background-color: #59EBFF;
+    color : #000000;
+    cursor: pointer;
+}
+.list-group a{
+background-color: transparent;
+}
+
+.class1{
+    background-color: #ffffff;
+    opacity: 4;
+    margin: 7px 7px;
+    border-radius: 5px;
+}
+.class2{
+    background-color: #ffffff;
+    opacity: 5;
+}
+/*-----------------------sidebar precedent---------------------*/
+
+/*.sidebar__top img{*/
+/*    font-weight: 10 !important;*/
+/*    font-size: 10px;*/
+/*}*/
+.sidebar__top {
+    text-align: center;
+    margin-left: 11px;
+   /*color:var(--primary-blue);*/
+}
+
+/*-------------------------Vehicules -----------------------------*/
+
+.camion div{
+    font-family: "Roboto Condensed", cursive;
+}
+
+.camion{
+    opacity: 3;
+    border-radius: 7px;
+    background-color: #ffffff;
+
+}
+.vehicules Button{
+    margin-top: 30px;
+    background-color:#ffffff;
+    border-radius: 7px;
+    font-family: "Roboto Condensed", cursive;
+    margin-left: 410px;
+}
+.vehicules Button:hover{
+    background-color: #00FFF0;
+
+}

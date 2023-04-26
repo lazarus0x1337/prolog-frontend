@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import '../admin/css/style.css';
+import '../css/style.css';
 import { NavLink } from "react-router-dom";
-import Image from '../../images/new.png';
+import Image from '../../images/00.jpg';
 import Dashboard from "../admin/Dashboard";
 import Managers from "../admin/Managers";
 import Clients from "../admin/Clients";
@@ -57,7 +57,7 @@ function Admin() {
 
                         <div className='bg-white sidebar p-2'>
                             <div className='sidebar__top m-1'>
-                                <i className="bi bi-caret-right-fill"/>
+                                {/*<i className="bi bi-caret-right-fill"/>*/}
                                 <span className='brand-name' >Welcome</span>
                             </div>
                             <hr className='text-dark' />

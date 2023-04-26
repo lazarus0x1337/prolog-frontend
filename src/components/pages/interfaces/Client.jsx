@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import '../admin/css/style.css';
+import '../css/style.css';
 import {NavLink, useLocation, useNavigate, useParams} from "react-router-dom";
 import Colis from "../client/Colis";
 import Vehicules from "../client/Vehicules";
 import StepProgress from "../client/StepProgress";
-import Image from '../../images/new.png';
+import Image from '../../images/00.jpg';
 import axios from "axios";
 const divStyle = {
     backgroundImage: `url(${Image})`,
@@ -59,41 +59,40 @@ function Client() {
         <>
             <div className='container-fluid  min-vh-100 ' style={divStyle}>
                 <div className='row '>
-                    {toggle && <div className='col-4 col-md-2 bg-white vh-100 position-fixed'>
+                    {toggle && <div className='col-4 col-md-2 class1 vh-100 position-fixed'>
 
-                        <div className='bg-white sidebar p-2'>
+                        <div className='class2 sidebar p-2'>
                             <div className='sidebar__top m-1'>
-                                <i className="bi bi-caret-right-fill"/>
+                                {/*<i className="bi bi-caret-right-fill"/>*/}
                                 <span className='brand-name' >Welcome</span>
                             </div>
                             <hr className='text-dark' />
                             <div className='list-group list-group-flush'>
 
-                                <a className='list-group-item py-2' >
+                                <a className='list-group-item py-2' onClick={handleClick1}>
                                     <i className="bi bi-binoculars fs-5 me-3"/>
-                                    <NavLink onClick={handleClick1}
+                                    <NavLink
                                              style={{ color: "black",textDecoration:'none'}}
                                              className={ (navClass) =>
-                                                 navClass.isActive ? "nav__active nav__link" : "nav__link"}>Tracking Number</NavLink>
+                                                 navClass.isActive ? "nav__active nav__link" : "nav__link"}>Tracking</NavLink>
                                 </a>
-                                <a className='list-group-item py-2' >
+                                <a className='list-group-item py-2' onClick={handleClick2} >
                                     <i className="bi bi-box-seam fs-5 me-3"/>
-                                    <NavLink onClick={handleClick2}
+                                    <NavLink
                                              style={{ color: "black",textDecoration:'none'}}
                                              className={ (navClass) =>
                                                  navClass.isActive ? "nav__active nav__link" : "nav__link"}>My Packages</NavLink>
                                 </a>
-                                <a className='list-group-item py-2' >
+                                <a className='list-group-item py-2' onClick={handleClick3} >
                                     <i className="bi bi-truck fs-5 me-3"/>
-                                    <NavLink onClick={handleClick3}
+                                    <NavLink
                                              style={{ color: "black",textDecoration:'none'}}
-                                             className={ (navClass) =>
-                                                 navClass.isActive ? "nav__active nav__link" : "nav__link"}>Rented Trucks</NavLink>
+                                             className={ (navClass) =>                                                navClass.isActive ? "nav__active nav__link" : "nav__link"}>Rented Trucks</NavLink>
                                 </a>
 
-                                <a className='list-group-item py-2' >
+                                <a className='list-group-item py-2' onClick={handleLogout} >
                                     <i className="bi bi-power fs-5 me-3"/>
-                                    <NavLink onClick={handleLogout}
+                                    <NavLink
                                              style={{ color: "black",textDecoration:'none'}}
                                              className={ (navClass) =>
                                                  navClass.isActive ? "nav__active nav__link" : "nav__link"}>Logout</NavLink>
