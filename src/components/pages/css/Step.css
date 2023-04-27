@@ -1,3 +1,6 @@
+
+
+
 .form-control {
     height: 34px;
     padding: 6px 12px;
@@ -30,7 +33,9 @@
     background-color: #eee;
     opacity: 1;
 }
-
+.event-time {
+    color: var(--color-font);
+}
 
 
 .input-group {
@@ -167,7 +172,7 @@
 }
 
 .tracking-info .parcel-name a {
-    color: #337ab7;
+    color: #00FFF0;
     font-size: 1.3em;
     line-height: 1.5em
 }
@@ -175,7 +180,7 @@
 .tracking-info .events {
     border: 1px solid #ddd;
     position: relative;
-    border-radius: 3px
+    border-radius: 3px;
 }
 
 .tracking-info .events li:before {
@@ -204,11 +209,11 @@
 .tracking-info .event {
     padding: 25px 0 15px 0;
     position: relative;
-    background-color: #F1F5F9!important
+    background-color: var(--color-list)!important
 }
 
 .tracking-info .event:hover {
-    background-color: #00ffff !important
+    background-color: var(--color-list-hover) !important
 }
 
 .tracking-info .event .event-time {
@@ -218,7 +223,7 @@
 }
 
 .tracking-info .event .event-time span {
-    color: #95a5a6;
+    color: var(--color-font-2);
     display: block
 }
 
@@ -231,7 +236,7 @@
     line-height: 28px;
     font-size: 14px;
     text-align: center;
-    background-color: #fff;
+    background-color: var(--color-cercle-big);
     border: 1px solid #ddd;
     border-radius: 18px;
     z-index: 10
@@ -240,7 +245,7 @@
 .tracking-info .event .event-dot:before {
     content: "";
     display: block;
-    background-color: #ddd;
+    background-color: var(--color-cercle-small);
     width: 12px;
     height: 12px;
     position: absolute;
@@ -251,6 +256,7 @@
 }
 
 .tracking-info .event .event-content {
+    color: var(--color-font);
     margin-left: 170px;
     padding-right: 10px;
     min-height: 55px;
@@ -265,7 +271,7 @@
 }
 
 .tracking-info .event .event-content>span {
-    color: #95a5a6;
+    color: var(--color-font-3);
     display: block
 }
 
@@ -276,7 +282,7 @@
     right: 0;
     color: #1f1f1f;
     font-size: 0.6em;
-    background-color: #ededed;
+    background-color: var(--color-list-hover);
     text-transform: uppercase;
     border-bottom-left-radius: 3px
 }
@@ -285,4 +291,14 @@
     color: #337ab7;
     display: block;
     margin-top: 1em
+}
+.search-form Button{
+    margin-top: 5px;
+    margin-left: 10px;
+    color:black;
+    background-color: var(--color-list-hover);
+}
+.search-form Button:hover {
+    background-color: #01f3eb;
+    border: 2px none var(--color-list-hover);
 }

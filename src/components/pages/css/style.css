@@ -1,23 +1,26 @@
 .list-group a:hover{
-    background-color: #59EBFF;
-    color : #000000;
+    background-color:var(--color-menu-hover);
+    color : var(--color-font-hover);
     cursor: pointer;
+    border-radius: 5px;
 }
 .list-group a{
-background-color: transparent;
+    color : var(--color-font);
+    background-color: transparent;
 }
 
 .class1{
-    background-color: #ffffff;
+    background-color: var(--color-menu);
     opacity: 4;
-    margin: 7px 7px;
+    margin: 13px 13px;
     border-radius: 5px;
 }
 .class2{
-    background-color: #ffffff;
+    background-color: transparent;
     opacity: 5;
 }
-/*-----------------------sidebar precedent---------------------*/
+
+/*-----------------------sidelist-groupbar precedent---------------------*/
 
 /*.sidebar__top img{*/
 /*    font-weight: 10 !important;*/
@@ -51,4 +54,7 @@ background-color: transparent;
 .vehicules Button:hover{
     background-color: #00FFF0;
 
+}
+.brand-name{
+    color: var(--color-font)
 }

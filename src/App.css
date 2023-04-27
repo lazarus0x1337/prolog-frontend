@@ -20,6 +20,30 @@
     --heading-color: #fff;
     --small-text-color: #808191;
 
+    /* Theme layout */
+    --color-degrade3-1: #1f282d;
+    --color-degrade3-2: #343f45;
+    --color-degrade3-3: #3a4950;
+    --color-degrade3-4: #40545e;
+    --color-degrade3-5: #4a6670;
+    --color-degrade3-6: #50717b;
+
+    --color-degrade2-1: #313131;
+    --color-degrade2-2: #383838;
+    --color-degrade2-3: #434343;
+
+    --color-menu: #1f282d;
+    --color-menu-hover: #343f45;
+    --color-list: #1f282d;
+    --color-list-hover: #343f45;
+    --color-font: #50717b;
+    --color-font-2: grey;
+    --color-font-3: grey;
+    --color-font-hover: #01f3eb;
+    --color-cercle-big: grey;
+    --color-cercle-small: #01f3eb;
+
+
 }
 .App{
     text-align: center;
@@ -529,12 +553,7 @@ input#form1.form-control{
     height: 10%;
     border-radius: 5px;
 }
-.search-form Button{
-    margin-top: 5px;
-    margin-left: 10px;
-    color:black;
-    background-color: var(--primary-blue);
-}
+
 
 
 /*------------------------------interfaces------------------------*/
