@@ -147,14 +147,19 @@ const NavBar = () => {
     const Button = styled.button`
       background-color: transparent;
       border: 3px solid var(--primary-red);
-      text-transform: uppercase;
+      //text-transform: uppercase;
       border-radius: 40% 15% 40% 15% ;
       padding: 0.3rem 0.7rem 0.3rem 0.7rem;
       color: #ffffff;
       margin-left: 1.3rem ;
+      
+      
 
       &:hover {
         background-color: var(--primary-hover-red);
+        //box-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+        box-shadow: 10px 1px 20px rgba(53, 239, 239, 0.4);
+        color : dimgrey;
       }
     `;
     const [colorChange, setColorchange] = useState(false);
@@ -284,7 +289,7 @@ const NavBar = () => {
                                 {/*>*/}
                                 {/*    Login / Register*/}
                                 {/*</Link>*/}
-                                <Button className="login-btn" color="white" onClick={handleLoginOpen} >Login</Button>
+                                <Button className="login-btn" onClick={handleLoginOpen} >Log in</Button>
                             </li>
                         </ul>
                     </div>
