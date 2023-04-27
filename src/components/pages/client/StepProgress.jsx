@@ -14,12 +14,12 @@ const StepProgress = (props) =>{
 
 
             {/*table de tracking*/}
-            <section className="tracking-info" id="tracking-info" style={{position:"relative"}}>
+            <section className="tracking-info " id="tracking-info" style={{position:"relative"}}>
                 <div className="container">
                     <div className="input-group">
                         <div className="container search-form">
                             <input type="search" id="form1" className="form-control" placeholder="tracking number..." />
-                            <Button variant="contained" >Search</Button>
+                            <Button className="searchButton" variant="contained" >Search</Button>
 
                         </div>
                     </div>

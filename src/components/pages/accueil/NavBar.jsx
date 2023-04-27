@@ -312,6 +312,7 @@ const NavBar = () => {
                                         <span className="icon"><ion-icon name="mail"/></span>
                                         <input type="email" id="input_email"
                                                value={email}
+                                               required
                                                onChange={(e) => setEmail(e.target.value)}
                                         />
                                         <label>Email</label>
@@ -320,6 +321,7 @@ const NavBar = () => {
                                         <span className="icon"><ion-icon name="lock-closed"/></span>
                                         <input id="input_pass" type="password"
                                                value={password}
+                                               required
                                                onChange={(e) => setPassword(e.target.value)}
                                         />
                                         <label>Password</label>

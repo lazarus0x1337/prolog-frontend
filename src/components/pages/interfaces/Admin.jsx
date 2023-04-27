@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import '../css/style.css';
 import { NavLink } from "react-router-dom";
-import Image from '../../images/00.jpg';
+import Image from '../../images/background_darkblue.jpeg';
 import Dashboard from "../admin/Dashboard";
 import Managers from "../admin/Managers";
 import Clients from "../admin/Clients";

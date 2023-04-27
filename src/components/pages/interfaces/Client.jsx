@@ -4,7 +4,7 @@ import {NavLink, useLocation, useNavigate, useParams} from "react-router-dom";
 import Colis from "../client/Colis";
 import Vehicules from "../client/Vehicules";
 import StepProgress from "../client/StepProgress";
-import Image from '../../images/00.jpg';
+import Image from '../../images/verctbg.jpeg';
 import axios from "axios";
 const divStyle = {
     backgroundImage: `url(${Image})`,
@@ -13,6 +13,11 @@ const divStyle = {
     height: 'auto',
     width:'auto',
 };
+    const styleNavLink = {
+        color: "var(--color-font)",
+        textDecoration:'none',
+        ':hover': {color: "var(--color-font-hover)"}
+    };
 
 function Client() {
     const navigate = useNavigate();
@@ -72,30 +77,30 @@ function Client() {
                                 <a className='list-group-item py-2' onClick={handleClick1}>
                                     <i className="bi bi-binoculars fs-5 me-3"/>
                                     <NavLink
-                                             style={{ color: "black",textDecoration:'none'}}
-                                             className={ (navClass) =>
-                                                 navClass.isActive ? "nav__active nav__link" : "nav__link"}>Tracking</NavLink>
+                                        style={styleNavLink}
+                                        className={ (navClass) =>
+                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>Tracking</NavLink>
                                 </a>
                                 <a className='list-group-item py-2' onClick={handleClick2} >
                                     <i className="bi bi-box-seam fs-5 me-3"/>
                                     <NavLink
-                                             style={{ color: "black",textDecoration:'none'}}
-                                             className={ (navClass) =>
-                                                 navClass.isActive ? "nav__active nav__link" : "nav__link"}>My Packages</NavLink>
+                                        style={styleNavLink}
+                                        className={ (navClass) =>
+                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>My Packages</NavLink>
                                 </a>
                                 <a className='list-group-item py-2' onClick={handleClick3} >
                                     <i className="bi bi-truck fs-5 me-3"/>
                                     <NavLink
-                                             style={{ color: "black",textDecoration:'none'}}
-                                             className={ (navClass) =>                                                navClass.isActive ? "nav__active nav__link" : "nav__link"}>Rented Trucks</NavLink>
+                                        style={styleNavLink}
+                                        className={ (navClass) =>                                                navClass.isActive ? "nav__active nav__link" : "nav__link"}>Rented Trucks</NavLink>
                                 </a>
 
                                 <a className='list-group-item py-2' onClick={handleLogout} >
                                     <i className="bi bi-power fs-5 me-3"/>
                                     <NavLink
-                                             style={{ color: "black",textDecoration:'none'}}
-                                             className={ (navClass) =>
-                                                 navClass.isActive ? "nav__active nav__link" : "nav__link"}>Logout</NavLink>
+                                        style={styleNavLink}
+                                        className={ (navClass) =>
+                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>Logout</NavLink>
                                 </a>
 
                             </div>
