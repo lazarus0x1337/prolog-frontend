@@ -178,9 +178,10 @@
 }
 
 .tracking-info .events {
-    border: 1px solid #ddd;
+    border: 1px none #ddd;
     position: relative;
     border-radius: 3px;
+    /*box-shadow: 0 0 5px rgba(53,239,239, 0.8);*/
 }
 
 .tracking-info .events li:before {
@@ -191,7 +192,7 @@
     left: 133px;
     bottom: 0;
     content: "";
-    background-color: #ddd
+    background-color: var(--color-cercle-small)
 }
 
 .tracking-info .events li:nth-child(even) {
@@ -237,7 +238,7 @@
     font-size: 14px;
     text-align: center;
     background-color: var(--color-cercle-big);
-    border: 1px solid #ddd;
+    border: 1px solid var(--color-cercle-small);
     border-radius: 18px;
     z-index: 10
 }
@@ -293,12 +294,15 @@
     margin-top: 1em
 }
 .search-form Button{
+    /*font-family: Algerian,"sans-serif";*/
     margin-top: 5px;
     margin-left: 10px;
-    color:black;
+    color: #35efef;
     background-color: var(--color-list-hover);
 }
 .search-form Button:hover {
+    color: var(--color-list-hover);
     background-color: #01f3eb;
     border: 2px none var(--color-list-hover);
+    box-shadow: 5px 1px 15px rgba(53, 239, 239, 0.4);
 }

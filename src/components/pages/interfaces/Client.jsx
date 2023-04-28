@@ -4,7 +4,7 @@ import {NavLink, useLocation, useNavigate, useParams} from "react-router-dom";
 import Colis from "../client/Colis";
 import Vehicules from "../client/Vehicules";
 import StepProgress from "../client/StepProgress";
-import Image from '../../images/verctbg.jpeg';
+import Image from '../../images/verctbg.jpg';
 import axios from "axios";
 const divStyle = {
     backgroundImage: `url(${Image})`,
@@ -63,10 +63,10 @@ function Client() {
 
         <>
             <div className='container-fluid  min-vh-100 ' style={divStyle}>
-                <div className='row '>
+                <div className='row ' style={{position: "relative"}}>
                     {toggle && <div className='col-4 col-md-2 class1 vh-100 position-fixed'>
 
-                        <div className='class2 sidebar p-2'>
+                        <div className='class2 sidebar p-2' >
                             <div className='sidebar__top m-1'>
                                 {/*<i className="bi bi-caret-right-fill"/>*/}
                                 <span className='brand-name' >Welcome</span>
@@ -94,8 +94,21 @@ function Client() {
                                         style={styleNavLink}
                                         className={ (navClass) =>                                                navClass.isActive ? "nav__active nav__link" : "nav__link"}>Rented Trucks</NavLink>
                                 </a>
-
-                                <a className='list-group-item py-2' onClick={handleLogout} >
+                                <a className='list-group-item py-2' onClick={handleClick3} >
+                                    <i className="bi bi-person fs-5 me-3"/>
+                                    <NavLink
+                                        style={styleNavLink}
+                                        className={ (navClass) =>
+                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>Profile</NavLink>
+                                </a>
+                                <a className='list-group-item py-2' onClick={handleClick3} >
+                                    <i className="bi bi-gear fs-5 me-3"/>
+                                    <NavLink
+                                        style={styleNavLink}
+                                        className={ (navClass) =>
+                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>Setting</NavLink>
+                                </a>
+                                <a className='list-group-item' onClick={handleLogout} style={{position:"absolute", bottom:"5px"}}>
                                     <i className="bi bi-power fs-5 me-3"/>
                                     <NavLink
                                         style={styleNavLink}

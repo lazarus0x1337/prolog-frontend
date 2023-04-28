@@ -47,7 +47,7 @@ function Colis(props){
     axios.get(`http://localhost:8080/api/v1/factureColis/clientId/${props.id}`, config)
         .then(response => {
             setFactures(response.data); // liste
-            factures.map((a,i)=>{console.log(a.colis.trackingNumber)})
+            factures.map((a,i)=>{console.log(a.colis.trackingNumber.trackingNumber)})
 
         })
 
@@ -86,7 +86,7 @@ function Colis(props){
 
                         {factures?.map((item,i) => (
                             <tr key={i}  >
-                                <th scope="row" className='pl-5'>{item.colis.trackingNumber}</th>
+                                <th scope="row" className='pl-5'>{item.colis.trackingNumber.trackingNumber}</th>
                                 <td>{item.colis.adresse}</td>
                                 <td>{item.colis.destinataire.adresse}</td>
                                 <td>{item.colis.poids}</td>

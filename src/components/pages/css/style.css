@@ -12,8 +12,10 @@
 .class1{
     background-color: var(--color-menu);
     opacity: 4;
-    margin: 13px 13px;
-    border-radius: 5px;
+    margin: 1%;
+    border-radius: 10px;
+    height: 96% !important;
+    box-shadow: 0.7px 0.3px 2px rgba(53,239,239, 0.8);
 }
 .class2{
     background-color: transparent;
@@ -53,7 +55,6 @@
 }
 .vehicules Button:hover{
     background-color: #00FFF0;
-
 }
 .brand-name{
     color: var(--color-font)
