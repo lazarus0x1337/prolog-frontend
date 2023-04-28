@@ -281,7 +281,7 @@
     padding: 5px 6px;
     top: -25px;
     right: 0;
-    color: #1f1f1f;
+    color: var(--primary-blue);
     font-size: 0.6em;
     background-color: var(--color-list-hover);
     text-transform: uppercase;
@@ -305,4 +305,9 @@
     background-color: #01f3eb;
     border: 2px none var(--color-list-hover);
     box-shadow: 5px 1px 15px rgba(53, 239, 239, 0.4);
+}
+
+.step-tracking{
+    border-radius: 10px;
+    overflow: hidden;
 }

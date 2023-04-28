@@ -15,8 +15,8 @@ const StepProgress = (props) =>{
 
             {/*table de tracking*/}
             <section className="tracking-info " id="tracking-info" style={{position:"relative"}}>
-                <div className="container">
-                    <div className="input-group">
+                <div className="container ">
+                    <div className="input-group ">
                         <div className="container search-form">
                             <input type="search" id="form1" className="form-control" placeholder="tracking number..." />
                             <Button className="searchButton" variant="contained" >Search</Button>
@@ -25,8 +25,8 @@ const StepProgress = (props) =>{
                     </div>
                     <br/>
 
-                    <div className="col-md-12 col-lg-12">
-                        <ul className="list-unstyled events">
+                    <div className="col-md-12 col-lg-12  step-tracking">
+                        <ul className="list-unstyled events ">
 
                             {info_colis.map((item,i) => (
                                 <li className="event" key={i} >

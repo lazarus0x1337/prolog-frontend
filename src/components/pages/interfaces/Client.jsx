@@ -6,6 +6,8 @@ import Vehicules from "../client/Vehicules";
 import StepProgress from "../client/StepProgress";
 import Image from '../../images/verctbg.jpg';
 import axios from "axios";
+import img1 from "../../images/logo/prolog1.png";
+import img2 from "../../images/logo/prolog2.png";
 const divStyle = {
     backgroundImage: `url(${Image})`,
     backgroundSize: 'cover',
@@ -68,10 +70,10 @@ function Client() {
 
                         <div className='class2 sidebar p-2' >
                             <div className='sidebar__top m-1'>
-                                {/*<i className="bi bi-caret-right-fill"/>*/}
-                                <span className='brand-name' >Welcome</span>
+                                 <img src={img2} className="img2"/><img src={img1} className="img1"/>
+                                {/*<span className='brand-name' >Welcome</span>*/}
                             </div>
-                            <hr className='text-dark' />
+                            <hr style={{borderColor:"var(--color-cercle-small)"}} />
                             <div className='list-group list-group-flush'>
 
                                 <a className='list-group-item py-2' onClick={handleClick1}>
@@ -92,7 +94,8 @@ function Client() {
                                     <i className="bi bi-truck fs-5 me-3"/>
                                     <NavLink
                                         style={styleNavLink}
-                                        className={ (navClass) =>                                                navClass.isActive ? "nav__active nav__link" : "nav__link"}>Rented Trucks</NavLink>
+                                        className={ (navClass) =>
+                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>Rented Trucks</NavLink>
                                 </a>
                                 <a className='list-group-item py-2' onClick={handleClick3} >
                                     <i className="bi bi-person fs-5 me-3"/>

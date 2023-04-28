@@ -59,3 +59,15 @@
 .brand-name{
     color: var(--color-font)
 }
+
+/*----------------------img------------------------*/
+.img1{
+
+ height: 23px;
+
+}
+.img2{
+    margin-top: 10px;
+    margin-right: 8px;
+    height: 40px;
+}

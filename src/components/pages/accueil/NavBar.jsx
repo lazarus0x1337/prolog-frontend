@@ -105,7 +105,7 @@ const NavBar = () => {
 
 
             },fail=>{
-                alert("Email is already exist");
+                alert("problem");
                 console.error(fail); //error
             });
         }
