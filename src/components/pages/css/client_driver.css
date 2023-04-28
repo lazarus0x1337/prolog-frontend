@@ -1,3 +1,14 @@
+
+.table-admin{
+  background-color: var(--color-degrade3-1);
+}
+.table-admin th{
+  color:var(--color-font-hover);
+}
+.table-admin td{
+  color:var(--secondary-color);
+}
+
 .client {
   padding: 0px 30px 50px;
 }

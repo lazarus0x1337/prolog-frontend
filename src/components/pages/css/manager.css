@@ -1,3 +1,16 @@
+.manager Table{
+  background-color: var(--color-degrade3-1);
+}
+.manager table th{
+  color:var(--color-font-hover);
+}
+.manager table td{
+  color:var(--secondary-color);
+}
+.bi-trash3{
+  color:var(--secondary-color);
+}
+
 .manager {
   padding: 0px 30px 50px;
 

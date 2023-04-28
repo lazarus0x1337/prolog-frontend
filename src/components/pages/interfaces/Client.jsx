@@ -111,7 +111,7 @@ function Client() {
                                         className={ (navClass) =>
                                             navClass.isActive ? "nav__active nav__link" : "nav__link"}>Setting</NavLink>
                                 </a>
-                                <a className='list-group-item' onClick={handleLogout} style={{position:"absolute", bottom:"5px"}}>
+                                <a className='list-group-item' onClick={handleLogout}  style={{ top:"250px"}}>
                                     <i className="bi bi-power fs-5 me-3"/>
                                     <NavLink
                                         style={styleNavLink}

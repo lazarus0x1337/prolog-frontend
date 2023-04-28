@@ -1,4 +1,3 @@
-import react from "react";
 import  Nav from "./Nav";
 
 function Dashboard({Toggle}){
@@ -46,7 +45,7 @@ function Dashboard({Toggle}){
                </div>
            </div>
           </div>
-            <table className="table caption-top bg-white rounded mt-2">
+            <table className="table caption-top mt-2 table-dashboard">
                 <caption className="text-white fs-4">Recent Orders</caption>
                 <thead>
                 <tr>

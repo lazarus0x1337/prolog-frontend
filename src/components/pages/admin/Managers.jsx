@@ -17,28 +17,28 @@ const Managers = ({Toggle}) => {
     }
 
 
-    const [currentPage,setCurrentPage] = useState(1);
-    const recordsPerPage = 3;
-    const lastIndex = currentPage * recordsPerPage;
-    const firstIndex = lastIndex - recordsPerPage;
-    const records = manager.slice(firstIndex , lastIndex);
-    const npage = Math.ceil(manager.length / recordsPerPage);
-    const numbers = [...Array(npage+1).keys()].slice(1)
+    // const [currentPage,setCurrentPage] = useState(1);
+    // const recordsPerPage = 3;
+    // const lastIndex = currentPage * recordsPerPage;
+    // const firstIndex = lastIndex - recordsPerPage;
+    // const records = manager.slice(firstIndex , lastIndex);
+    // const npage = Math.ceil(manager.length / recordsPerPage);
+    // const numbers = [...Array(npage+1).keys()].slice(1)
 
-    function prePage(){
-        if(currentPage !== 1) setCurrentPage(currentPage - 1)
-    }
-    function changeCPage(id){
-        setCurrentPage(id);
-    }
-    function nextPage(){
-        if(currentPage !== npage) setCurrentPage(currentPage + 1)
-    }
+    // function prePage(){
+    //     if(currentPage !== 1) setCurrentPage(currentPage - 1)
+    // }
+    // function changeCPage(id){
+    //     setCurrentPage(id);
+    // }
+    // function nextPage(){
+    //     if(currentPage !== npage) setCurrentPage(currentPage + 1)
+    // }
   return (
       <div className="px-3">
           <Nav Toggle={Toggle}/>
     <div className="manager">
-        <h2 className="booking__title">Managers : </h2>
+        <h2 className="title">Managers : </h2>
 
 
         <div className="input-group">
@@ -50,7 +50,7 @@ const Managers = ({Toggle}) => {
         <br/>
         <div>
 
-        <Table className="table" >
+        <Table className="table table-manager" >
           <thead>
           <tr>
                  <th scope="col">id</th>
@@ -62,39 +62,39 @@ const Managers = ({Toggle}) => {
           </thead>
          <tbody>
 
-                {records?.map((item,i) => (
+                {manager?.map((item,i) => (
                     <tr key={i}  >
-                    <th scope="row" className='pl-5'>{item.id}</th>
+                    <td scope="row" className='pl-5'>{item.id}</td>
                     <td>{item.Username}</td>
                     <td>{item.category}</td>
                     <td>{item.groupSize}</td>
                      <td>
-                         <a className="bi bi-trash3" onClick={()=>handleDelete(item.id)}  style={{color:"black" }}/>
+                         <a className="bi bi-trash3 " onClick={()=>handleDelete(item.id)}/>
                          &nbsp;&nbsp;&nbsp;
-                         <a className="bi bi-pencil-square" href=""  style={{color:"black"}}/>
+                         {/*<a className="bi bi-pencil-square" href=""  style={{color:"black"}}/>*/}
                      </td>
                     </tr>
                 ))}
          </tbody>
         </Table>
         </div>
-        <>
-            <ul className='pagination'>
-                <li className='page-item'>
-                    <a href='#' className='page-link'  onClick={prePage}>Prev</a>
-                </li>
-                {
-                    numbers.map((n,i) =>(
-                        <li className={`page-item ${currentPage === n ? 'active' : ''}`} key={i}>
-                            <a href='#' className='page-link' onClick={ ()=> changeCPage(n) }>{n}</a>
-                        </li>
-                    ))
-                }
-                <li className='page-item'>
-                    <a href='#' className='page-link' onClick={nextPage}>Next</a>
-                </li>
-            </ul>
-        </>
+        {/*<>*/}
+        {/*    <ul className='pagination'>*/}
+        {/*        <li className='page-item'>*/}
+        {/*            <a href='#' className='page-link'  onClick={prePage}>Prev</a>*/}
+        {/*        </li>*/}
+        {/*        {*/}
+        {/*            numbers.map((n,i) =>(*/}
+        {/*                <li className={`page-item ${currentPage === n ? 'active' : ''}`} key={i}>*/}
+        {/*                    <a href='#' className='page-link' onClick={ ()=> changeCPage(n) }>{n}</a>*/}
+        {/*                </li>*/}
+        {/*            ))*/}
+        {/*        }*/}
+        {/*        <li className='page-item'>*/}
+        {/*            <a href='#' className='page-link' onClick={nextPage}>Next</a>*/}
+        {/*        </li>*/}
+        {/*    </ul>*/}
+        {/*</>*/}
     </div>
       </div>
   );

@@ -1,19 +1,13 @@
 import React, { useState } from "react";
 import '../css/style.css';
-import { NavLink } from "react-router-dom";
-import Dashboard from "../admin/Dashboard";
-import Managers from "../admin/Managers";
-import Clients from "../admin/Clients";
-import Driver from "../admin/Driver";
-import DespoVehicules from "../admin/DespoVehicules";
+import {NavLink, useLocation, useNavigate, useParams} from "react-router-dom";
+import Colis from "../client/Colis";
+import Vehicules from "../client/Vehicules";
+import StepProgress from "../client/StepProgress";
+import Image from '../../images/verctbg.jpg';
 import axios from "axios";
 import img1 from "../../images/logo/prolog1.png";
 import img2 from "../../images/logo/prolog2.png";
-import Image from '../../images/verctbg.jpg';
-import StepProgress from "../client/StepProgress";
-import Colis from "../client/Colis";
-import Vehicules from "../client/Vehicules";
-
 const divStyle = {
     backgroundImage: `url(${Image})`,
     backgroundSize: 'cover',
@@ -27,51 +21,46 @@ const styleNavLink = {
     ':hover': {color: "var(--color-font-hover)"}
 };
 
-function Admin() {
+function Client() {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [id,setId] = useState(new URLSearchParams(location.search).get('id')) // Récupérer la valeur de l'id à partir des query parameters
+    const [tk,setTk] = useState(new URLSearchParams(location.search).get('tk'))
+    const [fullname,setFullname] = useState(new URLSearchParams(location.search).get('fullname'))
     const [toggle, setToggle] = useState(true);
     const Toggle = () => {  setToggle(!toggle) }
 
-    const [show1, setShow1] = useState(true);
-    const [show2, setShow2] = useState(false);
-    const [show3, setShow3] = useState(false);
-    const [show4, setShow4] = useState(false);
-    const [show5, setShow5] = useState(false);
+    const [showStep, setShowStep] = useState(true);
+    const [showColis, setShowColis] = useState(false);
+    const [showVehi, setShowVehi] = useState(false);
 
     function handleClick1() {
-        setShow1(true);
-        setShow2(false);
-        setShow3(false);
-        setShow4(false);
-        setShow5(false);
+        setShowStep(true);
+        setShowVehi(false);
+        setShowColis(false);
     }
     function handleClick2() {
-        setShow1(false);
-        setShow2(true);
-        setShow3(false);
-        setShow4(false);
-        setShow5(false);
+        setShowVehi(false);
+        setShowStep(false);
+        setShowColis(true);
     }
     function handleClick3() {
-        setShow1(false);
-        setShow2(false);
-        setShow3(true);
-        setShow4(false);
-        setShow5(false);
+        setShowVehi(true);
+        setShowColis(false);
+        setShowStep(false);
     }
-    function handleClick4() {
-        setShow1(false);
-        setShow2(false);
-        setShow3(false);
-        setShow4(true);
-        setShow5(false);
+
+
+    const handleLogout = () => {
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${tk}` // Ajouter le token dans l'en-tête d'autorisation
+            }
+        };
+        axios.post("http://localhost:8080/api/v1/auth/logout",{},config)
+            .then(()=>{navigate('/home');})
     }
-    function handleClick5() {
-        setShow1(false);
-        setShow2(false);
-        setShow3(false);
-        setShow4(false);
-        setShow5(true);
-    }
+
     return (
 
         <>
@@ -81,65 +70,48 @@ function Admin() {
 
                         <div className='class2 sidebar p-2' >
                             <div className='sidebar__top m-1'>
-                                <img src={img2} className="img2"/>
-                                <img src={img1} className="img1"/>
+                                <img src={img2} className="img2"/><img src={img1} className="img1"/>
+                                {/*<span className='brand-name' >Welcome</span>*/}
                             </div>
                             <hr style={{borderColor:"var(--color-cercle-small)"}} />
                             <div className='list-group list-group-flush'>
 
                                 <a className='list-group-item py-2' onClick={handleClick1}>
-                                    <i className="bi bi-speedometer2 fs-5 me-3"/>
+                                    <i className="bi bi-binoculars fs-5 me-3"/>
                                     <NavLink
                                         style={styleNavLink}
                                         className={ (navClass) =>
-                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>Dashboard</NavLink>
+                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>Tracking</NavLink>
                                 </a>
                                 <a className='list-group-item py-2' onClick={handleClick2} >
-                                    <i className="bi bi-person-gear fs-5 me-3"/>
+                                    <i className="bi bi-box-seam fs-5 me-3"/>
                                     <NavLink
                                         style={styleNavLink}
                                         className={ (navClass) =>
-                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>Managers</NavLink>
+                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>My Packages</NavLink>
                                 </a>
                                 <a className='list-group-item py-2' onClick={handleClick3} >
-                                    <i className="bi bi-table fs-5 me-3"/>
-                                    <NavLink
-                                        style={styleNavLink}
-                                        className={ (navClass) =>
-                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>Clients</NavLink>
-                                </a>
-                                <a className='list-group-item py-2' onClick={handleClick4} >
-                                    <i className="bi bi-clipboard-data fs-5 me-3"/>
-                                    <NavLink
-                                        style={styleNavLink}
-                                        className={ (navClass) =>
-                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>Driver</NavLink>
-                                </a>
-
-                                <a className='list-group-item py-2' onClick={handleClick5} >
                                     <i className="bi bi-truck fs-5 me-3"/>
                                     <NavLink
                                         style={styleNavLink}
                                         className={ (navClass) =>
-                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>Vehicules</NavLink>
+                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>Rented Trucks</NavLink>
                                 </a>
-
-                                <a className='list-group-item py-2' >
+                                <a className='list-group-item py-2' onClick={handleClick3} >
                                     <i className="bi bi-person fs-5 me-3"/>
                                     <NavLink
                                         style={styleNavLink}
                                         className={ (navClass) =>
                                             navClass.isActive ? "nav__active nav__link" : "nav__link"}>Profile</NavLink>
                                 </a>
-
-                                <a className='list-group-item py-2'  >
+                                <a className='list-group-item py-2' onClick={handleClick3} >
                                     <i className="bi bi-gear fs-5 me-3"/>
                                     <NavLink
                                         style={styleNavLink}
                                         className={ (navClass) =>
                                             navClass.isActive ? "nav__active nav__link" : "nav__link"}>Setting</NavLink>
                                 </a>
-                                    <a className='list-group-item'  style={{ top:"160px"}}>
+                                <a className='list-group-item' onClick={handleLogout} style={{position:"absolute", bottom:"5px"}}>
                                     <i className="bi bi-power fs-5 me-3"/>
                                     <NavLink
                                         style={styleNavLink}
@@ -153,11 +125,10 @@ function Admin() {
 
                     {toggle &&  <div className='col-4 col-md-2'/>}
                     <div className='col'>
-                        {show1 && <Dashboard Toggle={Toggle} /> }
-                        {show2 && <Managers Toggle={Toggle} /> }
-                        {show3 && <Clients Toggle={Toggle}/> }
-                        {show4 && <Driver Toggle={Toggle} /> }
-                        {show5 && <DespoVehicules Toggle={Toggle} /> }
+                        {showStep && <StepProgress Toggle={Toggle} fullname={fullname}/> }
+                        {showColis && <Colis Toggle={Toggle} id={id} tk={tk} fullname={fullname}/> }
+                        {showVehi && <Vehicules Toggle={Toggle} fullname={fullname}/> }
+
                     </div>
                 </div>
             </div>
@@ -165,4 +136,4 @@ function Admin() {
         </>
     );
 }
-export default Admin;
+export default Client;
