@@ -9,7 +9,7 @@ const StepProgress = (props) =>{
 
     return (
         <>
-            {/*<div className="px-3">*/}
+
                 <Nav Toggle={props.Toggle} fullname={props.fullname}/>
 
 
@@ -65,7 +65,6 @@ const StepProgress = (props) =>{
 
             {/*    </Box>*/}
             {/*</Modal>*/}
-
 
 </>
     );

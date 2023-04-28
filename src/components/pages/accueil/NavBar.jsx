@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import logo from "../../images/prolog.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import "./Register.css";
+import "../css/Register.css";
 import { Link } from "react-scroll";
 //Modal ==> StyledComponents
 import Modal from '@mui/material/Modal';

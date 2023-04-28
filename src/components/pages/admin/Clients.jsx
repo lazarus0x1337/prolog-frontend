@@ -26,7 +26,7 @@ const Clients = ({Toggle}) => {
     // }
     return (
 
-        <div className="px-3">
+        <div>
             <Nav Toggle={Toggle}/>
 
     <div className="client">

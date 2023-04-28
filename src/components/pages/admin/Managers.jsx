@@ -35,7 +35,7 @@ const Managers = ({Toggle}) => {
     //     if(currentPage !== npage) setCurrentPage(currentPage + 1)
     // }
   return (
-      <div className="px-3">
+      <div>
           <Nav Toggle={Toggle}/>
     <div className="manager">
         <h2 className="title">Managers : </h2>

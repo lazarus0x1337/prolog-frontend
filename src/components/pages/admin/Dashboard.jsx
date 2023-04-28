@@ -3,9 +3,9 @@ import  Nav from "./Nav";
 function Dashboard({Toggle}){
     return(
 
-        <div className="px-3">
+        <>
         <Nav Toggle={Toggle}/>
-          <div className="container-fluid">
+          <div className="container-fluid px-lg-4">
            <div className="row g-3 my-2 ">
                <div className="col-md-3 p-1">
                    <div className="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
@@ -45,6 +45,7 @@ function Dashboard({Toggle}){
                </div>
            </div>
           </div>
+            <div className="px-4">
             <table className="table caption-top mt-2 table-dashboard">
                 <caption className="text-white fs-4">Recent Orders</caption>
                 <thead>
@@ -75,7 +76,8 @@ function Dashboard({Toggle}){
                 </tr>
                 </tbody>
             </table>
-        </div>
+            </div>
+        </>
     );
 }
 

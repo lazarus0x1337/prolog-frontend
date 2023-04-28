@@ -10,21 +10,21 @@ import Modal from "@mui/material/Modal";
 import axios from "axios";
 
 function Colis(props){
-    const [currentPage,setCurrentPage] = useState(1);
-    const recordsPerPage = 3;
-    const lastIndex = currentPage * recordsPerPage;
-    const firstIndex = lastIndex - recordsPerPage;
-    const npage = Math.ceil(colis_data.length / recordsPerPage);
-    const numbers = [...Array(npage+1).keys()].slice(1);
-    function prePage(){
-        if(currentPage !== 1) setCurrentPage(currentPage - 1)
-    }
-    function changeCPage(id){
-        setCurrentPage(id);
-    }
-    function nextPage(){
-        if(currentPage !== npage) setCurrentPage(currentPage + 1)
-    }
+    // const [currentPage,setCurrentPage] = useState(1);
+    // const recordsPerPage = 3;
+    // const lastIndex = currentPage * recordsPerPage;
+    // const firstIndex = lastIndex - recordsPerPage;
+    // const npage = Math.ceil(colis_data.length / recordsPerPage);
+    // const numbers = [...Array(npage+1).keys()].slice(1);
+    // function prePage(){
+    //     if(currentPage !== 1) setCurrentPage(currentPage - 1)
+    // }
+    // function changeCPage(id){
+    //     setCurrentPage(id);
+    // }
+    // function nextPage(){
+    //     if(currentPage !== npage) setCurrentPage(currentPage + 1)
+    // }
 
 
     const [loginOpen, setLoginOpen] = React.useState(false);
@@ -52,7 +52,7 @@ function Colis(props){
         })
 
     return(
-        <div className="px-3">
+        <>
             <Nav Toggle={props.Toggle} fullname={props.fullname}/>
             <div className="manager">
                 <h2 className="booking__title">Colis : </h2>
@@ -99,25 +99,25 @@ function Colis(props){
                         </tbody>
                     </Table>
                 </div>
-                <>
-                    <ul className='pagination'>
-                        <li className='page-item'>
-                            <a href='#' className='page-link'  onClick={prePage}>Prev</a>
-                        </li>
-                        {
-                            numbers.map((n,i) =>(
-                                <li className={`page-item ${currentPage === n ? 'active' : ''}`} key={i}>
-                                    <a href='#' className='page-link' onClick={ ()=> changeCPage(n) }>{n}</a>
-                                </li>
-                            ))
-                        }
-                        <li className='page-item'>
-                            <a href='#' className='page-link' onClick={nextPage}>Next</a>
-                        </li>
-                    </ul>
-                </>
+                {/*<>*/}
+                {/*    <ul className='pagination'>*/}
+                {/*        <li className='page-item'>*/}
+                {/*            <a href='#' className='page-link'  onClick={prePage}>Prev</a>*/}
+                {/*        </li>*/}
+                {/*        {*/}
+                {/*            numbers.map((n,i) =>(*/}
+                {/*                <li className={`page-item ${currentPage === n ? 'active' : ''}`} key={i}>*/}
+                {/*                    <a href='#' className='page-link' onClick={ ()=> changeCPage(n) }>{n}</a>*/}
+                {/*                </li>*/}
+                {/*            ))*/}
+                {/*        }*/}
+                {/*        <li className='page-item'>*/}
+                {/*            <a href='#' className='page-link' onClick={nextPage}>Next</a>*/}
+                {/*        </li>*/}
+                {/*    </ul>*/}
+                {/*</>*/}
             </div>
-        </div>
+            </>
     );
 }
 

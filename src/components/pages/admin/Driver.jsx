@@ -23,7 +23,7 @@ const Driver = ({Toggle}) => {
     //     if(Current !== npage) SetCurrent(Current + 1)
     // }
     return (
-        <div className="px-3">
+        <div>
             <Nav Toggle={Toggle}/>
 
         <div className="client">
