@@ -154,14 +154,15 @@ nav ul li {
 }
 
 .main-info h1 {
+    font-family: "fangsong","serif";
     color : white;
     text-transform: uppercase;
 
 }
 
 .main-info h1 span{
-
-    color: var(--primary-blue) !important;
+    font-family: "fangsong","serif";
+    color: var(--primary-blue);
 }
 
 .income-form input{
@@ -185,14 +186,14 @@ nav ul li {
 }
 
 .income-form button[type="submit"]{
-    font-family: "Arial Black", sans-serif;
+    font-family: "fangsong", "sans-serif";
     font-weight: bold;
     margin-top: 10px;
     position: relative;
     border-radius:  25px 25px ;
     width: 170px;
     height: 47px;
-    font-size: 13px;
+    font-size: 15px;
     border:none;
     outline: none;
     cursor: pointer;
