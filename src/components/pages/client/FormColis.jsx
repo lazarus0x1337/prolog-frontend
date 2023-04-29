@@ -103,8 +103,8 @@ export default function AddressForm() {
                         required
                         onChange={(e) => settelAdd(e.target.value)}
                         value={telAdd}
-                        name="tel"
-                        label="Tel "
+                        name="telephone"
+                        label="telephone"
                         fullWidth
                         autoComplete="tel"
                         variant="standard"

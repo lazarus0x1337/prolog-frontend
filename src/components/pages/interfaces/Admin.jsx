@@ -139,7 +139,7 @@ function Admin() {
                                         className={ (navClass) =>
                                             navClass.isActive ? "nav__active nav__link" : "nav__link"}>Setting</NavLink>
                                 </a>
-                                    <a className='list-group-item'  style={{ top:"160px"}}>
+                                    <a className='list-group-item' style={{ position:"absolute",top:"90%",width:"84%"}}>
                                     <i className="bi bi-power fs-5 me-3"/>
                                     <NavLink
                                         style={styleNavLink}
