@@ -30,6 +30,16 @@ function Client() {
     const [toggle, setToggle] = useState(true);
     const Toggle = () => {  setToggle(!toggle) }
 
+    if(fullname) {
+        sessionStorage.setItem("fullname", fullname);
+    }
+    if(tk) {
+        sessionStorage.setItem("token", tk);
+    }
+    if(id) {
+        sessionStorage.setItem("ID", id);
+    }
+
     const [showStep, setShowStep] = useState(true);
     const [showColis, setShowColis] = useState(false);
     const [showVehi, setShowVehi] = useState(false);
@@ -125,9 +135,9 @@ function Client() {
 
                     {toggle &&  <div className='col-4 col-md-2'/>}
                     <div className='col'>
-                        {showStep && <StepProgress Toggle={Toggle} fullname={fullname}/> }
-                        {showColis && <Colis Toggle={Toggle} id={id} tk={tk} fullname={fullname}/> }
-                        {showVehi && <Vehicules Toggle={Toggle} fullname={fullname}/> }
+                        {showStep && <StepProgress Toggle={Toggle}/> }
+                        {showColis && <Colis Toggle={Toggle}/> }
+                        {showVehi && <Vehicules Toggle={Toggle}/> }
 
                     </div>
                 </div>

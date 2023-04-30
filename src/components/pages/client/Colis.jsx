@@ -1,13 +1,16 @@
-import { useState } from "react";
-import  Nav from "../admin/Nav";
-import { Table } from "react-bootstrap";
-import colis_data from "../services/colis_data_client";
-import { Button, Typography } from "@mui/material";
+import {useState} from "react";
+import Nav from "../admin/Nav";
+import {Table} from "react-bootstrap";
+import {Button, Checkbox, FormControlLabel, Typography} from "@mui/material";
 import React from "react";
 import Box from "@mui/material/Box";
 import FormColis from "./FormColis";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+
+
 
 function Colis(props){
     // const [currentPage,setCurrentPage] = useState(1);
@@ -44,14 +47,172 @@ function Colis(props){
         }
     };
 
-    axios.get(`http://localhost:8080/api/v1/factureColis/clientId/${props.id}`, config)
+    axios.get(`http://localhost:8080/api/v1/factureColis/clientId/${sessionStorage.getItem("ID")}`, config)
         .then(response => {
+            console.log("id ="+sessionStorage.getItem("ID"));
             setFactures(response.data); // liste
-            factures.map((a,i)=>{console.log(a.colis.trackingNumber.trackingNumber)})
-
+            // factures.map((a, i) => {
+            //     // console.log(a.colis.trackingNumber.trackingNumber)
+            // })
         })
 
-    return(
+
+    // Colis Data
+    const [showTel, setshowTel] = useState(false);
+    const [ColisId, setColisId] = useState(0);
+    const [AddColis, setAddColis] = useState("");
+
+    const [Poids, setPoids] = useState(0);
+    const [Height, setHeight] = useState(0);
+    const [Length, setLength] = useState(0);
+    const [Width, setWidth] = useState(0);
+    const [Prix, setPrix] = useState(Poids * Height * Width * Length);
+    //Destinataire Data
+    const [addressDES, setaddressDES] = useState("");
+    const [telAdd, settelAdd] = useState("");
+    const [lastName, setlastName] = useState("");
+    const [firstName, setfirstName] = useState("");
+    const [checkedFragile, setCheckedFragile] = useState(false);
+    const [checkedFroid, setCheckedFriod] = useState(false);
+    const [result, setResult] = useState('');
+    const DataColis = {
+        "poids": Poids,
+        "longueur": Width,
+        "largeur": Length,
+        "hauteur": Height,
+        "froid": checkedFroid,
+        "fragile": checkedFragile,
+        "adresse": AddColis,
+        "destinataire": {
+            "firstname": firstName,
+            "lastname": lastName,
+            "adresse": addressDES,
+            "telephone": telAdd
+        },
+        "trackingNumber": {
+            "trackingNumber": result
+        }
+    }
+
+    const generateResult = () => {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        const charactersLength = characters.length;
+        let randomResult = '';
+        for (let i = 0; i < 15; i++) {
+            randomResult = randomResult.concat(characters.charAt(Math.floor(Math.random() * charactersLength)));
+        }
+        setResult(randomResult);
+        console.log(result);
+    }
+
+    //modal :
+
+    const [OpenColis, setOpenColis] = React.useState(false);
+    const [OpenFacture, setOpenFacture] = React.useState(false);
+    const [saved, setSaved] = React.useState(false);
+
+    const [TEL, setTEL] = useState("");
+    const [telModal, setTelModal] = useState(false);
+
+    const ValidateFacture = () => {
+        setOpenFacture(true);
+        setOpenColis(false);
+        setTelModal(false);
+    }
+    const closeValidateFacture = () => {
+        setOpenFacture(false);
+        setOpenColis(false);
+        setTelModal(false);
+    }
+
+    const handleOpen = () => {
+        setOpenColis(true);
+        setOpenFacture(false);
+        setTelModal(false);
+
+    };
+    const handleClose = () => {
+        setOpenColis(false);
+        setOpenFacture(false);
+        setTelModal(false);
+    };
+    const  OpenModalTel=()=>{
+        setTelModal(true);
+        setOpenColis(false);
+        setOpenFacture(false);
+    }
+    const  closeModalTel=()=>{
+        setTelModal(false);
+        setOpenColis(false);
+        setOpenFacture(false);
+        setSaved(false);
+    }
+    const Saved=()=>{
+        closeModalTel();
+        setSaved(true);
+    }
+
+
+
+    const CheckTel=()=>{
+        axios.get(`http://localhost:8080/api/v1/user/${sessionStorage.getItem("ID")}`, config)
+            .then(response => {
+                if(!response.data.telephone){
+                    OpenModalTel();
+                } else {
+                    SaveFacture();
+                }
+            })
+
+    }
+    const SaveFacture = async () => {
+
+        try {
+            const response = await axios.post('http://localhost:8080/api/v1/colis', DataColis, config);
+            if (response.status === 201) {
+                console.log("Colis enregistré avec succès");
+                const DataFacture = {
+                    "prix":Prix,
+                    "date":"2023-04-27T13:30:00.000+00:00",
+                    "client":{
+                        "id":sessionStorage.getItem("ID")
+                    },
+                    "colis":{
+                        "id":response.data.id
+                    }
+                }
+                const resp = await axios.post('http://localhost:8080/api/v1/factureColis', DataFacture, config);
+                if (resp.status === 201) {
+                    Saved();
+                }
+            } else {
+                alert("Les champs sont vides ou incorrects");
+            }
+        } catch (error) {
+            alert("Erreur lors de l'enregistrement");
+            console.log(error);
+        }
+
+    }
+
+    const saveTel = () => {
+        axios.put(`http://localhost:8080/api/v1/user/${sessionStorage.getItem("ID")}`,{"telephone":TEL},config)
+        SaveFacture();
+    }
+
+    function handleClick() {
+        if (!Poids || !Width || !Length || !Height || !lastName || !firstName || !telAdd || !AddColis || !addressDES) {
+            alert("Valeur Null !");
+
+        } else {
+            setPrix(Height*Width*Length*Poids*0.02);
+            generateResult();
+            ValidateFacture();
+        }
+    }
+
+
+    return (
         <>
             <Nav Toggle={props.Toggle} fullname={props.fullname}/>
             <div className="manager">
@@ -59,14 +220,12 @@ function Colis(props){
                 <div className="input-group">
                     <div className="container search-form">
                         <input type="search" id="form1" className="form-control" placeholder="Search..."/>
-                        <Button variant="contained" >Search</Button>
-                        <Button variant="contained" onClick={handleLoginOpen} >Send new Colis</Button>
+                        <Button variant="contained">Search</Button>
+                        <Button variant="contained" onClick={handleOpen}>Send new Colis</Button>
                     </div>
                 </div>
-                <Modal open={loginOpen} onClose={handleLoginClose}>
-                    <FormColis/>
-                </Modal>
-              <br/>
+
+                <br/>
                 <div>
 
                     <Table className="table" >
