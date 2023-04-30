@@ -1,32 +1,32 @@
 import React, { useState } from "react";
-import "./css/client.css";
-import ClientData from "../data/Client_data";
+import "../css/client_driver.css";
+import ClientData from "../services/Client_data";
 import { Table } from "react-bootstrap";
 import Nav from "./Nav";
 import { Button,TextField  } from "@mui/material";
 
 const Clients = ({Toggle}) => {
 
-    const [CurrentPage,SetCurrentPage] = useState(1);
-    const recordsPerPage =3;
-    const lastIndex = CurrentPage * recordsPerPage;
-    const firstIndex = lastIndex - recordsPerPage;
-    const records = ClientData.slice(firstIndex , lastIndex);
-    const npage = Math.ceil(ClientData.length / recordsPerPage);
-    const numbers = [...Array(npage+1).keys()].slice(1)
-
-    function prePage(){
-        if(CurrentPage !== 1) SetCurrentPage(CurrentPage - 1)
-    }
-    function changeCPage(id){
-        SetCurrentPage(id);
-    }
-    function nextPage(){
-        if(CurrentPage !== npage) SetCurrentPage(CurrentPage + 1)
-    }
+    // const [CurrentPage,SetCurrentPage] = useState(1);
+    // const recordsPerPage =3;
+    // const lastIndex = CurrentPage * recordsPerPage;
+    // const firstIndex = lastIndex - recordsPerPage;
+    // const records = ClientData.slice(firstIndex , lastIndex);
+    // const npage = Math.ceil(ClientData.length / recordsPerPage);
+    // const numbers = [...Array(npage+1).keys()].slice(1)
+    //
+    // function prePage(){
+    //     if(CurrentPage !== 1) SetCurrentPage(CurrentPage - 1)
+    // }
+    // function changeCPage(id){
+    //     SetCurrentPage(id);
+    // }
+    // function nextPage(){
+    //     if(CurrentPage !== npage) SetCurrentPage(CurrentPage + 1)
+    // }
     return (
 
-        <div className="px-3">
+        <div>
             <Nav Toggle={Toggle}/>
 
     <div className="client">
@@ -40,7 +40,7 @@ const Clients = ({Toggle}) => {
           </div>
           <br/>
           <div>
-              <Table className="table" >
+              <Table className="table table-admin" >
                   <thead>
                   <tr>
                       <th scope="col">id</th>
@@ -51,9 +51,9 @@ const Clients = ({Toggle}) => {
                   </thead>
                   <tbody>
 
-                  {records?.map((item,i) => (
+                  {ClientData?.map((item,i) => (
                       <tr key={i}  >
-                          <th scope="row" className='pl-5'>{item.id}</th>
+                          <td scope="row" className='pl-5'>{item.id}</td>
                           <td>{item.Username}</td>
                           <td>{item.email}</td>
                       </tr>
@@ -61,23 +61,23 @@ const Clients = ({Toggle}) => {
                   </tbody>
               </Table>
           </div>
-          <>
-              <ul className='pagination'>
-                  <li className='page-item'>
-                      <a href='#' className='page-link' onClick={prePage}>Prev</a>
-                  </li>
-                  {
-                      numbers.map((n,i) =>(
-                          <li className={`page-item ${CurrentPage === n ? 'active' : ''}`} key={i}>
-                              <a href='#' className='page-link' onClick={ ()=> changeCPage(n) }>{n}</a>
-                          </li>
-                      ))
-                  }
-                  <li className='page-item'>
-                      <a href='#' className='page-link' onClick={nextPage}>Next</a>
-                  </li>
-              </ul>
-          </>
+          {/*<>*/}
+          {/*    <ul className='pagination'>*/}
+          {/*        <li className='page-item'>*/}
+          {/*            <a href='#' className='page-link' onClick={prePage}>Prev</a>*/}
+          {/*        </li>*/}
+          {/*        {*/}
+          {/*            numbers.map((n,i) =>(*/}
+          {/*                <li className={`page-item ${CurrentPage === n ? 'active' : ''}`} key={i}>*/}
+          {/*                    <a href='#' className='page-link' onClick={ ()=> changeCPage(n) }>{n}</a>*/}
+          {/*                </li>*/}
+          {/*            ))*/}
+          {/*        }*/}
+          {/*        <li className='page-item'>*/}
+          {/*            <a href='#' className='page-link' onClick={nextPage}>Next</a>*/}
+          {/*        </li>*/}
+          {/*    </ul>*/}
+          {/*</>*/}
       </div>
     </div>
   </div>

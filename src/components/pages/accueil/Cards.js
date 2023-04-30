@@ -1,4 +1,4 @@
-import "./Cards.css";
+import "../css/Cards.css";
 import { Link } from 'react-router-dom';
 import c1 from '../../images/camion_benne.png';
 import c2 from '../../images/camion_frigo.png';
