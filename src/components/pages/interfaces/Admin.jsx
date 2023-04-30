@@ -94,6 +94,20 @@ function Admin() {
                                         className={ (navClass) =>
                                             navClass.isActive ? "nav__active nav__link" : "nav__link"}>Dashboard</NavLink>
                                 </a>
+                                <a className='list-group-item py-2' onClick={handleClick3} >
+                                    <i className="bi bi-box fs-5 me-3"/>
+                                    <NavLink
+                                        style={styleNavLink}
+                                        className={ (navClass) =>
+                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>Containers</NavLink>
+                                </a>
+                                <a className='list-group-item py-2' onClick={handleClick3} >
+                                    <i className="bi bi-table fs-5 me-3"/>
+                                    <NavLink
+                                        style={styleNavLink}
+                                        className={ (navClass) =>
+                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>Costumers</NavLink>
+                                </a>
                                 <a className='list-group-item py-2' onClick={handleClick2} >
                                     <i className="bi bi-person-gear fs-5 me-3"/>
                                     <NavLink
@@ -101,19 +115,13 @@ function Admin() {
                                         className={ (navClass) =>
                                             navClass.isActive ? "nav__active nav__link" : "nav__link"}>Managers</NavLink>
                                 </a>
-                                <a className='list-group-item py-2' onClick={handleClick3} >
-                                    <i className="bi bi-table fs-5 me-3"/>
-                                    <NavLink
-                                        style={styleNavLink}
-                                        className={ (navClass) =>
-                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>Clients</NavLink>
-                                </a>
+
                                 <a className='list-group-item py-2' onClick={handleClick4} >
-                                    <i className="bi bi-clipboard-data fs-5 me-3"/>
+                                    <i className="bi bi-fuel-pump fs-5 me-3"/>
                                     <NavLink
                                         style={styleNavLink}
                                         className={ (navClass) =>
-                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>Driver</NavLink>
+                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>Drivers</NavLink>
                                 </a>
 
                                 <a className='list-group-item py-2' onClick={handleClick5} >
