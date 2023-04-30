@@ -8,6 +8,7 @@ import Image from '../../images/verctbg.jpg';
 import axios from "axios";
 import img1 from "../../images/logo/prolog1.png";
 import img2 from "../../images/logo/prolog2.png";
+import sessionStorage from 'sessionstorage';
 const divStyle = {
     backgroundImage: `url(${Image})`,
     backgroundSize: 'cover',
@@ -15,11 +16,11 @@ const divStyle = {
     height: 'auto',
     width:'auto',
 };
-    const styleNavLink = {
-        color: "var(--color-font)",
-        textDecoration:'none',
-        ':hover': {color: "var(--color-font-hover)"}
-    };
+const styleNavLink = {
+    color: "var(--color-font)",
+    textDecoration:'none',
+    ':hover': {color: "var(--color-font-hover)"}
+};
 
 function Client() {
     const navigate = useNavigate();
@@ -64,7 +65,7 @@ function Client() {
     const handleLogout = () => {
         const config = {
             headers: {
-                'Authorization': `Bearer ${tk}` // Ajouter le token dans l'en-tête d'autorisation
+                'Authorization': `Bearer ${sessionStorage.getItem("token")}` // Ajouter le token dans l'en-tête d'autorisation
             }
         };
         axios.post("http://localhost:8080/api/v1/auth/logout",{},config)

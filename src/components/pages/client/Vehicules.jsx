@@ -23,7 +23,7 @@ function Vehicules(props) {
 
     return (
         <div>
-            <Nav Toggle={props.Toggle} fullname={props.fullname}/>
+            <Nav Toggle={props.Toggle} fullname={sessionStorage.getItem("fullname")}/>
                 <div className="container-lg">
                     <div className="row row-cols-1 row-cols-2 row-cols-3 row-cols-4">
                         <div className="col pt-4 ">

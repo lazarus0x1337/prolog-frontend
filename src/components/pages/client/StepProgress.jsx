@@ -9,9 +9,7 @@ const StepProgress = (props) =>{
 
     return (
         <>
-
-                <Nav Toggle={props.Toggle} fullname={props.fullname}/>
-
+            <Nav Toggle={props.Toggle} fullname={sessionStorage.getItem("fullname")}/>
 
             {/*table de tracking*/}
             <section className="tracking-info " id="tracking-info" style={{position:"relative"}}>
