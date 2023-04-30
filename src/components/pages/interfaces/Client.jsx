@@ -9,6 +9,7 @@ import axios from "axios";
 import img1 from "../../images/logo/prolog1.png";
 import img2 from "../../images/logo/prolog2.png";
 import sessionStorage from 'sessionstorage';
+import Profile from "./Profile";
 const divStyle = {
     backgroundImage: `url(${Image})`,
     backgroundSize: 'cover',
@@ -21,6 +22,8 @@ const styleNavLink = {
     textDecoration:'none',
     ':hover': {color: "var(--color-font-hover)"}
 };
+
+
 
 function Client() {
     const navigate = useNavigate();
@@ -44,19 +47,28 @@ function Client() {
     const [showStep, setShowStep] = useState(true);
     const [showColis, setShowColis] = useState(false);
     const [showVehi, setShowVehi] = useState(false);
-
+    const [showProfile, setshowProfile] = useState(false);
     function handleClick1() {
         setShowStep(true);
         setShowVehi(false);
         setShowColis(false);
+        setshowProfile(false);
     }
     function handleClick2() {
         setShowVehi(false);
         setShowStep(false);
         setShowColis(true);
+        setshowProfile(false);
     }
     function handleClick3() {
         setShowVehi(true);
+        setShowColis(false);
+        setShowStep(false);
+        setshowProfile(false);
+    }
+    function handleClick4(){
+        setshowProfile(true);
+        setShowVehi(false);
         setShowColis(false);
         setShowStep(false);
     }
@@ -108,7 +120,7 @@ function Client() {
                                         className={ (navClass) =>
                                             navClass.isActive ? "nav__active nav__link" : "nav__link"}>Rented Trucks</NavLink>
                                 </a>
-                                <a className='list-group-item py-2' onClick={handleClick3} >
+                                <a className='list-group-item py-2' onClick={handleClick4} >
                                     <i className="bi bi-person fs-5 me-3"/>
                                     <NavLink
                                         style={styleNavLink}
@@ -139,7 +151,7 @@ function Client() {
                         {showStep && <StepProgress Toggle={Toggle}/> }
                         {showColis && <Colis Toggle={Toggle}/> }
                         {showVehi && <Vehicules Toggle={Toggle}/> }
-
+                        {showProfile && <Profile/> }
                     </div>
                 </div>
             </div>
