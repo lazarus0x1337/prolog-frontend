@@ -11,11 +11,11 @@ import img2 from "../../images/logo/prolog2.png";
 import sessionStorage from 'sessionstorage';
 import Profile from "./Profile";
 const divStyle = {
+    height: '100vh',
     backgroundImage: `url(${Image})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    height: 'auto',
-    width:'auto',
+    backgroundRepeat: 'no-repeat',
 };
 const styleNavLink = {
     color: "var(--color-font)",
