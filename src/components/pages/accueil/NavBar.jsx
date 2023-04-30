@@ -30,7 +30,7 @@ const NavBar = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    const redirection = ["admin", "manager", "driver", "client"];
+    const redirection = ["admin","manager","driver","client"];
 
     async function useLogin(event){
         event.preventDefault();
@@ -55,14 +55,12 @@ const NavBar = () => {
                             .then( response => {
                                 const { id, role, fullname } = response.data;
                                 let indice;
-                                if( role ==="ADMIN") indice = 0;
+                                if( role === "ADMIN")       indice = 0;
                                 else if(role === "MANAGER") indice = 1;
-                                else if(role === "DRIVER") indice = 2;
-                                else if(role === "CLIENT") indice = 3;
+                                else if(role === "DRIVER")  indice = 2;
+                                else if(role === "CLIENT")  indice = 3;
                                 navigate(
-                                    '/'
-                                    + redirection[indice]
-                                    +`?id=${id}&tk=${access_token}&fullname=${fullname}`
+                                    '/'+redirection[indice]+`?id=${id}&tk=${access_token}&fullname=${fullname}`
                                 );
                             })
 

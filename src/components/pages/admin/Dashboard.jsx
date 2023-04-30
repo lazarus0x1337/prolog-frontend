@@ -1,10 +1,11 @@
 import  Nav from "./Nav";
+import React from "react";
 
-function Dashboard({Toggle}){
+function Dashboard(props){
     return(
 
         <>
-        <Nav Toggle={Toggle}/>
+            <Nav Toggle={props.Toggle} fullname={sessionStorage.getItem("fullname")}/>
           <div className="container-fluid px-lg-4">
            <div className="row g-3 my-2 ">
                <div className="col-md-3 p-1">

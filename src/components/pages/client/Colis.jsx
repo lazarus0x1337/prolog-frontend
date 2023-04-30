@@ -37,12 +37,8 @@ function Colis(props) {
 
     axios.get(`http://localhost:8080/api/v1/factureColis/clientId/${sessionStorage.getItem("ID")}`, config)
         .then(response => {
-            console.log("id ="+sessionStorage.getItem("ID"));
-            setFactures(response.data); // liste
-            // factures.map((a, i) => {
-            //     // console.log(a.colis.trackingNumber.trackingNumber)
-            // })
-        })
+            setFactures(response.data);
+        });
 
 
     // Colis Data
@@ -222,7 +218,7 @@ function Colis(props) {
                             <th scope="col">Tracking Number</th>
                             <th scope="col">Origin Address</th>
                             <th scope="col">Arrived Address</th>
-                            <th scope="col">Weight(Kg)</th>
+                            <th scope="col">Weight(g)</th>
                             <th scope="col">Dimension(cm3)</th>
                             <th scope="col">Fragile</th>
                             <th scope="col">Froid</th>
@@ -376,7 +372,7 @@ function Colis(props) {
                                     required
                                     onChange={(e) => setPoids(e.target.value)}
                                     value={Poids}
-                                    label="Poids (Kg)"
+                                    label="Poids (g)"
                                     fullWidth
                                     type="number"
                                     variant="standard"
@@ -437,7 +433,7 @@ function Colis(props) {
                                             readOnly: true,
                                         }}
                                         value={Poids}
-                                        label="Poids (kg)"
+                                        label="Poids (g)"
                                         fullWidth
                                         type="number"
                                         variant="standard"

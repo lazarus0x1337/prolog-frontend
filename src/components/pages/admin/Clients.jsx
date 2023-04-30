@@ -5,7 +5,7 @@ import { Table } from "react-bootstrap";
 import Nav from "./Nav";
 import { Button,TextField  } from "@mui/material";
 
-const Clients = ({Toggle}) => {
+const Clients = (props) => {
 
     // const [CurrentPage,SetCurrentPage] = useState(1);
     // const recordsPerPage =3;
@@ -27,7 +27,7 @@ const Clients = ({Toggle}) => {
     return (
 
         <div>
-            <Nav Toggle={Toggle}/>
+            <Nav Toggle={props.Toggle} fullname={sessionStorage.getItem("fullname")}/>
 
     <div className="client">
       <div className="sell__car-wrapper">
