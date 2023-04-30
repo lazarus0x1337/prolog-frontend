@@ -5,7 +5,7 @@ import Nav from "./Nav";
 import  manager  from "../services/Manager_data";
 import {Link,useNavigate} from 'react-router-dom';
 import { Button } from "@mui/material";
-const Managers = ({Toggle}) => {
+const Managers = (props) => {
 
     let history = useNavigate();
     const handleDelete =(id)=>{
@@ -36,7 +36,7 @@ const Managers = ({Toggle}) => {
     // }
   return (
       <div>
-          <Nav Toggle={Toggle}/>
+          <Nav Toggle={props.Toggle} fullname={sessionStorage.getItem("fullname")}/>
     <div className="manager">
         <h2 className="title">Managers : </h2>
 

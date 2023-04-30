@@ -72,3 +72,11 @@
     height: 40px;
 }
 
+.form-check input{
+background-color: #00FFF0 !important;
+    color: #00FFF0!important;
+}
+
+.table td ,th{
+    text-align: center;
+}

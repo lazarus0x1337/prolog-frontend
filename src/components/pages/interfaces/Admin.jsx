@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import '../css/style.css';
-import { NavLink } from "react-router-dom";
+import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import Dashboard from "../admin/Dashboard";
 import Managers from "../admin/Managers";
 import Clients from "../admin/Clients";
 import Driver from "../admin/Driver";
 import DespoVehicules from "../admin/DespoVehicules";
-import axios from "axios";
+
 import img1 from "../../images/logo/prolog1.png";
 import img2 from "../../images/logo/prolog2.png";
 import Image from '../../images/verctbg.jpg';
 import StepProgress from "../client/StepProgress";
 import Colis from "../client/Colis";
 import Vehicules from "../client/Vehicules";
+import sessionStorage from "sessionstorage";
+import axios from "axios";
 
 const divStyle = {
     backgroundImage: `url(${Image})`,
@@ -28,8 +30,23 @@ const styleNavLink = {
 };
 
 function Admin() {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [id,setId] = useState(new URLSearchParams(location.search).get('id')) // Récupérer la valeur de l'id à partir des query parameters
+    const [tk,setTk] = useState(new URLSearchParams(location.search).get('tk'))
+    const [fullname,setFullname] = useState(new URLSearchParams(location.search).get('fullname'))
     const [toggle, setToggle] = useState(true);
     const Toggle = () => {  setToggle(!toggle) }
+
+    if(fullname) {
+        sessionStorage.setItem("fullname", fullname);
+    }
+    if(tk) {
+        sessionStorage.setItem("token", tk);
+    }
+    if(id) {
+        sessionStorage.setItem("ID", id);
+    }
 
     const [show1, setShow1] = useState(true);
     const [show2, setShow2] = useState(false);
@@ -72,6 +89,16 @@ function Admin() {
         setShow4(false);
         setShow5(true);
     }
+
+    const handleLogout = () => {
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${sessionStorage.getItem("token")}` // Ajouter le token dans l'en-tête d'autorisation
+            }
+        };
+        axios.post("http://localhost:8080/api/v1/auth/logout",{},config)
+            .then(()=>{navigate('/home');})
+    }
     return (
 
         <>
@@ -95,7 +122,7 @@ function Admin() {
                                             navClass.isActive ? "nav__active nav__link" : "nav__link"}>Dashboard</NavLink>
                                 </a>
                                 <a className='list-group-item py-2' onClick={handleClick3} >
-                                    <i className="bi bi-box fs-5 me-3"/>
+                                    <i className="bi bi-boxes fs-5 me-3"/>
                                     <NavLink
                                         style={styleNavLink}
                                         className={ (navClass) =>
@@ -149,7 +176,7 @@ function Admin() {
                                 </a>
                                     <a className='list-group-item' style={{ position:"absolute",top:"90%",width:"84%"}}>
                                     <i className="bi bi-power fs-5 me-3"/>
-                                    <NavLink
+                                    <NavLink onClick={handleLogout}
                                         style={styleNavLink}
                                         className={ (navClass) =>
                                             navClass.isActive ? "nav__active nav__link" : "nav__link"}>Logout</NavLink>
