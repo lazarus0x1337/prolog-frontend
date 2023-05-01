@@ -6,23 +6,11 @@ import Managers from "../admin/Managers";
 import Clients from "../admin/Clients";
 import Driver from "../admin/Driver";
 import DespoVehicules from "../admin/DespoVehicules";
-
 import img1 from "../../images/logo/prolog1.png";
 import img2 from "../../images/logo/prolog2.png";
-import Image from '../../images/verctbg.jpg';
-import StepProgress from "../client/StepProgress";
-import Colis from "../client/Colis";
-import Vehicules from "../client/Vehicules";
 import sessionStorage from "sessionstorage";
 import axios from "axios";
 
-const divStyle = {
-    backgroundImage: `url(${Image})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    height: 'auto',
-    width:'auto',
-};
 const styleNavLink = {
     color: "var(--color-font)",
     textDecoration:'none',
@@ -102,7 +90,7 @@ function Admin() {
     return (
 
         <>
-            <div className='container-fluid  min-vh-100 ' style={divStyle}>
+            <div className='container-fluid  min-vh-100 '>
                 <div className='row ' style={{position: "relative"}}>
                     {toggle && <div className='col-4 col-md-2 class1 vh-100 position-fixed'>
 

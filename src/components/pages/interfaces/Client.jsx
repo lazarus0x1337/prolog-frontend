@@ -10,13 +10,7 @@ import img1 from "../../images/logo/prolog1.png";
 import img2 from "../../images/logo/prolog2.png";
 import sessionStorage from 'sessionstorage';
 import Profile from "./Profile";
-const divStyle = {
-    height: '100vh',
-    backgroundImage: `url(${Image})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-};
+
 const styleNavLink = {
     color: "var(--color-font)",
     textDecoration:'none',
@@ -87,7 +81,7 @@ function Client() {
     return (
 
         <>
-            <div className='container-fluid  min-vh-100 ' style={divStyle}>
+            <div className='container-fluid  min-vh-100 '>
                 <div className='row ' style={{position: "relative"}}>
                     {toggle && <div className='col-4 col-md-2 class1 vh-100 position-fixed'>
 

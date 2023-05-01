@@ -8,23 +8,12 @@ import Modal from "@mui/material/Modal";
 import axios from "axios";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import {style} from "../interfaces/Css_Modal";
 
 
 
 function Colis(props) {
 
-
-    const style = {
-        borderRadius: "20px",
-        color: '#000000',
-        backgroundColor: '#ffffff',
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 500,
-        p: 4,
-    };
 
     // service -----------------------------------------------------------
     let [factures, setFactures] = useState([]);
