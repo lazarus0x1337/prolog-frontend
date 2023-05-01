@@ -103,11 +103,6 @@ function Colis(props) {
 
     let [factures, setFactures] = useState([]);
     const [isChecked, setIsChecked] = useState(true);
-    const config = {
-        headers: {
-            'Authorization': `Bearer ${sessionStorage.getItem("token")}` // Ajouter le token dans l'en-tête d'autorisation
-        }
-    };
    //api manager for get all factures :
     axios.get(`http://localhost:8080/api/v1/factureColis`,config)
         .then(response => {
