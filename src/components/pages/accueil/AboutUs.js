@@ -3,7 +3,12 @@ import nous from "../../images/nous.jpg";
 
 const AboutUs = () => {
   return (
-    <div id="about" className="container py-5">
+    <div id="about" className="container-fluid py-5" style={{
+      backgroundColor: "white",
+      width: "95vw",
+      position: "relative",
+      zIndex: 1
+    }}>
       <div className="row">
         <div className="col-lg-6 col-xm-12">
           <div className="photo-wrap mb-5">
