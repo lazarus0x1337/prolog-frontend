@@ -563,4 +563,16 @@ input#form1.form-control{
     color: var(--primary-blue);
 }
 
-
+/*------------------------------Nav Menu------------------------*/
+.Nav-Menu.show{
+    background-color: var(--color-menu);
+}
+.Nav-Menu a{
+    text-align: center;
+    background-color: var(--color-menu);
+    color:var(--color-font);
+}
+.Nav-Menu a:hover{
+    background-color: var(--color-menu-hover) !important;
+    color:var(--color-font-hover) !important;
+}

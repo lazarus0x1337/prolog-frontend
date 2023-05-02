@@ -8,6 +8,7 @@ import Colis from "../manager/Colis";
 import Container from "../manager/Container";
 import sessionStorage from "sessionstorage";
 import axios from "axios";
+import Driver from "../manager/Driver";
 
 const styleNavLink = {
     color: "var(--color-font)",
@@ -109,6 +110,13 @@ function Manager() {
                                         className={ (navClass) =>
                                             navClass.isActive ? "nav__active nav__link" : "nav__link"}>Container</NavLink>
                                 </a>
+                                <a className='list-group-item py-2' onClick={handleClick3} >
+                                    <i className="bi bi-fuel-pump fs-5 me-3"/>
+                                    <NavLink
+                                        style={styleNavLink}
+                                        className={ (navClass) =>
+                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>Drivers</NavLink>
+                                </a>
                                 <a className='list-group-item py-2'  >
                                     <i className="bi bi-person fs-5 me-3"/>
                                     <NavLink
@@ -140,7 +148,7 @@ function Manager() {
                     <div className='col'>
                         {show1 && <Colis Toggle={Toggle} /> }
                         {show2 && <Container Toggle={Toggle} /> }
-                        {/*{show3 && <Profile Toggle={Toggle}/> }*/}
+                        {show3 && <Driver Toggle={Toggle}/> }
                         {/*{show4 && <Setting Toggle={Toggle} /> }*/}
                     </div>
                 </div>
