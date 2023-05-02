@@ -4,6 +4,7 @@ import Home from "./components/pages/accueil/Home";
 import {  Route ,Routes,Navigate} from "react-router-dom";
 import Client from "./components/pages/interfaces/Client";
 import Admin from "./components/pages/interfaces/Admin";
+import Manager from "./components/pages/interfaces/Manager";
 import  ClockLoader from "react-spinners/ClockLoader";
 import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
@@ -27,6 +28,8 @@ useEffect( ()=>{
                    <Route path="/home" element={<Home/>} />
                     <Route path="/client" element={<Client/>} />
                    <Route path="/admin" element={<Admin/>} />
+                    <Route path="/manager" element={<Manager/>} />
+                    {/*<Route path="/Driver" element={<Driver/>} />*/}
 
     </Routes>
 

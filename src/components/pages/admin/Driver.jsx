@@ -4,7 +4,7 @@ import { Table } from "react-bootstrap";
 import '../css/client_driver.css';
 import Nav from "./Nav";
 
-const Driver = ({Toggle}) => {
+const Driver = (props) => {
     // const [Current,SetCurrent] = useState(1);
     // const recordsPerPage = 3;
     // const lastIndex = Current * recordsPerPage;
@@ -24,7 +24,7 @@ const Driver = ({Toggle}) => {
     // }
     return (
         <div>
-            <Nav Toggle={Toggle}/>
+            <Nav Toggle={props.Toggle} fullname={sessionStorage.getItem("fullname")}/>
 
         <div className="client">
             <div className="sell__car-wrapper">

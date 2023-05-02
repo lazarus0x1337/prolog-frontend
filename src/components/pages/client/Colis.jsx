@@ -8,23 +8,12 @@ import Modal from "@mui/material/Modal";
 import axios from "axios";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import {style} from "../interfaces/Css_Modal";
 
 
 
 function Colis(props) {
 
-
-    const style = {
-        borderRadius: "20px",
-        color: '#000000',
-        backgroundColor: '#ffffff',
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 500,
-        p: 4,
-    };
 
     // service -----------------------------------------------------------
     let [factures, setFactures] = useState([]);
@@ -37,12 +26,8 @@ function Colis(props) {
 
     axios.get(`http://localhost:8080/api/v1/factureColis/clientId/${sessionStorage.getItem("ID")}`, config)
         .then(response => {
-            console.log("id ="+sessionStorage.getItem("ID"));
-            setFactures(response.data); // liste
-            // factures.map((a, i) => {
-            //     // console.log(a.colis.trackingNumber.trackingNumber)
-            // })
-        })
+            setFactures(response.data);
+        });
 
 
     // Colis Data
@@ -90,7 +75,7 @@ function Colis(props) {
             randomResult = randomResult.concat(characters.charAt(Math.floor(Math.random() * charactersLength)));
         }
         setResult(randomResult);
-        console.log(result);
+
     }
 
     //modal :
@@ -222,7 +207,7 @@ function Colis(props) {
                             <th scope="col">Tracking Number</th>
                             <th scope="col">Origin Address</th>
                             <th scope="col">Arrived Address</th>
-                            <th scope="col">Weight(Kg)</th>
+                            <th scope="col">Weight(g)</th>
                             <th scope="col">Dimension(cm3)</th>
                             <th scope="col">Fragile</th>
                             <th scope="col">Froid</th>
@@ -376,7 +361,7 @@ function Colis(props) {
                                     required
                                     onChange={(e) => setPoids(e.target.value)}
                                     value={Poids}
-                                    label="Poids (Kg)"
+                                    label="Poids (g)"
                                     fullWidth
                                     type="number"
                                     variant="standard"
@@ -437,7 +422,7 @@ function Colis(props) {
                                             readOnly: true,
                                         }}
                                         value={Poids}
-                                        label="Poids (kg)"
+                                        label="Poids (g)"
                                         fullWidth
                                         type="number"
                                         variant="standard"

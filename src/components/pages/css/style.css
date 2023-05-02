@@ -1,3 +1,12 @@
+body {
+    height: 100vh;
+    background-image: url('../../images/verctbg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 .list-group a:hover{
     background-color:var(--color-menu-hover);
     color : var(--color-font-hover);
@@ -72,3 +81,11 @@
     height: 40px;
 }
 
+.form-check input{
+background-color: #00FFF0 !important;
+    color: #00FFF0!important;
+}
+
+.table td ,th{
+    text-align: center;
+}

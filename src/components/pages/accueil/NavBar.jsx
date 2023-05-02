@@ -30,6 +30,7 @@ const NavBar = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    const redirection = ["admin","manager","driver","client"];
 
     async function useLogin(event){
         event.preventDefault();
@@ -38,7 +39,8 @@ const NavBar = () => {
                 {
                     email:email,
                     password:password
-                }).then((response)=> {
+                })
+                .then((response)=> {
 
                     if(response.status===200) {
                         const { access_token } = response.data;
@@ -52,8 +54,14 @@ const NavBar = () => {
                         axios.get(`http://localhost:8080/api/v1/user/email/${email}`, config)
                             .then( response => {
                                 const { id, role, fullname } = response.data;
-                                if(role==="ADMIN") navigate('/admin');
-                                else if(role==="CLIENT") navigate(`/client?id=${id}&tk=${access_token}&fullname=${fullname}`);
+                                let indice;
+                                if( role === "ADMIN")       indice = 0;
+                                else if(role === "MANAGER") indice = 1;
+                                else if(role === "DRIVER")  indice = 2;
+                                else if(role === "CLIENT")  indice = 3;
+                                navigate(
+                                    '/'+redirection[indice]+`?id=${id}&tk=${access_token}&fullname=${fullname}`
+                                );
                             })
 
                     } else if (response.status===401 || response.status===403) alert("incorrect email and password");
@@ -96,7 +104,11 @@ const NavBar = () => {
                     axios.get(`http://localhost:8080/api/v1/user/email/${emailRegister}`, config)
                         .then( response => {
                             const { id, fullname } = response.data;
-                            navigate(`/client?id=${id}&tk=${access_token}&fullname=${fullname}`);
+                            navigate(
+                                '/'
+                                +redirection[3]
+                                +`?id=${id}&tk=${access_token}&fullname=${fullname}`
+                            );
                         })
 
                 } else if (response.status===401 || response.status===403) alert("Email is already exist");
@@ -310,7 +322,7 @@ const NavBar = () => {
                             <span className="icon-close" onClick={handleLoginClose}><ion-icon name="close"/></span>
                             <div className="form-box login">
                                 <h2>Login</h2>
-                                <form form name="login" method="post" >
+                                <form name="login" method="post" >
                                     <div className="input-box">
                                         <span className="icon"><ion-icon name="mail"/></span>
                                         <input type="email" id="input_email"
@@ -329,16 +341,17 @@ const NavBar = () => {
                                         />
                                         <label>Password</label>
                                     </div>
-                                    {/*<div className="remember-forgot">*/}
-                                    {/*    <label>*/}
-                                    {/*        <input type="checkbox" id="checkLogin"/>Remember me*/}
-                                    {/*    </label>*/}
-
-                                    {/*</div>*/}
+                                    <div className="remember-forgot">
+                                        <label>
+                                            <input type="checkbox" id="checkLogin"/>Remember me
+                                        </label>
+                                        <a href="#">Forgot Password?</a>
+                                    </div>
                                     <button type="submit" className="btn" onClick={useLogin}>Login</button>
                                     <div className="login-register">
-                                        <p>Don't have an account?
-                                            <a className="register-link"  onClick={handleRegisterOpen}>Register</a>
+                                        <p>Don't have an account ?
+                                            <a className="register-link"  onClick={handleRegisterOpen}
+                                               style={{marginLeft: "3px"}}>Register</a>
                                         </p>
                                     </div>
                                 </form>
