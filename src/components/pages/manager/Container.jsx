@@ -4,9 +4,20 @@ import {Table} from "react-bootstrap";
 import manager from "../services/Manager_data";
 import {useState} from "react";
 import "../css/manager.css";
+import sessionStorage from "sessionstorage";
+import axios from "axios";
+import * as React from "react";
+
 
 function Container(props) {
+    const config = {
+        headers: {
+            'Authorization': `Bearer ${sessionStorage.getItem("token")}` // Ajouter le token dans l'en-tête d'autorisation
+        }
+    };
 
+
+    const [Containers, setContainers] = useState([]);
     const [selectedContainer, setSelectedContainer] = useState(null);
 
 // get all containers :
@@ -45,32 +56,52 @@ function Container(props) {
                         <thead>
                         <tr >
                             <th scope="col">Reference</th>
-                            <th scope="col">UserName</th>
+                            <th scope="col">Nombre de colis</th>
+                            <th scope="col">Trajet</th>
+                            <th scope="col">Driver</th>
+                            <th scope="col">Status</th>
 
                         </tr>
                         </thead>
                         <tbody>
 
-                        {manager?.map((container,i) => (
-                            <tr key={i} onClick={() => handleRowClick(container)}  >
-                                <td scope="row" className='pl-5'>{container.id}</td>
-                                <td>{container.Username}</td>
-                                {selectedContainer && selectedContainer.id === container.id &&(
-                                    <tfoot>
-                                    <tr>
-                                        <td colSpan="3">
-                                            <div className="colis-details">
-                                                <h2>{selectedContainer.id}</h2>
-                                                <p>{selectedContainer.category}</p>
-                                                <p>{selectedContainer.groupSize}</p>
-                                            </div>
+                        {Containers?.map((container, i) => (
+                            <React.Fragment key={i}>
+                                <tr onClick={() => handleRowClick(container)}>
+                                    <td scope="row" className='pl-5'>{container.ref}</td>
+                                    <td>{container.colis.length}</td>
+                                    <td>{container.villeDepart} to {container.villeArrivee}</td>
+                                    <td>{container.driver.fullname}</td>
+                                    <td>{container.fin?"Arrivé":"En cours"}</td>
+                                </tr>
+                                {selectedContainer && selectedContainer.id === container.id && (
+                                    <tr key={`${i}-details`} style={{backgroundColor:"var(--color-menu-hover)"}}>
+                                        <td colSpan={5}>
+                                            <table className="table-table" >
+                                                <tbody>
+                                                <tr>
+                                                    <th>Tracking Number</th>
+                                                    <th>Adresse Source</th>
+                                                    <th>Adresse Destinataire</th>
+                                                    <th>Livré</th>
+                                                </tr>
+                                                {selectedContainer.colis.map((item, j) => (
+                                                    <tr key={`${i}-${j}`}>
+                                                        <td>{item.trackingNumber.trackingNumber}</td>
+                                                        <td>{item.adresse}</td>
+                                                        <td>{item.destinataire.adresse}</td>
+                                                        <td>{item.delivered?"Délivré":"Pas encore"}</td>
+                                                    </tr>
+                                                ))}
+                                                </tbody>
+                                            </table>
                                         </td>
                                     </tr>
-                                    </tfoot>
                                 )}
-                            </tr>
-
+                            </React.Fragment>
                         ))}
+
+
                         </tbody>
                     </Table>
                 </div>
