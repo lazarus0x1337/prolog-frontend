@@ -9,6 +9,18 @@ function Container(props) {
 
     const [selectedContainer, setSelectedContainer] = useState(null);
 
+// get all containers :
+    try{
+        axios.get('http://localhost:8080/api/v1/conteneur',config)
+            .then(response => {
+                if(response.status === 200){
+                    setContainers(response.data);
+                }else console.log("ereur"+response.status);
+            })
+    }catch (error){
+        console.log(error);
+    }
+
     const handleRowClick = (container) => {
          setSelectedContainer(container);
     };
