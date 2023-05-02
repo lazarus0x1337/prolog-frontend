@@ -33,8 +33,17 @@ function Colis(props) {
 
     //succes and erreur envois packages :
     const [openErreur,setopenErreur]=useState(false);
+    const [openErreur2,setopenErreur2]=useState(false);
     const [openSucces,setopenSucces]=useState(false);
+    const handleModalFin=()=>{
+        setopenErreur2(true);
+        handleCloseModal2();
+        setopenErreur(false);
+        setopenSucces(false);
+    };
+
     const handleClose=()=>{
+        setopenErreur2(false);
         handleCloseModal2();
         setopenErreur(false);
         setopenSucces(false);
@@ -75,7 +84,7 @@ function Colis(props) {
 
         axios.get(`http://localhost:8080/api/v1/conteneur/ref/${reference}`,config)
             .then(response => {
-                if(response.status===200){
+                if(response.status===200 && !response.data.fin){
                     // Affichage du modal de validation
 
                     const {id,villeDepart,villeArrivee,driver} = response.data;
@@ -312,6 +321,23 @@ function Colis(props) {
                     </Table>
                 </div>
             </div>
+
+            <Modal open={openErreur2} onClose={handleClose} >
+                <Box sx={style}>
+                    <Grid  sx={{ my: 1 }}>
+                        <Typography variant="h6" textAlign="center" gutterBottom>
+                            Ce conteneur est déja arrivé à destination
+                        </Typography>
+                        <Button onClick={handleClose} style={{
+                            backgroundColor: "var(--primary-blue)",
+                            color: "black",
+                            marginLeft: "180px",
+                            marginTop: "27px",
+                            padding: "10px"
+                        }}>Ok</Button>
+                    </Grid>
+                </Box>
+            </Modal>
 
             <Modal open={openErreur} onClose={handleClose} >
                 <Box sx={style}>
