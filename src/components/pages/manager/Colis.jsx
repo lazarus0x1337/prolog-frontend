@@ -88,6 +88,8 @@ function Colis(props) {
                             setfullname(fullname);
                         })
                     handleInfoContainer();
+                } else {
+                    handleModalFin();
                 }
             })
             .catch(reason => {
@@ -198,6 +200,7 @@ function Colis(props) {
             "ref":reference,
             "villeDepart":villeDepart,
             "villeArrivee":villeArrivee,
+            "fin":false,
             "driver":{"id":Driver.id}
         }
         axios.post(

@@ -39,7 +39,7 @@ function Colis(props) {
     const [Height, setHeight] = useState(0);
     const [Length, setLength] = useState(0);
     const [Width, setWidth] = useState(0);
-    const [Prix, setPrix] = useState(Poids * Height * Width * Length);
+    const [Prix, setPrix] = useState();
     //Destinataire Data
     const [addressDES, setaddressDES] = useState("");
     const [telAdd, settelAdd] = useState("");
@@ -178,7 +178,9 @@ function Colis(props) {
             alert("Valeur Null !");
 
         } else {
-            setPrix(Height*Width*Length*Poids*0.02);
+            const ajout1 = checkedFragile?1.2:1;
+            const ajout2 = checkedFroid?1.3:1;
+            setPrix(((Poids/10) + (Height * Width * Length)/500000)*(ajout1*ajout2));
             generateResult();
             ValidateFacture();
         }
