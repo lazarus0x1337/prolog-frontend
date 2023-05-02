@@ -1,5 +1,15 @@
 import Nav from "../admin/Nav";
-import {Button, FormControlLabel, FormGroup, Switch, Typography} from "@mui/material";
+import {
+    Button,
+    FormControl,
+    FormControlLabel,
+    FormGroup,
+    InputLabel,
+    MenuItem,
+    Select,
+    Switch,
+    Typography
+} from "@mui/material";
 import {Table} from "react-bootstrap";
 import React, {useState} from "react";
 import axios from "axios";
@@ -19,13 +29,42 @@ function Colis(props) {
     };
 
 
+    //succes and erreur envois packages :
+    const [openErreur,setopenErreur]=useState(false);
+    const [openSucces,setopenSucces]=useState(false);
+    const handleClose=()=>{
+        handleCloseModal2();
+        setopenErreur(false);
+        setopenSucces(false);
+    };
+    const handleOpenSucces=()=>{
+        handleCloseModal2();
+        setopenErreur(false);
+        setopenSucces(true);
+    };
+    const handleOpenErreur=()=>{
+        handleCloseModal2();
+        setopenErreur(true);
+        setopenSucces(false);
+    };
+
+
     const [openModal1,setOpenModal1]=useState(false);
     const [openModal2,setOpenModal2]=useState(false);
     const [openModal3,setOpenModal3]=useState(false);
     const [openModal4,setOpenModal4]=useState(false);
     const [reference,setReference]=useState("");
+    const generateReference = () => {
+        const characters = '0123456789';
+        const charactersLength = characters.length;
+        let randomResult = 'RFC';
+        for (let i = 0; i < 10; i++) {
+            randomResult = randomResult.concat(characters.charAt(Math.floor(Math.random() * charactersLength)));
+        }
+        setReference(randomResult);
+    }
 
-
+    const [ConteneurId,setConteneurId] = useState();
     const [villeDepart,setvilleDepart]=useState(false);
     const [villeArrivee,setvilleArrivee]=useState(false);
     const [fullname,setfullname]=useState(false);
@@ -123,6 +162,22 @@ function Colis(props) {
               handleOpenModal2();
         }
     }
+    const [idsColis,setIdsColis] = useState([]);
+    const colis = selectedIdsTraitement.map(id => ({ id }));
+    function HandleClickValider(){
+        axios.put(
+            `http://localhost:8080/api/v1/conteneur/${ConteneurId}`,
+            { colis },
+            config
+        ).then(response => {
+            if(response.status===202){
+                setSelectedIds([]);
+                setSelectedIdsTraitement([]);
+                handleOpenSucces();
+            }else handleOpenErreur();
+        })
+
+    }
 
 
 
@@ -206,6 +261,43 @@ function Colis(props) {
                     </Table>
                 </div>
             </div>
+
+            <Modal open={openErreur} onClose={handleClose} >
+                <Box sx={style}>
+                    <Grid  sx={{ my: 1 }}>
+                        <Typography variant="h6" textAlign="center" gutterBottom>
+                            Erreur d'envoie les packages !
+                        </Typography>
+                        <Button onClick={handleClose} style={{
+                            backgroundColor: "var(--primary-blue)",
+                            color: "black",
+                            marginLeft: "180px",
+                            marginTop: "27px",
+                            padding: "10px"
+                        }}>Ok</Button>
+                    </Grid>
+                </Box>
+            </Modal>
+
+
+            <Modal open={openSucces} onClose={handleClose} >
+                <Box sx={style}>
+                    <Grid  sx={{ my: 1 }}>
+                        <Typography variant="h6" textAlign="center" gutterBottom>
+                            Les packages envoyé avec succès !
+                        </Typography>
+                        <Button onClick={handleClose} style={{
+                            backgroundColor: "var(--primary-blue)",
+                            color: "black",
+                            marginLeft: "180px",
+                            marginTop: "27px",
+                            padding: "10px"
+                        }}>Ok</Button>
+                    </Grid>
+                </Box>
+            </Modal>
+
+
             <Modal open={openModal1} onClose={handleCloseModal1} >
                 <Box sx={style}>
                     <Grid  sx={{ my: 1 }}>
@@ -379,7 +471,9 @@ function Colis(props) {
                         </Grid>
 
                     </Grid>
-                    <Button  style={{
+                    <Button
+                        onClick={HandleClickValider}
+                        style={{
                         marginTop:"10px",
                         backgroundColor: "var(--primary-blue)",
                         color: "black",

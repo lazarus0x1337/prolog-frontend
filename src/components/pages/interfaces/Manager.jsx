@@ -139,7 +139,7 @@ function Manager() {
                     {toggle &&  <div className='col-4 col-md-2'/>}
                     <div className='col'>
                         {show1 && <Colis Toggle={Toggle} /> }
-                        {/*{show2 && <Container Toggle={Toggle} /> }*/}
+                        {show2 && <Container Toggle={Toggle} /> }
                         {/*{show3 && <Profile Toggle={Toggle}/> }*/}
                         {/*{show4 && <Setting Toggle={Toggle} /> }*/}
                     </div>

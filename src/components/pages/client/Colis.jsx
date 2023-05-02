@@ -75,7 +75,7 @@ function Colis(props) {
             randomResult = randomResult.concat(characters.charAt(Math.floor(Math.random() * charactersLength)));
         }
         setResult(randomResult);
-        console.log(result);
+
     }
 
     //modal :
