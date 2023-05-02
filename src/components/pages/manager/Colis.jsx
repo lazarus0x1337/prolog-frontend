@@ -21,6 +21,8 @@ import Modal from "@mui/material/Modal";
 import {style,style_Tracking} from "../interfaces/Css_Modal";
 
 
+
+
 function Colis(props) {
     const config = {
         headers: {
@@ -76,7 +78,8 @@ function Colis(props) {
                 if(response.status===200){
                     // Affichage du modal de validation
 
-                    const {villeDepart,villeArrivee,driver} = response.data;
+                    const {id,villeDepart,villeArrivee,driver} = response.data;
+                    setConteneurId(id);
                     setvilleDepart(villeDepart);
                     setvilleArrivee(villeArrivee);
                     axios.get(`http://localhost:8080/api/v1/user/${driver.id}`,config)
@@ -95,6 +98,15 @@ function Colis(props) {
     }
 
     const handleAddContainer=()=>{
+        setDriver([]);
+        axios.get('http://localhost:8080/api/v1/user',config)
+            .then(response => {
+                const driv = response.data.filter(driver => driver.role === "DRIVER");
+                setDrivers(driv);
+            })
+        generateReference();
+        setvilleArrivee("");
+        setvilleDepart("");
         setOpenModal3(true);
         setOpenModal4(false);
         setOpenModal2(false);
@@ -137,9 +149,11 @@ function Colis(props) {
         setOpenModal4(false);
     }
 
+    //fetch les donnes de drivers
+    const [Driver, setDriver] = useState([]);
+    const [Drivers,setDrivers] = useState([]);
 
-
-
+    //fetch les donnes de factures
     let [factures, setFactures] = useState([]);
     const [isChecked, setIsChecked] = useState(true);
    //api manager for get all factures :
@@ -153,13 +167,14 @@ function Colis(props) {
         });
 
     const [selectedIds, setSelectedIds] = useState([]);
+    const [selectedIdsTraitement, setSelectedIdsTraitement] = useState([]);
 
     function handleAddToContainer(){
         if(selectedIds.length===0) {
             handleOpenModal1();
         }
         else{
-              handleOpenModal2();
+            handleOpenModal2();
         }
     }
     const [idsColis,setIdsColis] = useState([]);
@@ -177,6 +192,37 @@ function Colis(props) {
             }else handleOpenErreur();
         })
 
+    }
+    function HandleClickCreate(){
+        const data = {
+            "ref":reference,
+            "villeDepart":villeDepart,
+            "villeArrivee":villeArrivee,
+            "driver":{"id":Driver.id}
+        }
+        axios.post(
+            'http://localhost:8080/api/v1/conteneur',
+            data,
+            config
+        ).then(response => {
+            if(response.status===201){
+                const ID = response.data.id;
+                console.log(ID);
+                axios.put(
+                    `http://localhost:8080/api/v1/conteneur/${ID}`,
+                    { colis },
+                    config
+                ).then(resp => {
+                    if(resp.status===202){
+                        setSelectedIds([]);
+                        setSelectedIdsTraitement([]);
+                        handleOpenSucces();
+                    }
+                })
+            }
+        }).catch(reason => {
+            handleOpenErreur();
+        })
     }
 
 
@@ -234,8 +280,10 @@ function Colis(props) {
                                             onChange={(e) => {
                                                 if (e.target.checked) {
                                                     setSelectedIds([...selectedIds, item.colis.trackingNumber.trackingNumber]);
+                                                    setSelectedIdsTraitement([...selectedIdsTraitement, item.colis.id]);
                                                 } else {
                                                     setSelectedIds(selectedIds.filter((id) => id !== item.colis.trackingNumber.trackingNumber));
+                                                    setSelectedIdsTraitement(selectedIdsTraitement.filter((id) => id !== item.colis.id));
                                                 }
                                             }}
                                         />
@@ -341,20 +389,22 @@ function Colis(props) {
                         <Typography variant="h6" textAlign="left" gutterBottom>
                             Colis à ajouter au conteneur :
                         </Typography>
-                        {selectedIds.map(item => (
-                            <TextField
-                                sx={{ my: 0.1 }}
-                                style={{textAlign:"center"}}
-                                key={item.id}
-                                InputProps={{
-                                readOnly: true,
-                                  }}
-                                value={item}
-                                fullWidth
-                                type="text"
+                        <Grid style={style_Tracking}>
+                            {selectedIds.map(item => (
+                                <TextField
+                                    sx={{ my: 0.1 }}
+                                    style={{textAlign:"center"}}
+                                    key={item.id}
+                                    InputProps={{
+                                        readOnly: true,
+                                    }}
+                                    value={item}
+                                    fullWidth
+                                    type="text"
 
-                             />
-                        ))}
+                                />
+                            ))}
+                        </Grid>
                     </Grid>
                 </Box>
             </Modal>
@@ -370,41 +420,85 @@ function Colis(props) {
 
                         <Grid sx={{ my: 0.5 }} item xs={12} >
                             <TextField sx={{ my: 1 }}
-                                       label="Reference"
+                                       label="New Reference"
+                                       InputProps={{
+                                           readOnly: true,
+                                       }}
                                        onChange={(e) => setReference(e.target.value)}
                                        value={reference}
                                        fullWidth
                                        type="text"
                             />
-
+                            <TextField sx={{ my: 1 }}
+                                       label="Ville Depart"
+                                       onChange={(e) => setvilleDepart(e.target.value)}
+                                       value={villeDepart}
+                                       fullWidth
+                                       type="text"
+                                       required
+                            />
+                            <TextField sx={{ my: 1 }}
+                                       label="Ville Arrivée"
+                                       onChange={(e) => setvilleArrivee(e.target.value)}
+                                       value={villeArrivee}
+                                       fullWidth
+                                       type="text"
+                                       required
+                            />
+                                <FormControl fullWidth>
+                                    <InputLabel id="demo-simple-select-label">Driver</InputLabel>
+                                    <Select
+                                        value={Driver.fullname}
+                                        label="Driver"
+                                        onChange={(e) => {
+                                            setDriver(e.target.value);
+                                        }}
+                                        required
+                                    >
+                                        {/*<MenuItem value={DriverObject} disabled>cc</MenuItem>*/}
+                                        { Drivers.map( (item) => (
+                                            <MenuItem key={item.id} value={item}>{item.fullname}</MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
                         </Grid>
                     </Grid>
                     <Grid  sx={{ my: 1 }}>
                         <Typography variant="h6" textAlign="left" gutterBottom>
                             Colis à ajouter au conteneur :
                         </Typography>
-                        {selectedIds.map(item => (
-                            <TextField
-                                sx={{ my: 0.1 }}
-                                style={{textAlign:"center"}}
-                                key={item.id}
-                                InputProps={{
-                                    readOnly: true,
-                                }}
-                                value={item}
-                                fullWidth
-                                type="text"
+                        <Grid style={style_Tracking}>
+                            {selectedIds.map(item => (
+                                <TextField
+                                    sx={{ my: 0.1 }}
+                                    style={{textAlign:"center"}}
+                                    key={item.id}
+                                    InputProps={{
+                                        readOnly: true,
+                                    }}
+                                    value={item}
+                                    fullWidth
+                                    type="text"
 
-                            />
-                        ))}
+                                />
+                            ))}
+                        </Grid>
                     </Grid>
+                    <Button
+                        onClick={HandleClickCreate}
+                        style={{
+                        marginTop:"10px",
+                        backgroundColor: "var(--primary-blue)",
+                        color: "black",
+                        width:"100%"
+                    }}>Valider</Button>
                 </Box>
             </Modal>
 
 
 
             <Modal open={openModal4} onClose={handleOpenModal2} >
-                <Box sx={style} style={{overflow:"hidden"}} >
+                <Box sx={style} style={{overflow:"auto"}} >
                     <Grid>
                         <Typography variant="h6"  gutterBottom>
                             Informations about Container :

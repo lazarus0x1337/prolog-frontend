@@ -34,6 +34,6 @@ export const style_Tracking = {
     alignItems: 'center',
     justifyContent: 'center',
     overflowY: 'auto',
-    maxHeight: '35vh',
+    maxHeight: '30vh',
     borderBottom: '1px solid black',
 }
