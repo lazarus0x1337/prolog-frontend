@@ -17,13 +17,13 @@ function Navbar() {
     }
 
     return (
-        <header>
-            <h3>Prolog</h3>
+        <header className="header-driver">
+            <h3 className="title-driver">Prolog</h3>
             <nav ref={navRef}>
                 <a href="/#">Containers</a>
                 <a href="/#">Profile</a>
                 <a href="/#">Setting</a>
-                <a onClick={handleLogout}>Logout</a>
+                <a href="/" onClick={handleLogout}>Logout</a>
                 <button
                     className="nav-btn nav-close-btn"
                     onClick={showNavbar}>

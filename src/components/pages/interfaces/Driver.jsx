@@ -62,17 +62,24 @@ export default function Driver() {
                         {/* End hero unit */}
                         <Grid container spacing={4}>
                             {Conteneurs.map((item,i) => (
-                                <Grid className="" item key={i} xs={12} sm={6} md={4}>
+                                <Grid item key={i} xs={12} sm={6} md={4}>
                                     <Card
-                                        sx={{ height: '100%', display: 'flex', flexDirection: 'column'}}
-                                    >
+                                        sx={{
+
+                                            height: '100%',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            backgroundColor:'transparent',
+                                            // border: '5px solid var(--color-menu)',
+                                            borderRadius: '20px',
+                                    }}>
                                         <CardMedia
                                             component="img"
                                             sx={{
                                                 // 16:9
-                                                pt: '56.25%',
+                                                // pt: '56.25%',
                                             }}
-                                            image="https://source.unsplash.com/random"
+                                            image={imgMap}
                                             alt="random"
                                         />
                                         <CardContent sx={{ flexGrow: 1 }}>
