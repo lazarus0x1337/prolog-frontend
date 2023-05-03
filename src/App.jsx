@@ -6,9 +6,8 @@ import Client from "./components/pages/interfaces/Client";
 import Admin from "./components/pages/interfaces/Admin";
 import Manager from "./components/pages/interfaces/Manager";
 import  ClockLoader from "react-spinners/ClockLoader";
-import { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
-import axios from "axios";
+import { useEffect} from "react";
+import Driver from "./components/pages/interfaces/Driver";
 function App() {
 const [loading,setLoading]=React.useState(false);
 useEffect( ()=>{
@@ -29,13 +28,11 @@ useEffect( ()=>{
                     <Route path="/client" element={<Client/>} />
                    <Route path="/admin" element={<Admin/>} />
                     <Route path="/manager" element={<Manager/>} />
-                    {/*<Route path="/Driver" element={<Driver/>} />*/}
+                    <Route path="/Driver" element={<Driver/>} />
 
     </Routes>
 
         )}
-
-
 </>
     );
 }
