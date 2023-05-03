@@ -1,54 +1,126 @@
-import React, { useState } from "react";
-import '../Driver/Driver.css';
-import axios from "axios";
-import "react-bootstrap";
-import {Button} from "@mui/material";
-import {Link} from "react-scroll";
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import CssBaseline from '@mui/material/CssBaseline';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {useEffect, useState} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
+import sessionStorage from "sessionstorage";
+import {getConteneursByDriverId} from '../../api/GetConteneurByDriverId';
 import Navbar from "../Driver/Navbar";
-function Driver() {
+import {TextField} from "@mui/material";
+
+
+
+export default function Driver() {
+    const [Conteneurs,setConteneurs]=useState([]);
+    const [ConteneursNonFilter,setConteneursNonFilter]=useState([]);
     const [AfficheContainer,setAfficheContainer]=useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [id,setId] = useState(new URLSearchParams(location.search).get('id'));
+    const [tk,setTk] = useState(new URLSearchParams(location.search).get('tk'));
+    const [fullname,setFullname] = useState(new URLSearchParams(location.search).get('fullname'));
+
+    if(fullname) {
+        sessionStorage.setItem("fullname", fullname);
+    }
+    if(tk) {
+        sessionStorage.setItem("token", tk);
+    }
+    if(id) {
+        sessionStorage.setItem("ID", id);
+    }
+
+    useEffect(() => {
+        const token = sessionStorage.getItem('token');
+        const driverId = sessionStorage.getItem('ID');
+        getConteneursByDriverId(token, driverId, setConteneurs);
+    }, []);
+
+
+
+    const theme = createTheme();
 
     return (
         <>
-            <Navbar />
-            <div className="container-driver">
+            <Navbar/>
 
-                <div className="d-flex justify-content-center align-items-center">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-3 col-sm-6">
-                                <div className="box">
-                                    <h3>Container : rfc2324243</h3>
-                                    <p>Pour effectuer des envois via notre plateforme, il suffit de remplir quelques champs (nom du destinataire, son adresse, mode de paiement ...) et nous occupons du reste...</p>
-                                </div>
-                            </div>
-
-                            <div className="col-md-3 col-sm-6">
-                                <div className="box">
-                                    <h3>Container : rfc2324243</h3>
-                                    <p>Nous disposons d’un vaste espace alloué à chacun de nos vendeurs pour stocker leurs marchandises. Ceci a pour but de leurs épargner du temps ...</p>
-                                </div>
-                            </div>
-
-                            <div className="col-md-3 col-sm-3 ">
-                                <div className="box">
-                                    <h3>Container : rfc2324243</h3>
-                                    <p>Nous disposons d’une équipe performante, experte en communication et techniques de vente. Disponible pour appeler vos clients et confirmer vos commandes...</p>.
-                                </div>
-                            </div>
-                            <div className="col-md-3 col-sm-3 ">
-                                <div className="box">
-                                    <h3>Container : rfc2324243</h3>
-                                    <p>Nous disposons d’une équipe performante, experte en communication et techniques de vente. Disponible pour appeler vos clients et confirmer vos commandes...</p>.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <main>
+                    <Container sx={{ py: 0,marginTop:"120px" }} maxWidth="md">
+                        <Typography gutterBottom variant="h2" component="h1" sx={{ textAlign:"center"}}>
+                            Containers
+                        </Typography>
+                        {/* End hero unit */}
+                        <Grid container spacing={4}>
+                            {Conteneurs.map((item,i) => (
+                                <Grid className="" item key={i} xs={12} sm={6} md={4}>
+                                    <Card
+                                        sx={{ height: '100%', display: 'flex', flexDirection: 'column'}}
+                                    >
+                                        <CardMedia
+                                            component="img"
+                                            sx={{
+                                                // 16:9
+                                                pt: '56.25%',
+                                            }}
+                                            image="https://source.unsplash.com/random"
+                                            alt="random"
+                                        />
+                                        <CardContent sx={{ flexGrow: 1 }}>
+                                            <Typography gutterBottom variant="h5" component="h2">
+                                                {item.ref}
+                                            </Typography>
+                                            <TextField sx={{ my: 1 }}
+                                                       InputProps={{
+                                                           readOnly: true,
+                                                       }}
+                                                       label="Nombre de Colis"
+                                                       variant="standard"
+                                                       fullWidth
+                                                       type="text"
+                                                       value={item.colis.length}
+                                            />
+                                            <TextField sx={{ my: 1 }}
+                                                       InputProps={{
+                                                           readOnly: true,
+                                                       }}
+                                                       label="FROM"
+                                                       variant="standard"
+                                                       fullWidth
+                                                       type="text"
+                                                       value={item.villeDepart}
+                                            />
+                                            <TextField sx={{ my: 1 }}
+                                                       InputProps={{
+                                                           readOnly: true,
+                                                       }}
+                                                       label="TO"
+                                                       variant="standard"
+                                                       fullWidth
+                                                       type="text"
+                                                       value={item.villeArrivee}
+                                            />
+                                        </CardContent>
+                                        <CardActions>
+                                            <Button size="small">View</Button>
+                                            <Button size="small">Edit</Button>
+                                        </CardActions>
+                                    </Card>
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </Container>
+                </main>
+            </ThemeProvider>
         </>
     );
 }
-export default Driver;

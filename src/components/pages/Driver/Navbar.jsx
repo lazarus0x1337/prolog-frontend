@@ -1,5 +1,8 @@
 import { useRef } from "react";
 import '../Driver/Driver.css';
+import {Logout} from "../../api/Logout";
+import sessionStorage from "sessionstorage";
+import {useNavigate} from "react-router-dom";
 
 function Navbar() {
     const navigate = useNavigate();
@@ -9,6 +12,9 @@ function Navbar() {
             "responsive_nav"
         );
     };
+    const handleLogout = () => {
+        Logout(sessionStorage.getItem("token"),navigate);
+    }
 
     return (
         <header>
