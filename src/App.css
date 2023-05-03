@@ -17,9 +17,9 @@
     --card-02-bg: linear-gradient(#01d293, #56c57a);
     --card-03-bg: #725cff;
     --card-04-bg: #2884ff;
-    --heading-color: #fff;
+    --heading-color: #ffffff;
     --small-text-color: #808191;
-
+    --color-test: #b0e6ff;
     /* Theme layout */
     --color-degrade3-1: #1f282d;
     --color-degrade3-2: #343f45;
@@ -31,6 +31,7 @@
     --color-degrade2-1: #313131;
     --color-degrade2-2: #383838;
     --color-degrade2-3: #434343;
+
 
     --color-menu: #1f282d;
     --color-menu-hover: #343f45;

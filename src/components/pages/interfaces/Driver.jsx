@@ -15,7 +15,7 @@ import sessionStorage from "sessionstorage";
 import {getConteneursByDriverId} from '../../api/GetConteneurByDriverId';
 import Navbar from "../Driver/Navbar";
 import {TextField} from "@mui/material";
-
+import imgMap from "../../images/googlemapImg.jpg";
 
 
 export default function Driver() {
@@ -56,11 +56,11 @@ export default function Driver() {
                 <CssBaseline />
                 <main>
                     <Container sx={{ py: 0,marginTop:"120px" }} maxWidth="md">
-                        <Typography gutterBottom variant="h2" component="h1" sx={{ textAlign:"center"}}>
-                            Containers
+                        <Typography gutterBottom variant="h2" component="h1" sx={{ textAlign:"center",color :"white"}}>
+                            <div className="Containers-title" style={{fontFamily: "Georgia"}}> Containers </div>
                         </Typography>
                         {/* End hero unit */}
-                        <Grid container spacing={4}>
+                        <Grid container spacing={4} >
                             {Conteneurs.map((item,i) => (
                                 <Grid item key={i} xs={12} sm={6} md={4}>
                                     <Card
@@ -82,11 +82,21 @@ export default function Driver() {
                                             image={imgMap}
                                             alt="random"
                                         />
-                                        <CardContent sx={{ flexGrow: 1 }}>
-                                            <Typography gutterBottom variant="h5" component="h2">
+                                        <CardContent sx={{ flexGrow: 1, backgroundColor:'var(--color-menu)'}}>
+                                            <Typography gutterBottom variant="h5" component="h2" sx={{
+                                                textAlign:"center",color:"var(--color-font-hover)", fontFamily:'cursive' }}>
                                                 {item.ref}
                                             </Typography>
-                                            <TextField sx={{ my: 1 }}
+                                            <TextField  sx={{
+                                                my: 1,
+                                                color: "var(--color-font)",
+                                                '& .MuiInputLabel-root': {
+                                                    color: "var(--color-font)" // Changer la couleur de l'étiquette en blanc
+                                                },
+                                                '& .MuiInputBase-input': {
+                                                    color: 'var(--color-font-hover)' // Changer la couleur du texte à l'intérieur du champ de saisie
+                                                }
+                                            }}
                                                        InputProps={{
                                                            readOnly: true,
                                                        }}
@@ -96,7 +106,16 @@ export default function Driver() {
                                                        type="text"
                                                        value={item.colis.length}
                                             />
-                                            <TextField sx={{ my: 1 }}
+                                            <TextField sx={{
+                                                my: 1,
+                                                color: "var(--color-font)",
+                                                '& .MuiInputLabel-root': {
+                                                    color: "var(--color-font)" // Changer la couleur de l'étiquette en blanc
+                                                },
+                                                '& .MuiInputBase-input': {
+                                                    color: 'var(--color-font-hover)' // Changer la couleur du texte à l'intérieur du champ de saisie
+                                                }
+                                            }}
                                                        InputProps={{
                                                            readOnly: true,
                                                        }}
@@ -106,7 +125,16 @@ export default function Driver() {
                                                        type="text"
                                                        value={item.villeDepart}
                                             />
-                                            <TextField sx={{ my: 1 }}
+                                            <TextField sx={{
+                                                my: 1,
+                                                color: "var(--color-font)",
+                                                '& .MuiInputLabel-root': {
+                                                    color: "var(--color-font)" // Changer la couleur de l'étiquette en blanc
+                                                },
+                                                '& .MuiInputBase-input': {
+                                                    color: 'var(--color-font-hover)' // Changer la couleur du texte à l'intérieur du champ de saisie
+                                                }
+                                            }}
                                                        InputProps={{
                                                            readOnly: true,
                                                        }}
@@ -117,9 +145,16 @@ export default function Driver() {
                                                        value={item.villeArrivee}
                                             />
                                         </CardContent>
-                                        <CardActions>
-                                            <Button size="small">View</Button>
-                                            <Button size="small">Edit</Button>
+                                        <CardActions  sx={{ flexGrow: 1 , backgroundColor:'var(--color-degrade3-1)',justifyContent: 'center', '&:hover':{backgroundColor:'var(--color-font-hover)',color:"var(--color-menu)"} }}>
+                                            <Button
+                                                sx={{
+                                                        fontFamily:'cursive',
+                                                        color:"var(--color-font-2)",
+                                                        fontSize:"1rem",
+                                                        '&:hover': {
+                                                            color:"var(--color-menu)"
+                                                        }
+                                            }}>Voyager</Button>
                                         </CardActions>
                                     </Card>
                                 </Grid>
