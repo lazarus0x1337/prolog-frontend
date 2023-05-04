@@ -90,7 +90,7 @@ function Container(props) {
                                                         <td>{item.trackingNumber.trackingNumber}</td>
                                                         <td>{item.adresse}</td>
                                                         <td>{item.destinataire.adresse}</td>
-                                                        <td>{item.delivered?"Délivré":"Pas encore"}</td>
+                                                        <td>{item.delivered?"Délivré":"Non"}</td>
                                                     </tr>
                                                 ))}
                                                 </tbody>
