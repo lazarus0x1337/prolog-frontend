@@ -4,7 +4,7 @@ import {Logout} from "../../api/Logout";
 import sessionStorage from "sessionstorage";
 import {useNavigate} from "react-router-dom";
 
-function Navbar() {
+function Navbar(props) {
     const navigate = useNavigate();
     const navRef = useRef();
     const showNavbar = () => {
@@ -15,14 +15,17 @@ function Navbar() {
     const handleLogout = () => {
         Logout(sessionStorage.getItem("token"),navigate);
     }
+    const handleClickChangeToPackages =() => {
+        props.show1=
+    }
 
     return (
         <header className="header-driver">
             <h3 className="title-driver">Prolog</h3>
             <nav ref={navRef}>
-                <a href="/#">Containers</a>
-                <a href="/#">Profile</a>
-                <a href="/#">Setting</a>
+                <a href="/driver">Containers</a>
+                <a onClick={handleClickChangeToPackages}>Packages</a>
+                <a>Profile</a>
                 <a href="/" onClick={handleLogout}>Logout</a>
                 <button
                     className="nav-btn nav-close-btn"
