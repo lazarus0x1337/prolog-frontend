@@ -1,4 +1,4 @@
-/*.Containers-title{*/
+/*.Containers.jsx-title{*/
 /*    font-family: "Georgia";*/
 /*    !*text-transform: uppercase;*!*/
 /*    color: var(--color-font-hover);*/
@@ -82,7 +82,7 @@ header {
 
 
 
-nav a {
+.a-navbar{
     font-size: 1.3em;
     margin: 0 2rem;
     color: var(--color-font);
@@ -143,7 +143,8 @@ nav {
         right: 2rem;
     }
 
-    nav a {
+    .a-navbar{
+        color:white;
         font-size: 1.5rem;
     }
 }
