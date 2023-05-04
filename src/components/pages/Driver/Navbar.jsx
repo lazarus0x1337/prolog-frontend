@@ -4,7 +4,7 @@ import {Logout} from "../../api/Logout";
 import sessionStorage from "sessionstorage";
 import {useNavigate} from "react-router-dom";
 
-function Navbar(props) {
+function Navbar() {
     const navigate = useNavigate();
     const navRef = useRef();
     const showNavbar = () => {
@@ -16,7 +16,7 @@ function Navbar(props) {
         Logout(sessionStorage.getItem("token"),navigate);
     }
     const handleClickChangeToPackages =() => {
-        props.show1=
+
     }
 
     return (
