@@ -280,7 +280,7 @@ export default function Driver() {
                         <Typography color="var(--color-font)" variant="body1" paragraph>Arrival Address :<div style={{textAlign:'center', color:"var(--primary-blue)"}}>  {Conteneur.villeArrivee}</div></Typography>
                     </Box>
 
-                    <Box style={{backgroundColor:'var(--color-font-hover)',padding: '10px', borderTop:'2px solid var(--color-font-hover)',borderBottom:'2px solid var(--color-font-hover)'}} display="flex" flexDirection="row" justifyContent="center" alignItems="center" width="100%">
+                    <Box style={{borderRadius:'20px', backgroundColor:'var(--color-font-hover)',padding: '10px', borderTop:'2px solid var(--color-font-hover)',borderBottom:'2px solid var(--color-font-hover)'}} display="flex" flexDirection="row" justifyContent="center" alignItems="center" width="100%">
                         {/*<Box flexGrow={1} marginRight={1}>*/}
                             <FormControl variant="standard"
                                          sx={{backgroundColor: "transparent", width: '70%'}}>
@@ -327,13 +327,12 @@ export default function Driver() {
                                     {/*<td scope="row" className='pl-5'><img src={iconeBox} style={{width: '40px'}}/></td>*/}
                                     <td scope="row" className='pl-5'>{colis.trackingNumber.trackingNumber}</td>
                                     <td scope="row" className='pl-5'>
-                                     <Radio {...controlProps('none', colis.id)}
-                                      checked={!colis.recup && !colis.delivred} color="default"/>
-                                    <Radio {...controlProps('recup', colis.id)}
-                                          checked={colis.recup}/>
-
-                                    <Radio {...controlProps('deliv', colis.id)}
-                                          checked={colis.delivred} color="success"/>
+                                        <Radio {...controlProps('none', colis.id)}
+                                               checked={!colis.recup && !colis.delivred} color="default"/>
+                                        <Radio {...controlProps('recup', colis.id)}
+                                               checked={colis.recup}/>
+                                        <Radio {...controlProps('deliv', colis.id)}
+                                               checked={colis.delivred} color="success"/>
                                     </td>
 
                                 </tr>
@@ -351,14 +350,14 @@ export default function Driver() {
                                                 </thead>
                                                 <tbody>
                                                 <tr>
-                                                    <td>Sender</td>
+                                                    <td className="title-minitab">Sender</td>
                                                     <td>{colis.client.fullname}</td>
                                                     <td>{colis.adresse}</td>
                                                     <td>{colis.client.telephone}</td>
 
                                                 </tr>
                                                 <tr>
-                                                    <td>Receiver</td>
+                                                    <td className="title-minitab">Receiver</td>
                                                     <td>{colis.destinataire.firstname} {colis.destinataire.lastname}</td>
                                                     <td>{colis.destinataire.adresse}</td>
                                                     <td>{colis.destinataire.telephone}</td>
@@ -384,14 +383,26 @@ export default function Driver() {
                                                 </tbody>
                                             </Table>
                                             <TextField
-                                                sx={{ my: 0.1, '& .MuiInputLabel-root': {
-                                                        color: "var(--color-font)", // Changer la couleur de l'étiquette en blanc
-                                                        fontSize: '1.4em'
-                                                    },
+                                                sx={{ my: 0.1,
                                                     '& .MuiInputBase-input': {
                                                         color: 'var(--color-font-hover)',
                                                         fontSize: '1.5em',
-                                                        textAlign: 'right'
+                                                        textAlign: 'right',
+                                                        outline: 'none',
+                                                        borderRadius: '10px',
+                                                        backgroundColor: 'var(--color-menu-hover)'
+                                                    },
+                                                    '& .MuiInputLabel-root': {
+                                                        color: "var(--color-degrade3-1)", // Changer la couleur de l'étiquette en blanc
+                                                        fontSize: '1.5em',
+                                                        backgroundColor: 'var(--color-menu-hover)',
+                                                        paddingLeft: '5px',
+                                                        paddingRight: '5px',
+                                                        fontWeight: 'bold',
+                                                        // borderRadius: '5px',
+                                                        marginTop: '10px',
+                                                        borderBottom: '1px solid black'
+
                                                     }}}
                                                 InputProps={{
                                                     readOnly: true,
