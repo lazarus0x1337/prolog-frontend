@@ -23,6 +23,7 @@ function Navbar({ handleClickChangeToShow1, handleClickChangeToShow2}) {
 
         function handleShow2Click() {
             handleClickChangeToShow2();
+            showNavbar();
         }
 
     return (

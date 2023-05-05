@@ -1,4 +1,5 @@
 import * as React from 'react';
+import "../css/driver.css";
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -16,9 +17,15 @@ import {GetConteneursByDriverId} from '../../api/GetConteneurByDriverId';
 import Navbar from "../Driver/Navbar";
 import {Radio, TextField} from "@mui/material";
 import imgMap from "../../images/googlemapImg.jpg";
+import iconeBox from "../../images/packageIcon.png";
 import {Table} from "react-bootstrap";
 import Box from "@mui/material/Box";
-
+import {GetConteneurById} from "../../api/GetConteneurById";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import {ChangeEvent} from "react";
 
 export default function Driver() {
 
@@ -60,13 +67,14 @@ export default function Driver() {
     }, []);
 
 
-
-    const [show1, setShow1] = useState(true);
-    const [show2, setShow2] = useState(false);
-
     function handleClickChangeToShow1() {
-        setShow1(true);
-        setShow2(false);
+        if (Conteneurs.length === 0)
+            NoDataFound();
+        else {
+            setShow1(true);
+            setShow2(false);
+            setShow3(false);
+        }
     }
 
     function handleClickChangeToShow2() {
@@ -85,12 +93,57 @@ export default function Driver() {
         setShow3(false);
     }
 
+    const NoDataFound = () => {
+        setShow1(false);
+        setShow2(false);
+        setShow3(true);
+    }
     const theme = createTheme();
+
+    const handleClickVoyager = async (idConteneur) => {
+        const token = sessionStorage.getItem("token");
+        const cont = await GetConteneurById(token, idConteneur);
+        setConteneur(cont);
+        handleClickChangeToShow3();
+    }
+
+    const [selectedColis, setSelectedColis] = useState(null);
+    const handleRowClick = (container) => {
+        setSelectedColis(container);
+    };
+
+    const [selectedValues, setSelectedValues] = useState({});
+    const handleChange = (event: ChangeEvent<HTMLInputElement>, colisId: number) => {
+        setSelectedValues(prevState => ({
+            ...prevState,
+            [colisId]: event.target.value
+        }));
+    };
+
+    const controlProps = (value: string, colisId: number) => ({
+        checked: selectedValues[colisId] === value,
+        onChange: (event: ChangeEvent<HTMLInputElement>) => handleChange(event, colisId),
+        value: value,
+        name: 'color-radio-button-demo',
+        inputProps: {'aria-label': value},
+    });
 
     return (
         <>
             <Navbar handleClickChangeToShow1={handleClickChangeToShow1}
-                    handleClickChangeToShow2={handleClickChangeToShow2} />
+                    handleClickChangeToShow2={handleClickChangeToShow2}/>
+
+            {show3 &&
+                <Box sx={{height: 600, width: '100%', marginTop: '100px'}} backgroundColor="transparent">
+                    <Box p={2} display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+                        <i className="bi bi-exclamation-triangle"
+                           style={{color: "var(--primary-blue)", fontSize: "40px"}}/>
+                        <Typography variant="h6" paragraph color="var(--primary-blue)" textTransform="uppercase"
+                                    style={{fontFamily: "Georgia"}}> No container was selected </Typography>
+                    </Box>
+                </Box>
+
+            }
 
             {show1 &&
                 <ThemeProvider theme={theme}>
@@ -198,6 +251,7 @@ export default function Driver() {
                                                 }
                                             }}>
                                                 <Button
+                                                    onClick={() => handleClickVoyager(item.id)}
                                                     sx={{
                                                         fontFamily: 'cursive',
                                                         color: "var(--color-font-2)",
@@ -205,7 +259,8 @@ export default function Driver() {
                                                         '&:hover': {
                                                             color: "var(--color-menu)"
                                                         }
-                                                    }}>Voyager</Button>
+
+                                                    }}>Travel</Button>
                                             </CardActions>
                                         </Card>
                                     </Grid>
@@ -216,61 +271,144 @@ export default function Driver() {
                 </ThemeProvider>
             }
 
-            { show2 &&
-                <Box sx={{ height: 400, width: '100%' }}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={8}>
-                            hello
-                        </Grid>
-                        <Grid item xs={4}>
-                            hani
-                        </Grid>
-                        <Grid item xs={4}>
-                            ok
-                        </Grid>
-                        <Grid item xs={8}>
-                            ok
-                        </Grid>
-                    </Grid>
-                    <Table className="table table-manager" >
+            {show2 &&
+                <Box sx={{height: '100%', width: '0 auto', marginTop: '80px', borderTop:'2px solid var(--color-font-hover)'}} backgroundColor="var(--color-menu)">
+                    <Box sx={{marginBottom:'10px', backgroundColor:"var(--color-menu)"}} p={2} display="flex" flexDirection="column"
+                         justifyContent="center">
+                        <Typography color="var(--color-font)" variant="h6" paragraph>Container Reference :<div style={{textAlign:'center', color:"var(--primary-blue)"}}>  {Conteneur.ref}</div></Typography>
+                        <Typography color="var(--color-font)" variant="body1" paragraph>Source Address : <div style={{textAlign:'center' ,color:"var(--primary-blue)"}}> {Conteneur.villeDepart}</div></Typography>
+                        <Typography color="var(--color-font)" variant="body1" paragraph>Arrival Address :<div style={{textAlign:'center', color:"var(--primary-blue)"}}>  {Conteneur.villeArrivee}</div></Typography>
+                    </Box>
+
+                    <Box style={{backgroundColor:'var(--color-font-hover)',padding: '10px', borderTop:'2px solid var(--color-font-hover)',borderBottom:'2px solid var(--color-font-hover)'}} display="flex" flexDirection="row" justifyContent="center" alignItems="center" width="100%">
+                        {/*<Box flexGrow={1} marginRight={1}>*/}
+                            <FormControl variant="standard"
+                                         sx={{backgroundColor: "transparent", width: '70%'}}>
+                                <InputLabel id="demo-simple-select-standard-label">Relay point</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-standard-label"
+                                    id="demo-simple-select-standard"
+                                    // value={age}
+                                    // onChange={handleChange}
+                                    label="Relay"
+                                >
+                                    <MenuItem value="">
+                                        <em>None</em>
+                                    </MenuItem>
+                                    <MenuItem value={10}>Ten</MenuItem>
+                                    <MenuItem value={20}>Twenty</MenuItem>
+                                    <MenuItem value={30}>Thirty</MenuItem>
+                                </Select>
+                            </FormControl>
+                        {/*</Box>*/}
+                        {/*<Box>*/}
+                            <Button variant="contained" sx={{fontWeight:'bold' ,borderRadius:'20px', border:'5px solid var(--color-menu)', backgroundColor:'var(--color-font-hover)', color:'var(--color-menu)', marginLeft: 1}}>
+                                Confirm
+                            </Button>
+                            <Button variant="contained" sx={{fontWeight:'bold' ,borderRadius:'20px', border:'5px solid var(--color-menu)', backgroundColor:'var(--color-menu)', color:'var(--color-font-hover)', marginLeft:1}}>
+                                Cancel
+                            </Button>
+                        {/*</Box>*/}
+                    </Box>
+
+                    <Table className="table TableDriver">
                         <thead>
-                        <tr >
-                            <th scope="col">Fullname</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Telephone</th>
+                        <tr>
+                            {/*<th scope="col"></th>*/}
+                            <th scope="col">Tracking</th>
+                            <th scope="col">None-Recovered-Delivred</th>
 
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td scope="row" className='pl-5'>3</td>
-                            <td>2</td>
-                            <td>1</td>
+                        {Conteneur.colis?.map((colis, i) => (
+                            <React.Fragment key={i}>
+                                <tr onClick={() => handleRowClick(colis)}>
+                                    {/*<td scope="row" className='pl-5'><img src={iconeBox} style={{width: '40px'}}/></td>*/}
+                                    <td scope="row" className='pl-5'>{colis.trackingNumber.trackingNumber}</td>
+                                    <td scope="row" className='pl-5'>
+                                     <Radio {...controlProps('none', colis.id)}
+                                      checked={!colis.recup && !colis.delivred} color="default"/>
+                                    <Radio {...controlProps('recup', colis.id)}
+                                          checked={colis.recup}/>
 
-                        </tr>
-                        <tr>
-                            <td scope="row" className='pl-5'>3</td>
-                            <td>2</td>
-                            <td>1</td>
+                                    <Radio {...controlProps('deliv', colis.id)}
+                                          checked={colis.delivred} color="success"/>
+                                    </td>
 
-                        </tr>
-                        <tr>
-                            <td scope="row" className='pl-5'>3</td>
-                            <td>2</td>
-                            <td>1</td>
+                                </tr>
+                                {selectedColis && selectedColis.id === colis.id && (
+                                    <tr key={`${i}-details`} style={{backgroundColor: "var(--color-menu)"}}>
+                                        <td colSpan={5}>
+                                            <Table className="table TableDriver2">
+                                                <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Name</th>
+                                                    <th>Address</th>
+                                                    <th>Tel</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>Sender</td>
+                                                    <td>{colis.client.fullname}</td>
+                                                    <td>{colis.adresse}</td>
+                                                    <td>{colis.client.telephone}</td>
 
-                        </tr>
+                                                </tr>
+                                                <tr>
+                                                    <td>Receiver</td>
+                                                    <td>{colis.destinataire.firstname} {colis.destinataire.lastname}</td>
+                                                    <td>{colis.destinataire.adresse}</td>
+                                                    <td>{colis.destinataire.telephone}</td>
+                                                </tr>
+                                                </tbody>
+                                            </Table>
+                                            <Table className="table TableDriver2">
+                                                <thead>
+                                                <tr>
+                                                    <th>Weigth(g)</th>
+                                                    <th>Dimension(L)</th>
+                                                    <th>Cold</th>
+                                                    <th>Fragile</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>{colis.poids}</td>
+                                                    <td>{colis.largeur * colis.longueur * colis.hauteur / 1000}</td>
+                                                    <td>{colis.froid ? "Yes" : "No"}</td>
+                                                    <td>{colis.fragile ? "Yes" : "No"}</td>
+                                                </tr>
+                                                </tbody>
+                                            </Table>
+                                            <TextField
+                                                sx={{ my: 0.1, '& .MuiInputLabel-root': {
+                                                        color: "var(--color-font)", // Changer la couleur de l'étiquette en blanc
+                                                        fontSize: '1.4em'
+                                                    },
+                                                    '& .MuiInputBase-input': {
+                                                        color: 'var(--color-font-hover)',
+                                                        fontSize: '1.5em',
+                                                        textAlign: 'right'
+                                                    }}}
+                                                InputProps={{
+                                                    readOnly: true,
+                                                }}
+                                                value={colis.prix+" Dhs"}
+                                                fullWidth
+                                                type="text"
+                                                label='Price'
 
-                        {/*{Drivers?.map((driver, i) => (*/}
-                        {/*    <React.Fragment key={i}>*/}
-                        {/*        <tr>*/}
-                        {/*            <td scope="row" className='pl-5'>{driver.fullname}</td>*/}
-                        {/*            <td>{driver.email}</td>*/}
-                        {/*            <td>{driver.telephone}</td>*/}
+                                            />
+                                            {/*<p style={{textAlign:'right'}}>Price : {colis.prix}</p>*/}
+                                        </td>
+                                    </tr>
+                                )}
+                            </React.Fragment>
+                        ))}
 
-                        {/*        </tr>*/}
-                        {/*    </React.Fragment>*/}
-                        {/*))}*/}
                         </tbody>
                     </Table>
                 </Box>
