@@ -18,6 +18,7 @@ function Navbar({ handleClickChangeToShow1, handleClickChangeToShow2}) {
 
         function handleShow1Click() {
             handleClickChangeToShow1();
+            showNavbar();
         }
 
         function handleShow2Click() {
@@ -26,7 +27,7 @@ function Navbar({ handleClickChangeToShow1, handleClickChangeToShow2}) {
 
     return (
         <header className="header-driver">
-            <h3 className="title-driver">Prolog</h3>
+            <h3 className="title-driver" style={{ color: 'var(--primary-blue)' , fontFamily:'Georgia'}}>Prolog</h3>
             <nav ref={navRef}>
                 <a className="a-navbar" onClick={handleShow1Click}>Containers</a>
                 <a  className="a-navbar" onClick={handleShow2Click}>Packages</a>
