@@ -1,0 +1,20 @@
+.TableDriver{
+    background-color: var(--color-menu);
+}
+.TableDriver td{
+    color:var(--color-font);
+}
+.TableDriver th{
+    color: var(--primary-blue);
+}
+
+.TableDriver2{
+    background-color: var(--color-menu-hover);
+}
+
+.TableDriver2 th{
+    color: var(--color-degrade3-1);
+}
+.TableDriver2 td{
+    color:var(--color-cercle-small);
+}
