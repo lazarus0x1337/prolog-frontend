@@ -87,10 +87,11 @@ header {
     margin: 0 2rem;
     color: var(--color-font);
     text-decoration: none;
-    cursor: revert;
+    cursor: pointer;
 }
 
 nav a:hover {
+    cursor: pointer;
     color: var(--primary-blue);
 }
 

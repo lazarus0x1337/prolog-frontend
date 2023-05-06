@@ -14,18 +14,10 @@ import {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import sessionStorage from "sessionstorage";
 import {GetConteneursByDriverId} from '../../api/GetConteneurByDriverId';
-import Navbar from "../Driver/Navbar";
-import {Radio, TextField} from "@mui/material";
-import imgMap from "../../images/googlemapImg.jpg";
-import iconeBox from "../../images/packageIcon.png";
-import {Table} from "react-bootstrap";
-import Box from "@mui/material/Box";
-import {GetConteneurById} from "../../api/GetConteneurById";
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import {ChangeEvent} from "react";
+import {UpdateTracking} from '../../api/UpdateTracking';
+import {GetPointsRelais} from '../../api/GetPointsRelais';
+import {UpdateColis} from "../../api/UpdateColis";
+
 
 export default function Driver() {
 
@@ -34,11 +26,16 @@ export default function Driver() {
     const [show3, setShow3] = useState(false);
     const [Conteneurs, setConteneurs] = useState([]);
     const [Conteneur, setConteneur] = useState({});
+    const [pointRelais,setPointRelais] = useState([]);
+    const [unPointRelais,setUnPointRelais] = useState({});
 
     const location = useLocation();
     const [id, setId] = useState(new URLSearchParams(location.search).get('id'));
     const [tk, setTk] = useState(new URLSearchParams(location.search).get('tk'));
     const [fullname, setFullname] = useState(new URLSearchParams(location.search).get('fullname'));
+
+    const [recupValues, setRecupValues] = useState({}); // état pour stocker si chaque colis a été récupéré
+    const [deliveredValues, setDeliveredValues] = useState({}); // état pour stocker si chaque colis a été livré
 
     if (fullname) {
         sessionStorage.setItem("fullname", fullname);
@@ -81,6 +78,7 @@ export default function Driver() {
         if (Object.keys(Conteneur).length === 0)
             NoDataFound();
         else {
+            setUnPointRelais({});
             setShow1(false);
             setShow2(true);
             setShow3(false);
@@ -88,6 +86,7 @@ export default function Driver() {
     }
 
     function handleClickChangeToShow3() {
+        setUnPointRelais({});
         setShow1(false);
         setShow2(true);
         setShow3(false);
@@ -99,11 +98,23 @@ export default function Driver() {
         setShow3(true);
     }
     const theme = createTheme();
-
     const handleClickVoyager = async (idConteneur) => {
         const token = sessionStorage.getItem("token");
         const cont = await GetConteneurById(token, idConteneur);
         setConteneur(cont);
+        cont.colis.map((colis) => {
+            setRecupValues(prevValues => ({
+                ...prevValues,
+                [colis.id]: colis.recup
+            }));
+
+            setDeliveredValues(prevValues => ({
+                ...prevValues,
+                [colis.id]: colis.recup
+            }));
+        })
+        const pr = await GetPointsRelais(token);
+        setPointRelais(pr);
         handleClickChangeToShow3();
     }
 
@@ -127,6 +138,45 @@ export default function Driver() {
         name: 'color-radio-button-demo',
         inputProps: {'aria-label': value},
     });
+    const handleClickConfirm=()=>{
+        if (!(Object.keys(unPointRelais).length === 0)){
+            const token = sessionStorage.getItem('token');
+            UpdateTracking(token,unPointRelais,Conteneur.colis);
+        }
+        handleCancelClick();
+    }
+    const handleCancelClick = () => {
+        // setPointRelais([]);
+        setUnPointRelais(null); // Clear the selected value
+    };
+
+    // const [selectedValue, setSelectedValue] = useState('');
+    // const handleRadioChange = (e, colisId) => {
+    //     setSelectedValue(e.target.value);
+    //     const val = e.target.value;
+    //     const token = sessionStorage.getItem('token');
+    //     const col = UpdateColis(token,colisId,val);
+    //     console.log(col);
+    // };
+
+    async function handleCheckboxChange(e, colisId) {
+        const token = sessionStorage.getItem('token');
+        const isChecked = e.target.checked;
+        const checkboxValue = e.target.value;
+        await UpdateColis(token,colisId,checkboxValue,isChecked);
+        if (checkboxValue === "recup") {
+            setRecupValues(prevValues => ({
+                ...prevValues,
+                [colisId]: isChecked
+            }));
+        } else if (checkboxValue === "delivered") {
+            setDeliveredValues(prevValues => ({
+                ...prevValues,
+                [colisId]: isChecked
+            }));
+        }
+
+    }
 
     return (
         <>
@@ -280,32 +330,59 @@ export default function Driver() {
                         <Typography color="var(--color-font)" variant="body1" paragraph>Arrival Address :<div style={{textAlign:'center', color:"var(--primary-blue)"}}>  {Conteneur.villeArrivee}</div></Typography>
                     </Box>
 
-                    <Box style={{borderRadius:'20px', backgroundColor:'var(--color-font-hover)',padding: '10px', borderTop:'2px solid var(--color-font-hover)',borderBottom:'2px solid var(--color-font-hover)'}} display="flex" flexDirection="row" justifyContent="center" alignItems="center" width="100%">
+                    <Box style={{borderRadius:'5px', backgroundColor:'var(--color-font-hover)',padding: '10px', borderTop:'2px solid var(--color-font-hover)',borderBottom:'2px solid var(--color-font-hover)'}} display="flex" flexDirection="row" justifyContent="center" alignItems="center" width="100%">
                         {/*<Box flexGrow={1} marginRight={1}>*/}
-                            <FormControl variant="standard"
-                                         sx={{backgroundColor: "transparent", width: '70%'}}>
-                                <InputLabel id="demo-simple-select-standard-label">Relay point</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-standard-label"
-                                    id="demo-simple-select-standard"
-                                    // value={age}
-                                    // onChange={handleChange}
-                                    label="Relay"
-                                >
-                                    <MenuItem value="">
-                                        <em>None</em>
-                                    </MenuItem>
-                                    <MenuItem value={10}>Ten</MenuItem>
-                                    <MenuItem value={20}>Twenty</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
-                                </Select>
-                            </FormControl>
+                        <FormControl variant="standard"
+                                     sx={{backgroundColor: "transparent", width: '70%'}}>
+                            <InputLabel id="demo-simple-select-standard-label" sx={{color:'var(--color-menu)'}}>Relay point</InputLabel>
+                            <Select
+                                key={unPointRelais}
+                                value={unPointRelais}
+                                onChange={(e) => {
+                                    setUnPointRelais(e.target.value);
+
+                                }}
+                                labelId="demo-simple-select-standard-label"
+                                id="demo-simple-select-standard"
+                                // value={}
+                                // onChange={handleChange}
+                                label="Relay"
+                            >
+                                {pointRelais.map((item, i) => (
+                                    <MenuItem
+                                        key={item.id}
+                                        value={item}
+                                        sx={{ color:"var(--primary-blue)",
+                                            border:'5px solid var(--color-menu)',
+                                            backgroundColor: "var(--color-menu)",
+                                            '&:hover': {
+                                                backgroundColor: "var(--color-menu)"
+                                            },
+                                            '&:active': {
+                                                backgroundColor: 'var(--color-menu)' // couleur de fond au clic
+                                            },
+                                            '&.selected': {
+                                                backgroundColor: 'var(--color-menu)' // couleur de fond pour l'élément sélectionné
+                                            },
+                                            '&.focus': {
+                                                backgroundColor: 'var(--color-menu)' // couleur de fond pour l'élément sélectionné
+                                            }
+                                    }}
+                                    >{item.ville}</MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
                         {/*</Box>*/}
                         {/*<Box>*/}
-                            <Button variant="contained" sx={{fontWeight:'bold' ,borderRadius:'20px', border:'5px solid var(--color-menu)', backgroundColor:'var(--color-font-hover)', color:'var(--color-menu)', marginLeft: 1}}>
+                            <Button
+                                onClick={handleClickConfirm}
+                                variant="contained"
+                                sx={{fontWeight:'bold' ,borderRadius:'5px', border:'5px solid var(--color-menu)', backgroundColor:'var(--color-font-hover)', color:'var(--color-menu)', marginLeft: 1}}>
                                 Confirm
                             </Button>
-                            <Button variant="contained" sx={{fontWeight:'bold' ,borderRadius:'20px', border:'5px solid var(--color-menu)', backgroundColor:'var(--color-menu)', color:'var(--color-font-hover)', marginLeft:1}}>
+                            <Button
+                                onClick={handleCancelClick}
+                                variant="contained" sx={{fontWeight:'bold' ,borderRadius:'5px', border:'5px solid var(--color-menu)', backgroundColor:'var(--color-menu)', color:'var(--color-font-hover)', marginLeft:1}}>
                                 Cancel
                             </Button>
                         {/*</Box>*/}
@@ -316,7 +393,8 @@ export default function Driver() {
                         <tr>
                             {/*<th scope="col"></th>*/}
                             <th scope="col">Tracking</th>
-                            <th scope="col">None-Recovered-Delivred</th>
+                            <th scope="col">Recovered</th>
+                            <th scope="col">Delivred</th>
 
                         </tr>
                         </thead>
@@ -326,13 +404,21 @@ export default function Driver() {
                                 <tr onClick={() => handleRowClick(colis)}>
                                     {/*<td scope="row" className='pl-5'><img src={iconeBox} style={{width: '40px'}}/></td>*/}
                                     <td scope="row" className='pl-5'>{colis.trackingNumber.trackingNumber}</td>
-                                    <td scope="row" className='pl-5'>
-                                        <Radio {...controlProps('none', colis.id)}
-                                               checked={!colis.recup && !colis.delivred} color="default"/>
-                                        <Radio {...controlProps('recup', colis.id)}
-                                               checked={colis.recup}/>
-                                        <Radio {...controlProps('deliv', colis.id)}
-                                               checked={colis.delivred} color="success"/>
+                                    <td>
+                                        <Checkbox
+                                            value="recup"
+                                            checked={recupValues[colis.id]}
+                                            onChange={(e) => handleCheckboxChange(e, colis.id)}
+                                            name={colis.id}
+                                        />
+                                    </td>
+                                    <td>
+                                        <Checkbox
+                                            value="delivered"
+                                            checked={deliveredValues[colis.id]}
+                                            onChange={(e) => handleCheckboxChange(e, colis.id)}
+                                            name={colis.id}
+                                        />
                                     </td>
 
                                 </tr>
@@ -413,7 +499,6 @@ export default function Driver() {
                                                 label='Price'
 
                                             />
-                                            {/*<p style={{textAlign:'right'}}>Price : {colis.prix}</p>*/}
                                         </td>
                                     </tr>
                                 )}

@@ -6,8 +6,11 @@ export async function GetPointsRelais(token) {
         headers: { Authorization: `Bearer ${token}` },
     };
 
-    axios
+    return axios
         .get(`${API_URL}/pointRelais`, config)
-        .then(() => navigate('/home'))
+        .then(response => {
+                return response.data;
+            }
+        )
         .catch(error => console.error(error));
 }

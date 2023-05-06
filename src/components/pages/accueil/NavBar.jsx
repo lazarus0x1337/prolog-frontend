@@ -53,6 +53,7 @@ const NavBar = () => {
 
                         axios.get(`http://localhost:8080/api/v1/user/email/${email}`, config)
                             .then( response => {
+                                sessionStorage.clear();
                                 const { id, role, fullname } = response.data;
                                 let indice;
                                 if( role === "ADMIN")       indice = 0;
