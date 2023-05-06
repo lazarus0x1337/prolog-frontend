@@ -28,3 +28,6 @@
     color : var(--color-degrade3-1) !important;
     font-weight: bold;
 }
+.MuiPaper-root{
+    background-color: var(--color-menu);
+}

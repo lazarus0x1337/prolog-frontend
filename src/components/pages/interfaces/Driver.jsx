@@ -1,5 +1,10 @@
-import * as React from 'react';
+import imgMap from "../../images/googlemapImg.jpg";
 import "../css/driver.css";
+import Navbar from "../Driver/Navbar";
+import sessionStorage from "sessionstorage";
+import * as React from 'react';
+import {useEffect, useState,ChangeEvent} from "react";
+import {useLocation} from "react-router-dom";
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -9,10 +14,16 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import {Table} from "react-bootstrap";
+import Box from "@mui/material/Box";
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {useEffect, useState} from "react";
-import {useLocation} from "react-router-dom";
-import sessionStorage from "sessionstorage";
+import {Checkbox, FormControlLabel, Radio, RadioGroup, TextField} from "@mui/material";
+
+import {GetConteneurById} from "../../api/GetConteneurById";
 import {GetConteneursByDriverId} from '../../api/GetConteneurByDriverId';
 import {UpdateTracking} from '../../api/UpdateTracking';
 import {GetPointsRelais} from '../../api/GetPointsRelais';
@@ -65,6 +76,7 @@ export default function Driver() {
 
 
     function handleClickChangeToShow1() {
+
         if (Conteneurs.length === 0)
             NoDataFound();
         else {
@@ -75,6 +87,7 @@ export default function Driver() {
     }
 
     function handleClickChangeToShow2() {
+
         if (Object.keys(Conteneur).length === 0)
             NoDataFound();
         else {
@@ -325,6 +338,19 @@ export default function Driver() {
                 <Box sx={{height: '100%', width: '0 auto', marginTop: '80px', borderTop:'2px solid var(--color-font-hover)'}} backgroundColor="var(--color-menu)">
                     <Box sx={{marginBottom:'10px', backgroundColor:"var(--color-menu)"}} p={2} display="flex" flexDirection="column"
                          justifyContent="center">
+                        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                            <Button
+                                variant="contained"
+                                sx={{
+                                    fontWeight:'bold',
+                                    padding:"10px" ,
+                                    borderRadius:'5px',
+                                    backgroundColor:'var(--color-font-hover)',
+                                    color:'var(--color-menu)',
+                                    width:"150px"
+                                }}>End of the Trip
+                            </Button>
+                        </div>
                         <Typography color="var(--color-font)" variant="h6" paragraph>Container Reference :<div style={{textAlign:'center', color:"var(--primary-blue)"}}>  {Conteneur.ref}</div></Typography>
                         <Typography color="var(--color-font)" variant="body1" paragraph>Source Address : <div style={{textAlign:'center' ,color:"var(--primary-blue)"}}> {Conteneur.villeDepart}</div></Typography>
                         <Typography color="var(--color-font)" variant="body1" paragraph>Arrival Address :<div style={{textAlign:'center', color:"var(--primary-blue)"}}>  {Conteneur.villeArrivee}</div></Typography>
