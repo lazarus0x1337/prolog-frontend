@@ -66,16 +66,8 @@ function Client() {
         setShowColis(false);
         setShowStep(false);
     }
-
-
-    const handleLogout = () => {
-        const config = {
-            headers: {
-                'Authorization': `Bearer ${sessionStorage.getItem("token")}` // Ajouter le token dans l'en-tête d'autorisation
-            }
-        };
-        axios.post("http://localhost:8080/api/v1/auth/logout",{},config)
-            .then(()=>{navigate('/home');})
+    function handleLogout(){
+        Logout(tk,navigate);
     }
 
     return (
