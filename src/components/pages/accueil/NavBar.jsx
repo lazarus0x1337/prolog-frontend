@@ -11,6 +11,7 @@ import { Button, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import Typed from "react-typed";
 
 
 
@@ -209,6 +210,15 @@ const handleLoginOpen = () => {
     const handleClickNav = () =>{
         setColorchange(true);
     }
+
+
+    let [valueSearch,setValueSearch]=useState('');
+
+    function handleClick() {
+        localStorage.setItem('tracking',valueSearch);
+        handleLoginOpen();
+    }
+
 
     return (
         <>
@@ -415,6 +425,41 @@ const handleLoginOpen = () => {
                     </Typography>
                 </Box>
             </Modal>
+
+            {/*-----------------------------------------------header101-------------------------------------*/}
+
+            <div id="home" className="header-wrapper bg-opacity-50">
+                <div className="main-info">
+                    <h1> <span>Développez </span> votre service
+                        <br/> en toute confiance.</h1>
+                    <Typed
+                        className="typed-text"
+                        strings={["PROLOG","Logistique simplifiée", "Location de véhicules",
+                            "Solutions de transport innovantes"]}
+                        typeSpeed={40}
+                        backSpeed={60}
+                        loop
+                    />
+
+                    <form className="income-form" >
+                        <div className="form-inner ">
+                            <input
+                                value={valueSearch}
+                                onChange={(e) => setValueSearch(e.target.value)}
+                                type="text" name=""
+                                placeholder="Enter Tracking number"  />
+                            <br/>
+                            <button type="button" onClick={handleClick}>TRACK PACKAGE</button>
+
+                        </div>
+                    </form>
+
+
+
+                    {/*<a href="#" className="btn-main-offer">Register</a>*/}
+                </div>
+            </div>
+
 
         </>
     );

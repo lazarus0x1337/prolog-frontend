@@ -11,7 +11,7 @@ function Home(){
     return(
      <>
            <NavBar/>
-           <Header/>
+           {/*<Header/>*/}
            <Cards/>
            <Services/>
            <AboutUs/>

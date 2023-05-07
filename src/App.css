@@ -186,7 +186,7 @@ nav ul li {
     font-size: 16px;
 }
 
-.income-form button[type="submit"]{
+.income-form button[type="button"]{
     font-family: "fangsong", "sans-serif";
     font-weight: bold;
     margin-top: 10px;
@@ -201,7 +201,7 @@ nav ul li {
     background: var(--primary-blue);
     color: #173636;
 }
-.income-form input[type="submit"]:hover{
+.income-form input[type="button"]:hover{
     background:var(--primary-dark-grey) ;
 }
 /*-------- TYPED TEXT ---------------*/
