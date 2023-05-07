@@ -56,14 +56,16 @@ body {
 
 }
 .vehicules Button{
+    color:var(--color-degrade3-1);
     margin-top: 30px;
-    background-color:#ffffff;
+    background-color:var(--color-degrade3-6);
     border-radius: 7px;
     font-family: "Roboto Condensed", cursive;
     margin-left: 410px;
 }
 .vehicules Button:hover{
     background-color: #00FFF0;
+    color:var(--color-degrade3-1);
 }
 .brand-name{
     color: var(--color-font)
@@ -89,3 +91,15 @@ background-color: #00FFF0 !important;
 .table td ,th{
     text-align: center;
 }
+
+.camion-1{
+    background-color:var(--color-degrade3-1);
+    color :var(--color-font-2);
+    border-radius: 10px;
+
+}
+
+.camion-1 i{
+    color:var(--color-cercle-small);
+}
+

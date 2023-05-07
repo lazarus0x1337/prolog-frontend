@@ -1,0 +1,62 @@
+.profile-1{
+    background-color: var(--color-degrade3-1);
+    color:#00FFF0;
+    border-radius: 5px;
+    margin: 0.9%;
+}
+.full-width-input {
+    width: 100% ;
+    text-align: center;
+}
+
+/*Input {*/
+/*    text-align: center;*/
+/*}*/
+/*Input{*/
+/*    text-align: center;*/
+/*}*/
+
+@media only screen and (max-width: 900px) {
+    .profile-1{
+        background-color: #00FFF0;
+        color:white;
+        border-radius: 5px;
+        margin: 1%;
+    }
+    .profile-1 .MuiGrid-item {
+        text-align: center;
+    }
+
+    .profile-1 .MuiFormControl-root {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .profile-1 .MuiFormLabel-root {
+        display: block;
+        text-align: center;
+    }
+
+    .profile-1 .MuiInput-root {
+        width: 100%;
+    }
+
+    .profile-1 .MuiSelect-root {
+        width: 100%;
+    }
+    .full-width-input {
+        width: 100%;
+    }
+}
+/*.card-title-profile{*/
+/*    text-align: center;*/
+/*    border-radius: 10px;*/
+/*    background-color: #00FFF0;*/
+/*    margin-left: 44% ;*/
+/*    margin-right: 44% ;*/
+/*    padding: 5px;*/
+/*}*/
+
+/*.profile-1 h5,p{*/
+/*    !*text-align: center;*!*/
+/*}*/

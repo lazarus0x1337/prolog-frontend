@@ -10,7 +10,7 @@ import img1 from "../../images/logo/prolog1.png";
 import img2 from "../../images/logo/prolog2.png";
 import sessionStorage from 'sessionstorage';
 import Profile from "./Profile";
-
+import {Logout} from "../../api/Logout";
 const styleNavLink = {
     color: "var(--color-font)",
     textDecoration:'none',
@@ -137,7 +137,7 @@ function Client() {
                         {showStep && <StepProgress Toggle={Toggle}/> }
                         {showColis && <Colis Toggle={Toggle}/> }
                         {showVehi && <Vehicules Toggle={Toggle}/> }
-                        {showProfile && <Profile/> }
+                        {showProfile && <Profile Toggle={Toggle}/> }
                     </div>
                 </div>
             </div>
