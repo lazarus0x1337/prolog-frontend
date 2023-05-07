@@ -188,7 +188,7 @@ const NavBar = () => {
     const [loginOpen, setLoginOpen] = React.useState(false);
     const [registerOpen, setRegisterOpen] = React.useState(false);
 
-    const handleLoginOpen = () => {
+const handleLoginOpen = () => {
         setRegisterOpen(false);
         setLoginOpen(true);
     };

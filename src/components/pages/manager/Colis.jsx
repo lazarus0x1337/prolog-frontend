@@ -172,7 +172,7 @@ function Colis(props) {
         .then(response => {
             if(!isChecked) setFactures(response.data);
             else{
-                const fact = response.data.filter(facture => facture.colis.inContainer === false);
+                const fact = response.data.filter(facture => facture.colis.inContainer !== true);
                 setFactures(fact);
             }
         });

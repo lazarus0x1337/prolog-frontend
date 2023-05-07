@@ -144,13 +144,6 @@ export default function Driver() {
         }));
     };
 
-    const controlProps = (value: string, colisId: number) => ({
-        checked: selectedValues[colisId] === value,
-        onChange: (event: ChangeEvent<HTMLInputElement>) => handleChange(event, colisId),
-        value: value,
-        name: 'color-radio-button-demo',
-        inputProps: {'aria-label': value},
-    });
     const handleClickConfirm=()=>{
         if (!(Object.keys(unPointRelais).length === 0)){
             const token = sessionStorage.getItem('token');

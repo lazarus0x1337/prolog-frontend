@@ -56,6 +56,9 @@ function Colis(props) {
         "froid": checkedFroid,
         "fragile": checkedFragile,
         "adresse": AddColis,
+        "recup": false,
+        "delivered": false,
+        "inContainer": false,
         "destinataire": {
             "firstname": firstName,
             "lastname": lastName,
@@ -144,9 +147,10 @@ function Colis(props) {
             const response = await axios.post('http://localhost:8080/api/v1/colis', DataColis, config);
             if (response.status === 201) {
                 console.log("Colis enregistré avec succès");
+                const d = new Date();
                 const DataFacture = {
                     "prix":Prix,
-                    "date":"2023-04-27T13:30:00.000+00:00",
+                    "date":d.toISOString(),
                     "client":{
                         "id":sessionStorage.getItem("ID")
                     },
@@ -210,7 +214,7 @@ function Colis(props) {
                             <th scope="col">Origin Address</th>
                             <th scope="col">Arrived Address</th>
                             <th scope="col">Weight(g)</th>
-                            <th scope="col">Dimension(cm3)</th>
+                            <th scope="col">Dimension(L)</th>
                             <th scope="col">Fragile</th>
                             <th scope="col">Froid</th>
                             <th scope="col">facture</th>
@@ -218,13 +222,13 @@ function Colis(props) {
                         </thead>
                         <tbody>
 
-                        {factures?.map((item, i) => (
+                        {factures?.reverse().map((item, i) => (
                             <tr key={i}>
                                 <th scope="row" className='pl-5'>{item.colis.trackingNumber.trackingNumber}</th>
                                 <td>{item.colis.adresse}</td>
                                 <td>{item.colis.destinataire.adresse}</td>
                                 <td>{item.colis.poids}</td>
-                                <td>{item.colis.longueur * item.colis.largeur * item.colis.hauteur}</td>
+                                <td>{item.colis.longueur * item.colis.largeur * item.colis.hauteur/1000}</td>
                                 <td>{item.colis.fragile ?
                                     <i className="bi bi-box-fill " style={{color: "#00FF03", paddingLeft: "12px"}}/> :
                                     <i className="bi bi-box-fill "
