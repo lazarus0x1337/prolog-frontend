@@ -14,6 +14,6 @@ export async function GetProfile(token, id) {
             }
         })
         .catch(reason => {
-            console.log(reason);
+            console.log({ reason });
         });
 }

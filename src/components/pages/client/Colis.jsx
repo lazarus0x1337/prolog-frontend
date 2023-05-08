@@ -1,36 +1,24 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Nav from "../admin/Nav";
 import {Table} from "react-bootstrap";
 import {Button, Checkbox, FormControlLabel, Typography} from "@mui/material";
 import React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import axios from "axios";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import {style} from "../interfaces/Css_Modal";
 import logo from "../../images/logo/prologBW.png";
+import axios from 'axios';
+import sessionStorage from "sessionstorage";
 
-
+// TODO: restore const config as before and add config value to axios call
 
 function Colis(props) {
 
 
     // service -----------------------------------------------------------
     let [factures, setFactures] = useState([]);
-
-    const config = {
-        headers: {
-            'Authorization': `Bearer ${sessionStorage.getItem("token")}` // Ajouter le token dans l'en-tête d'autorisation
-        }
-    };
-
-    axios.get(`http://localhost:8080/api/v1/factureColis/clientId/${sessionStorage.getItem("ID")}`, config)
-        .then(response => {
-            setFactures(response.data);
-        });
-
-
     // Colis Data
     const [showTel, setshowTel] = useState(false);
     const [ColisId, setColisId] = useState(0);
@@ -49,6 +37,8 @@ function Colis(props) {
     const [checkedFragile, setCheckedFragile] = useState(false);
     const [checkedFroid, setCheckedFriod] = useState(false);
     const [result, setResult] = useState('');
+    const [refetch, setRefetch] = useState(false);
+
     const DataColis = {
         "poids": Poids,
         "longueur": Width,
@@ -70,6 +60,24 @@ function Colis(props) {
             "trackingNumber": result
         }
     }
+
+    const config = {
+        headers: {
+            'Authorization': `Bearer ${sessionStorage.getItem("token")}` // Ajouter le token dans l'en-tête d'autorisation
+        }
+    };
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            axios.get(`http://localhost:8080/api/v1/factureColis/clientId/${sessionStorage.getItem("ID")}`,config)
+                .then(response => {
+                    setFactures(response.data);
+                });
+        }
+
+        fetchData();
+    }, [refetch])
 
     const generateResult = () => {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -251,7 +259,7 @@ function Colis(props) {
 
 
     const CheckTel=()=>{
-        axios.get(`http://localhost:8080/api/v1/user/${sessionStorage.getItem("ID")}`, config)
+        axios.get(`http://localhost:8080/api/v1/user/${sessionStorage.getItem("ID")}`,config)
             .then(response => {
                 if(!response.data.telephone){
                     OpenModalTel();
@@ -266,7 +274,6 @@ function Colis(props) {
         try {
             const response = await axios.post('http://localhost:8080/api/v1/colis', DataColis, config);
             if (response.status === 201) {
-                console.log("Colis enregistré avec succès");
                 const d = new Date();
                 const DataFacture = {
                     "prix":Prix,
@@ -288,12 +295,14 @@ function Colis(props) {
         } catch (error) {
             alert("Erreur lors de l'enregistrement");
             console.log(error);
+        } finally {
+            setRefetch(prevState => !prevState)
         }
 
     }
 
-    const saveTel = () => {
-        axios.put(`http://localhost:8080/api/v1/user/${sessionStorage.getItem("ID")}`,{"telephone":TEL},config)
+    const saveTel = async  () => {
+        await axios.put(`http://localhost:8080/api/v1/user/${sessionStorage.getItem("ID")}`,{"telephone":TEL}, config)
         SaveFacture();
     }
 
@@ -342,7 +351,7 @@ function Colis(props) {
                         </thead>
                         <tbody>
 
-                        {factures?.reverse().map((item, i) => (
+                        {factures?.map((item, i) => (
                             <tr key={i}>
                                 <th scope="row" className='pl-5'>{item.colis.trackingNumber.trackingNumber}</th>
                                 <td>{item.colis.adresse}</td>

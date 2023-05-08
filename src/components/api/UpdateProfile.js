@@ -10,9 +10,7 @@ export function UpdateProfile(token, data, id) {
         `${API_URL}/user/${id}`,
         data,
         config
-    ).then(response =>{
-        console.log(response);
-    }).catch((reason)=> {
+    ).catch((reason)=> {
         console.log(reason)
     });
 

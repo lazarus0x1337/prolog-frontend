@@ -14,22 +14,20 @@ import {GetProfile} from "../../api/GetProfile";
 
 function Profile(props) {
 
-    const [profile, setProfile] = useState({});
     const [fullname, setFullname] = useState('');
     const [email, setEmail] = useState('');
     const [telephone, setTelephone] = useState('');
     const [Lastpassword, setLPassword] = useState('');
     const [Newpassword, setNPassword] = useState('');
 
-    useEffect(async () => {
+    useEffect( () => {
         const token = sessionStorage.getItem("token");
         const id = sessionStorage.getItem("ID");
-        const [pr] = await Promise.all([GetProfile(token, id)]);
-        setProfile(pr);
-        setFullname(pr.fullname);
-        setEmail(pr.email);
-        setTelephone(pr.telephone);
-        console.log(pr);
+        GetProfile(token, id).then((pr) => {
+            setFullname(pr.fullname);
+            setEmail(pr.email);
+            setTelephone(pr.telephone);
+        });
     }, []);
 
     const handleUpdateProfile=()=>{
