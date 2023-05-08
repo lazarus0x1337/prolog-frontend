@@ -4,7 +4,7 @@ import {Logout} from "../../api/Logout";
 import sessionStorage from "sessionstorage";
 import {NavLink, useNavigate} from "react-router-dom";
 
-function Navbar({ handleClickChangeToShow1, handleClickChangeToShow2}) {
+function Navbar({ handleClickChangeToShow1, handleClickChangeToShow2,handleClickChangeToShowProfile}) {
     const navigate = useNavigate();
     const navRef = useRef();
     const showNavbar = () => {
@@ -25,6 +25,10 @@ function Navbar({ handleClickChangeToShow1, handleClickChangeToShow2}) {
             handleClickChangeToShow2();
             showNavbar();
         }
+        function handleShow3Click() {
+            handleClickChangeToShowProfile();
+            showNavbar();
+        }
 
     return (
         <header className="header-driver">
@@ -32,7 +36,7 @@ function Navbar({ handleClickChangeToShow1, handleClickChangeToShow2}) {
             <nav ref={navRef}>
                 <a className="a-navbar" onClick={handleShow1Click}>Containers</a>
                 <a  className="a-navbar" onClick={handleShow2Click}>Packages</a>
-                <a className="a-navbar" > Profile </a>
+                <a className="a-navbar" onClick={handleShow3Click}> Profile </a>
                 <a className="a-navbar" onClick={handleLogout}>Logout</a>
                 <button
                     className="nav-btn nav-close-btn"

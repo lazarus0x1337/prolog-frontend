@@ -10,6 +10,23 @@ function Profile(props) {
 
     return(
         <>
+            <Modal open={ShowModal} onClose={handleCloseModal} >
+                <Box sx={style}>
+                    <Grid  sx={{ my: 1 }}>
+                        <Typography variant="h6" textAlign="center" gutterBottom>
+                            Update Successfully Validated
+                        </Typography>
+                        <Button onClick={handleCloseModal} style={{
+                            backgroundColor: "var(--primary-blue)",
+                            color: "black",
+                            marginLeft: "180px",
+                            marginTop: "27px",
+                            padding: "10px"
+                        }}>Ok</Button>
+                    </Grid>
+                </Box>
+            </Modal>
+
             <Nav Toggle={props.Toggle} fullname={sessionStorage.getItem("fullname")}/>
             <div className="profile-1">
             <Grid container spacing={2}>

@@ -3,25 +3,46 @@
     color:#00FFF0;
     border-radius: 5px;
     margin: 0.9%;
+    padding-bottom: 30px;
 }
 .full-width-input {
     width: 100% ;
     text-align: center;
 }
 
-/*Input {*/
-/*    text-align: center;*/
-/*}*/
+.full-width-input  Input {
+    text-align: center;
+}
+
+.profile-1 Button{
+    font-weight:bold;
+    border-radius:10px;
+    outline:2px solid var(--color-font-hover);
+    background-color:var(--color-menu);
+    color:var(--color-font-hover);
+    margin:5px;
+
+}
+.profile-1 Button:hover{
+    margin:5px;
+    background-color:var(--color-font-hover);
+    color:var(--color-menu);
+
+}
+
+.MuiInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: #7FC8D6;
+}
 /*Input{*/
 /*    text-align: center;*/
 /*}*/
 
 @media only screen and (max-width: 900px) {
     .profile-1{
-        background-color: #00FFF0;
-        color:white;
+        background-color: var(--color-degrade3-1);
+        color:#00FFF0;
         border-radius: 5px;
-        margin: 1%;
+        margin: 0.9%;
     }
     .profile-1 .MuiGrid-item {
         text-align: center;
@@ -46,6 +67,14 @@
     }
     .full-width-input {
         width: 100%;
+    }
+
+    .profile-1 Button{
+        font-weight:bold;
+        border-radius:5px;
+        border:5px solid var(--color-menu);
+        background-color:var(--color-font-hover);
+        color:var(--color-menu);
     }
 }
 /*.card-title-profile{*/

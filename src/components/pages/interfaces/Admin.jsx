@@ -10,6 +10,7 @@ import img1 from "../../images/logo/prolog1.png";
 import img2 from "../../images/logo/prolog2.png";
 import sessionStorage from "sessionstorage";
 import axios from "axios";
+import Profile from "./Profile";
 
 const styleNavLink = {
     color: "var(--color-font)",
@@ -76,6 +77,14 @@ function Admin() {
         setShow3(false);
         setShow4(false);
         setShow5(true);
+    }
+    function handleClick6(){
+        setShow1(false);
+        setShow2(false);
+        setShow3(false);
+        setShow4(false);
+        setShow5(false);
+        setShow6(true);
     }
 
     const handleLogout = () => {
@@ -147,7 +156,7 @@ function Admin() {
                                             navClass.isActive ? "nav__active nav__link" : "nav__link"}>Vehicules</NavLink>
                                 </a>
 
-                                <a className='list-group-item py-2' >
+                                <a className='list-group-item py-2' onClick={handleClick6}>
                                     <i className="bi bi-person fs-5 me-3"/>
                                     <NavLink
                                         style={styleNavLink}
@@ -181,6 +190,7 @@ function Admin() {
                         {show3 && <Clients Toggle={Toggle}/> }
                         {show4 && <Driver Toggle={Toggle} /> }
                         {show5 && <DespoVehicules Toggle={Toggle} /> }
+                        {show6 && <Profile Toggle={Toggle} /> }
                     </div>
                 </div>
             </div>

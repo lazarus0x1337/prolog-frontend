@@ -35,6 +35,7 @@ export default function Driver() {
     const [show1, setShow1] = useState(true);
     const [show2, setShow2] = useState(false);
     const [show3, setShow3] = useState(false);
+    const [show4, setShow4] = useState(false);
     const [Conteneurs, setConteneurs] = useState([]);
     const [Conteneur, setConteneur] = useState({});
     const [pointRelais,setPointRelais] = useState([]);
@@ -83,6 +84,7 @@ export default function Driver() {
             setShow1(true);
             setShow2(false);
             setShow3(false);
+            setShow4(false);
         }
     }
 
@@ -95,6 +97,7 @@ export default function Driver() {
             setShow1(false);
             setShow2(true);
             setShow3(false);
+            setShow4(false);
         }
     }
 
@@ -103,12 +106,14 @@ export default function Driver() {
         setShow1(false);
         setShow2(true);
         setShow3(false);
+        setShow4(false);
     }
 
     const NoDataFound = () => {
         setShow1(false);
         setShow2(false);
         setShow3(true);
+        setShow4(false);
     }
     const theme = createTheme();
     const handleClickVoyager = async (idConteneur) => {
@@ -155,16 +160,6 @@ export default function Driver() {
         // setPointRelais([]);
         setUnPointRelais(null); // Clear the selected value
     };
-
-    // const [selectedValue, setSelectedValue] = useState('');
-    // const handleRadioChange = (e, colisId) => {
-    //     setSelectedValue(e.target.value);
-    //     const val = e.target.value;
-    //     const token = sessionStorage.getItem('token');
-    //     const col = UpdateColis(token,colisId,val);
-    //     console.log(col);
-    // };
-
     async function handleCheckboxChange(e, colisId) {
         const token = sessionStorage.getItem('token');
         const isChecked = e.target.checked;
@@ -184,10 +179,22 @@ export default function Driver() {
 
     }
 
+    function  handleClickChangeToShowProfile(){
+        setShow1(false);
+        setShow2(false);
+        setShow3(false);
+        setShow4(true);
+    }
+
     return (
         <>
             <Navbar handleClickChangeToShow1={handleClickChangeToShow1}
-                    handleClickChangeToShow2={handleClickChangeToShow2}/>
+                    handleClickChangeToShow2={handleClickChangeToShow2}
+                    handleClickChangeToShowProfile={handleClickChangeToShowProfile}/>
+
+            {show4 && <Profile_driver/>
+            }
+
 
             {show3 &&
                 <Box sx={{height: 600, width: '100%', marginTop: '100px'}} backgroundColor="transparent">
