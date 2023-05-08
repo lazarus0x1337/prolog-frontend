@@ -3,7 +3,7 @@ import "../css/driver.css";
 import Navbar from "../Driver/Navbar";
 import sessionStorage from "sessionstorage";
 import * as React from 'react';
-import {useEffect, useState,ChangeEvent} from "react";
+import {ChangeEvent, useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -21,13 +21,14 @@ import Select from '@mui/material/Select';
 import {Table} from "react-bootstrap";
 import Box from "@mui/material/Box";
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {Checkbox, FormControlLabel, Radio, RadioGroup, TextField} from "@mui/material";
+import {Checkbox, TextField} from "@mui/material";
 
 import {GetConteneurById} from "../../api/GetConteneurById";
-import {GetConteneursByDriverId} from '../../api/GetConteneurByDriverId';
 import {UpdateTracking} from '../../api/UpdateTracking';
 import {GetPointsRelais} from '../../api/GetPointsRelais';
 import {UpdateColis} from "../../api/UpdateColis";
+import Profile_driver from "../Driver/Profile_driver";
+import axios from "axios";
 
 
 export default function Driver() {
@@ -61,19 +62,33 @@ export default function Driver() {
 
 
     useEffect(() => {
-        const token = sessionStorage.getItem('token');
-        const driverId = sessionStorage.getItem('ID');
-        GetConteneursByDriverId(token, driverId)
-            .then((conteneurs) => {
-                setConteneurs(conteneurs);
-                if (conteneurs.length === 0) {
-                    NoDataFound();
-                }
-            })
-            .catch(reason => {
-                console.log(reason);
-            });
+        loadContainers().then(conteneurs => {
+            setConteneurs(conteneurs);
+            if (conteneurs.length === 0) {
+                NoDataFound();
+            }
+        });
     }, []);
+
+    const loadContainers = async () => {
+
+        const API_URL = 'http://localhost:8080/api/v1';
+        const token = sessionStorage.getItem("token");
+        const driverId = sessionStorage.getItem("ID");
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        };
+
+        return axios.get(`${API_URL}/conteneur`, config)
+                .then(response => {
+                    if (response.status === 200) {
+                        return response.data.filter(cc => cc.driver.id == driverId);
+                    }
+                })
+                .catch(reason => {
+                    console.log(reason);
+                });
+    }
 
 
     function handleClickChangeToShow1() {

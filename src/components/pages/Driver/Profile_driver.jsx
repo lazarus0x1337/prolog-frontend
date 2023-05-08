@@ -1,5 +1,3 @@
-import Nav from "../admin/Nav";
-import "../css/profile.css";
 import React, {useEffect, useState} from "react";
 import {FormLabel, Input, Typography} from "@mui/material";
 import FormControl from "@mui/material/FormControl";
@@ -7,13 +5,12 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import sessionStorage from "sessionstorage";
 import Box from "@mui/material/Box";
-import {style} from "./Css_Modal";
+import {style} from "../interfaces/Css_Modal";
 import Modal from "@mui/material/Modal";
 import {UpdateProfile} from "../../api/UpdateProfile";
 import {GetProfile} from "../../api/GetProfile";
 
-function Profile(props) {
-
+function Profile_driver(){
     const [profile, setProfile] = useState({});
     const [fullname, setFullname] = useState('');
     const [email, setEmail] = useState('');
@@ -21,18 +18,27 @@ function Profile(props) {
     const [Lastpassword, setLPassword] = useState('');
     const [Newpassword, setNPassword] = useState('');
 
-    useEffect(async () => {
-        const token = sessionStorage.getItem("token");
-        const id = sessionStorage.getItem("ID");
-        const [pr] = await Promise.all([GetProfile(token, id)]);
-        setProfile(pr);
-        setFullname(pr.fullname);
-        setEmail(pr.email);
-        setTelephone(pr.telephone);
-        console.log(pr);
+    useEffect(() => {
+        fetchData();
     }, []);
 
-    const handleUpdateProfile=()=>{
+    const fetchData = async () => {
+        try {
+            const token = sessionStorage.getItem("token");
+            const id = sessionStorage.getItem("ID");
+            const [pr] = await Promise.all([GetProfile(token, id)]);
+            setProfile(pr);
+            setFullname(pr.fullname);
+            setEmail(pr.email);
+            setTelephone(pr.telephone);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+
+
+    const handleUpdateProfile1 = ()=> {
         const token = sessionStorage.getItem("token");
         const id = sessionStorage.getItem("ID");
         const user = {
@@ -43,7 +49,7 @@ function Profile(props) {
         UpdateProfile(token,user,id);
         handlecheckModal();
     }
-    
+
     const [ShowModal, setShow] = useState(false);
     const handlecheckModal=()=>{
         setShow(true);
@@ -51,8 +57,7 @@ function Profile(props) {
     const handleCloseModal=()=>{
         setShow(false);
     }
-
-    return (
+    return(
         <>
             <Modal open={ShowModal} onClose={handleCloseModal} >
                 <Box sx={style}>
@@ -70,9 +75,7 @@ function Profile(props) {
                     </Grid>
                 </Box>
             </Modal>
-
-            <Nav Toggle={props.Toggle} fullname={sessionStorage.getItem("fullname")}/>
-            <div className="profile-1">
+            <div className="profile-1" style={{ marginTop:'100px'}}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <FormControl id="profile" className="full-width-input" sx={{textAlign: "center"}}>
@@ -116,7 +119,7 @@ function Profile(props) {
                         </FormControl>
                     </Grid>
                     <Grid item xs={12} sx={{display: 'flex', justifyContent: 'flex-end', paddingRight:'30px'}}>
-                        <Button onClick={handleUpdateProfile}>Save</Button>
+                        <Button onClick={handleUpdateProfile1}>Save</Button>
                     </Grid>
 
                 </Grid>
@@ -170,13 +173,6 @@ function Profile(props) {
             </div>
         </>
     );
-
 }
 
-export default Profile;
-
-
-
-
-
-
+export default Profile_driver;

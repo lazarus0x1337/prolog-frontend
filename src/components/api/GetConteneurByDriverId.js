@@ -8,6 +8,7 @@ export function GetConteneursByDriverId(token, driverId) {
     };
 
     return new Promise((resolve, reject) => {
+        console.log("conteneurs : "+config);
         axios.get(`${API_URL}/conteneur`, config)
             .then(response => {
                 if (response.status === 200) {
@@ -16,7 +17,6 @@ export function GetConteneursByDriverId(token, driverId) {
                 }
             })
             .catch(reason => {
-                console.log(reason);
                 reject(reason);
             });
     });
