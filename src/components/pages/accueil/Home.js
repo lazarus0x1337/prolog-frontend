@@ -1,5 +1,4 @@
 import NavBar from "./NavBar";
-import Header from "./Header";
 import AboutUs from "./AboutUs";
 import Services from "./Services";
 import Testimonials from "./Testimonials";
@@ -11,7 +10,6 @@ function Home(){
     return(
      <>
            <NavBar/>
-           <Header/>
            <Cards/>
            <Services/>
            <AboutUs/>

@@ -55,15 +55,21 @@ body {
     background-color: #ffffff;
 
 }
+
 .vehicules Button{
-    margin-top: 30px;
-    background-color:#ffffff;
-    border-radius: 7px;
-    font-family: "Roboto Condensed", cursive;
-    margin-left: 410px;
+    /*font-family: Algerian,"sans-serif";*/
+    margin-top: 5px;
+    margin-left: 10px;
+    color: #35efef;
+    background-color: var(--color-menu);
+    margin: 20px auto;
+    box-shadow: 0.7px 0.3px 2px rgba(53,239,239, 0.8);
 }
-.vehicules Button:hover{
-    background-color: #00FFF0;
+.vehicules Button:hover {
+    color: var(--color-list-hover);
+    background-color: #01f3eb;
+    border: 2px none var(--color-list-hover);
+    box-shadow: 5px 5px 15px rgba(53, 239, 239, 0.4);
 }
 .brand-name{
     color: var(--color-font)
@@ -89,3 +95,15 @@ background-color: #00FFF0 !important;
 .table td ,th{
     text-align: center;
 }
+
+.camion-1{
+    background-color:var(--color-degrade3-1);
+    color :var(--color-font-2);
+    border-radius: 10px;
+
+}
+
+.camion-1 i{
+    color:var(--color-cercle-small);
+}
+

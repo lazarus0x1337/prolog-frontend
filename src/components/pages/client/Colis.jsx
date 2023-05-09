@@ -1,35 +1,24 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Nav from "../admin/Nav";
 import {Table} from "react-bootstrap";
 import {Button, Checkbox, FormControlLabel, Typography} from "@mui/material";
 import React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import axios from "axios";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import {style} from "../interfaces/Css_Modal";
+import logo from "../../images/logo/prologBW.png";
+import axios from 'axios';
+import sessionStorage from "sessionstorage";
 
-
+// TODO: restore const config as before and add config value to axios call
 
 function Colis(props) {
 
 
     // service -----------------------------------------------------------
     let [factures, setFactures] = useState([]);
-
-    const config = {
-        headers: {
-            'Authorization': `Bearer ${sessionStorage.getItem("token")}` // Ajouter le token dans l'en-tête d'autorisation
-        }
-    };
-
-    axios.get(`http://localhost:8080/api/v1/factureColis/clientId/${sessionStorage.getItem("ID")}`, config)
-        .then(response => {
-            setFactures(response.data);
-        });
-
-
     // Colis Data
     const [showTel, setshowTel] = useState(false);
     const [ColisId, setColisId] = useState(0);
@@ -39,7 +28,7 @@ function Colis(props) {
     const [Height, setHeight] = useState(0);
     const [Length, setLength] = useState(0);
     const [Width, setWidth] = useState(0);
-    const [Prix, setPrix] = useState(Poids * Height * Width * Length);
+    const [Prix, setPrix] = useState();
     //Destinataire Data
     const [addressDES, setaddressDES] = useState("");
     const [telAdd, settelAdd] = useState("");
@@ -48,6 +37,8 @@ function Colis(props) {
     const [checkedFragile, setCheckedFragile] = useState(false);
     const [checkedFroid, setCheckedFriod] = useState(false);
     const [result, setResult] = useState('');
+    const [refetch, setRefetch] = useState(false);
+
     const DataColis = {
         "poids": Poids,
         "longueur": Width,
@@ -56,6 +47,9 @@ function Colis(props) {
         "froid": checkedFroid,
         "fragile": checkedFragile,
         "adresse": AddColis,
+        "recup": false,
+        "delivered": false,
+        "inContainer": false,
         "destinataire": {
             "firstname": firstName,
             "lastname": lastName,
@@ -66,6 +60,24 @@ function Colis(props) {
             "trackingNumber": result
         }
     }
+
+    const config = {
+        headers: {
+            'Authorization': `Bearer ${sessionStorage.getItem("token")}` // Ajouter le token dans l'en-tête d'autorisation
+        }
+    };
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            axios.get(`http://localhost:8080/api/v1/factureColis/clientId/${sessionStorage.getItem("ID")}`,config)
+                .then(response => {
+                    setFactures(response.data);
+                });
+        }
+
+        fetchData();
+    }, [refetch])
 
     const generateResult = () => {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -125,10 +137,129 @@ function Colis(props) {
         setSaved(true);
     }
 
+    const handlePrint = (facture) => {
+        const factureWindow = window.open("", "Facture", "height=600,width=800");
+
+        factureWindow.document.write("<html><head><title>Prolog Facture Colis</title></head><body>");
+        factureWindow.document.write("<style>"
+            + "body { position: relative; }"
+            + "h1 { margin: 0 auto; }"
+            + "table { margin: auto; border='10'; border-collapse: collapse;}"
+            + "td { padding: 4px 10px; }"
+            + "th { padding: 4px 10px; }"
+            + "img { position: absolute; right: 10px; top:10px;}"
+            + "</style></head><body>");
+
+        factureWindow.document.write("<div style='page-break-after: always;'>");
+        factureWindow.document.write("<img src="+logo+"/>");
+        factureWindow.document.write("<h1>PROLOG</h1>");
+            factureWindow.document.write("<div style='margin-top: 80px;'>");
+                factureWindow.document.write("<h2>Facture</h2>");
+                factureWindow.document.write("<p><span style='font-weight: bold'>Ref : </span> #" + facture.id + "</br>");
+                factureWindow.document.write("<span style='font-weight: bold'>Date : </span>" + facture.date.substring(0,10) + "</br>");
+                factureWindow.document.write("<span style='font-weight: bold'>Heure : </span>" + facture.date.substring(11,19) + "</p>");
+            factureWindow.document.write("<hr>");
+                factureWindow.document.write("<h2>Client</h2>");
+                factureWindow.document.write("<table border='1' >");
+                factureWindow.document.write("<tr>");
+                factureWindow.document.write("<th>Reference</th>");
+                factureWindow.document.write("<th>Nom complet</th>");
+                factureWindow.document.write("<th>Email</th>");
+                factureWindow.document.write("<th>Telephone</th>");
+                factureWindow.document.write("<th>Adresse</th>");
+                factureWindow.document.write("</tr>");
+                factureWindow.document.write("<tr>");
+                factureWindow.document.write("<td>"+ facture.client.id +"</td>");
+                factureWindow.document.write("<td>"+ facture.client.fullname +"</td>");
+                factureWindow.document.write("<td>"+ facture.client.email +"</td>");
+                factureWindow.document.write("<td>"+ facture.client.telephone +"</td>");
+                factureWindow.document.write("<td>"+ facture.colis.adresse +"</td>");
+                factureWindow.document.write("</tr>");
+                factureWindow.document.write("</table>");
+            // factureWindow.document.write("<hr>");
+                factureWindow.document.write("<h2>Destinataire</h2>");
+                factureWindow.document.write("<table border='1'><thead>");
+                factureWindow.document.write("<tr>");
+                factureWindow.document.write("<th>Reference</th>");
+                factureWindow.document.write("<th>Nom complet</th>");
+                factureWindow.document.write("<th>Email</th>");
+                factureWindow.document.write("<th>Telephone</th>");
+                factureWindow.document.write("<th>Adresse</th>");
+                factureWindow.document.write("</tr></thead>");
+                factureWindow.document.write("<tbody><tr>");
+                factureWindow.document.write("<td>"+ facture.colis.destinataire.id +"</td>");
+                factureWindow.document.write("<td>"+ facture.colis.destinataire.firstname +" "+facture.colis.destinataire.lastname+"</td>");
+                factureWindow.document.write("<td> - </td>");
+                factureWindow.document.write("<td>"+ facture.colis.destinataire.telephone +"</td>");
+                factureWindow.document.write("<td>"+ facture.colis.adresse +"</td>");
+                factureWindow.document.write("</tr></tbody>");
+                factureWindow.document.write("</table>");
+            // factureWindow.document.write("<hr>");
+                factureWindow.document.write("<h2>Colis</h2>");
+                factureWindow.document.write("<table border='1'>");
+                factureWindow.document.write("<tr>");
+                factureWindow.document.write("<th>Numero de tracking</th>");
+                factureWindow.document.write("<th>Poids (g)</th>");
+                factureWindow.document.write("<th>Dimension</th>");
+                factureWindow.document.write("<th>Froid</th>");
+                factureWindow.document.write("<th>Fragile</th>");
+                factureWindow.document.write("</tr>");
+                factureWindow.document.write("<tr>");
+                factureWindow.document.write("<td>"+ facture.colis.trackingNumber.trackingNumber +"</td>");
+                factureWindow.document.write("<td>"+ facture.colis.poids +"</td>");
+                factureWindow.document.write("<td>"+ facture.colis.longueur + "cm X " + facture.colis.largeur +"cm X " + facture.colis.hauteur + "cm" +"</td>");
+                factureWindow.document.write("<td>"+ (facture.colis.froid?'Oui':'Non') +"</td>");
+                factureWindow.document.write("<td>"+ (facture.colis.fragile?'Oui':'Non') +"</td>");
+                factureWindow.document.write("</tr>");
+                factureWindow.document.write("</table>");
+                factureWindow.document.write("<p style='text-align: right; font-size: 2em;'><span style='font-weight: bold'>Montant TTC : </span>" + facture.prix + "Dhs</p>");
+        factureWindow.document.write("<hr>");
+            factureWindow.document.write("</div>");
+
+
+
+            factureWindow.document.write("<div style='display: flex; position: absolute; bottom: 100px; justify-content: center;'>");
+            factureWindow.document.write("<div style='margin-left : 3%; margin-right : 3%;'><h4>Prolog</h4>" +
+                "<p>22, Avenue Voltaire</br>" +
+                "13000 Rabat</br>" +
+                "Maroc</br>" +
+                "N° Siren ou Siret : xxxxxDEVIS n° 123</br>" +
+                "N° TVA intra. : MAXX 999999999</p></div>");
+            factureWindow.document.write("<div style='margin-left : 3%; margin-right : 3%;'><h4>Coordonnées</h4>" +
+                "<p>Nadir Ouzlim</br>" +
+                "Téléphone : +2125 0000-0000</br>" +
+                "E-mail : nadir@prolog.fr</br>" +
+                "www.macompagnie.ma</p></div>");
+            factureWindow.document.write("<div style='margin-left : 3%; margin-right : 3%;'><h4>Détails bancaires</h4>" +
+                "<p>Banque BNP</br>" +
+                "Code banque 10000000</br>" +
+                "N° de compte 12345678</br>" +
+                "IBAN MA2341124098234</br>" +
+                "SWIFT/BIC MAHHCXX1001</p></div>");
+
+            factureWindow.document.write("</div>");
+
+        factureWindow.document.write("</div>");
+
+        factureWindow.document.write("<div style='page-break-before: always;'>");
+        factureWindow.document.write("<p>Veuillez coller ce document dans votre colis</p>");
+        factureWindow.document.write("</div>");
+
+        factureWindow.document.write("</body></html>");
+
+        // Masquer la fenêtre d'impression pour l'utilisateur
+        factureWindow.document.close();
+        factureWindow.focus();
+        factureWindow.print();
+        factureWindow.close();
+
+        // Réafficher la page après l'impression
+        window.focus();
+    }
 
 
     const CheckTel=()=>{
-        axios.get(`http://localhost:8080/api/v1/user/${sessionStorage.getItem("ID")}`, config)
+        axios.get(`http://localhost:8080/api/v1/user/${sessionStorage.getItem("ID")}`,config)
             .then(response => {
                 if(!response.data.telephone){
                     OpenModalTel();
@@ -143,10 +274,10 @@ function Colis(props) {
         try {
             const response = await axios.post('http://localhost:8080/api/v1/colis', DataColis, config);
             if (response.status === 201) {
-                console.log("Colis enregistré avec succès");
+                const d = new Date();
                 const DataFacture = {
                     "prix":Prix,
-                    "date":"2023-04-27T13:30:00.000+00:00",
+                    "date":d.toISOString(),
                     "client":{
                         "id":sessionStorage.getItem("ID")
                     },
@@ -164,12 +295,14 @@ function Colis(props) {
         } catch (error) {
             alert("Erreur lors de l'enregistrement");
             console.log(error);
+        } finally {
+            setRefetch(prevState => !prevState)
         }
 
     }
 
-    const saveTel = () => {
-        axios.put(`http://localhost:8080/api/v1/user/${sessionStorage.getItem("ID")}`,{"telephone":TEL},config)
+    const saveTel = async  () => {
+        await axios.put(`http://localhost:8080/api/v1/user/${sessionStorage.getItem("ID")}`,{"telephone":TEL}, config)
         SaveFacture();
     }
 
@@ -178,7 +311,9 @@ function Colis(props) {
             alert("Valeur Null !");
 
         } else {
-            setPrix(Height*Width*Length*Poids*0.02);
+            const ajout1 = checkedFragile?1.2:1;
+            const ajout2 = checkedFroid?1.3:1;
+            setPrix(((Poids/10) + (Height * Width * Length)/500000)*(ajout1*ajout2));
             generateResult();
             ValidateFacture();
         }
@@ -208,7 +343,7 @@ function Colis(props) {
                             <th scope="col">Origin Address</th>
                             <th scope="col">Arrived Address</th>
                             <th scope="col">Weight(g)</th>
-                            <th scope="col">Dimension(cm3)</th>
+                            <th scope="col">Dimension(L)</th>
                             <th scope="col">Fragile</th>
                             <th scope="col">Froid</th>
                             <th scope="col">facture</th>
@@ -222,16 +357,16 @@ function Colis(props) {
                                 <td>{item.colis.adresse}</td>
                                 <td>{item.colis.destinataire.adresse}</td>
                                 <td>{item.colis.poids}</td>
-                                <td>{item.colis.longueur * item.colis.largeur * item.colis.hauteur}</td>
+                                <td>{item.colis.longueur * item.colis.largeur * item.colis.hauteur/1000}</td>
                                 <td>{item.colis.fragile ?
-                                    <i className="bi bi-box-fill " style={{color: "#00FF03", paddingLeft: "12px"}}/> :
+                                    <i className="bi bi-box-fill " style={{color: "var(--color-font-hover)", paddingTop:'5px',paddingLeft: "12px"}}/> :
                                     <i className="bi bi-box-fill "
-                                       style={{color: "#FF0000", paddingLeft: "12px"}}/>}</td>
+                                       style={{color: "var(--color-font)", paddingLeft: "12px"}}/>}</td>
                                 <td>{item.colis.froid ?
-                                    <i className="bi bi-box-fill " style={{color: "#00FF03", paddingLeft: "12px"}}/> :
+                                    <i className="bi bi-box-fill " style={{color: "var(--color-font-hover)", paddingLeft: "12px"}}/> :
                                     <i className="bi bi-box-fill "
-                                       style={{color: "#FF0000", paddingLeft: "12px"}}/>}</td>
-                                <td><a href="">Imprimer</a></td>
+                                       style={{color: "var(--color-font)", paddingLeft: "12px"}}/>}</td>
+                                <td><Button onClick={() => handlePrint(item)}>Imprimer</Button></td>
                             </tr>
                         ))}
                         </tbody>

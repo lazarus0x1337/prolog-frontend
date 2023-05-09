@@ -15,10 +15,10 @@ function Nav(props) {
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">{username}</a>
-                                      <div className="dropdown-menu" aria-labelledby="dropdownId">
-                                             <a className="dropdown-item" href="#">Profile</a>
-                                             <a className="dropdown-item" href="#">Setting</a>
-                                             <a className="dropdown-item" href="#">Logout</a>
+                                      <div className="dropdown-menu Nav-Menu" aria-labelledby="dropdownId">
+                                             <a className="dropdown-item ">Profile</a>
+                                             <a className="dropdown-item" >Setting</a>
+                                             <a className="dropdown-item" >Logout</a>
                                       </div>
                     </li>
                 </ul>

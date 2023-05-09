@@ -25,7 +25,7 @@ function Vehicules(props) {
         <div>
             <Nav Toggle={props.Toggle} fullname={sessionStorage.getItem("fullname")}/>
                 <div className="container-lg">
-                    <div className="row row-cols-1 row-cols-2 row-cols-3 row-cols-4">
+                    <div className="row camion-2  row-cols-1 row-cols-2 row-cols-3 row-cols-4">
                         <div className="col pt-4 ">
                             <img src={c1} className="gallery-item"/>
                         </div>
@@ -41,34 +41,38 @@ function Vehicules(props) {
                     </div>
                     <div className="row row-cols-1 row-cols-2 row-cols-3 row-cols-4 vehicules">
                         <div className="col">
-                            <Grid className="camion">
+                            <Grid className="camion-1">
                                 <div className="p-2 ">&nbsp;&nbsp;&nbsp;Type&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;Camion Benne</div>
-                                <div className="p-2">&nbsp;&nbsp;&nbsp;Volume&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;De 1 à 40m3</div>
+                                <div className="p-2">&nbsp;&nbsp;&nbsp;Volume&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;40 000 L</div>
+                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Colis Fragile&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/> </div>
+                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Colis Froid&nbsp;&nbsp;&nbsp; <i className="bi bi-square"/> </div>
                                 <div className="p-2">&nbsp;&nbsp;&nbsp;Disponible&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/></div>
                             </Grid>
                         </div>
                         <div className="col">
-                            <Grid className="camion">
+                            <Grid className="camion-1">
                                 <div className="p-2 ">&nbsp;&nbsp;&nbsp;Type&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;Camion Frigo</div>
-                                <div className="p-2">&nbsp;&nbsp;&nbsp;Volume&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;De 1 à 50m3</div>
+                                <div className="p-2">&nbsp;&nbsp;&nbsp;Volume&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;50 000 L</div>
                                 <div className="p-2">&nbsp;&nbsp;&nbsp;Support Colis Fragile&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/> </div>
                                 <div className="p-2">&nbsp;&nbsp;&nbsp;Support Colis Froid&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/> </div>
                                 <div className="p-2">&nbsp;&nbsp;&nbsp;Disponible&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/></div>
                             </Grid>
                         </div>
                         <div className="col">
-                            <Grid className="camion">
+                            <Grid className="camion-1">
                                 <div className="p-2 ">&nbsp;&nbsp;&nbsp;Type&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;Camion Fourgon</div>
-                                <div className="p-2">&nbsp;&nbsp;&nbsp;Volume&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;De 1 à 50m3</div>
+                                <div className="p-2">&nbsp;&nbsp;&nbsp;Volume&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;60 500 L</div>
                                 <div className="p-2">&nbsp;&nbsp;&nbsp;Support Colis Fragile&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/> </div>
-                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Colis Froid&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/> </div>
+                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Colis Froid&nbsp;&nbsp;&nbsp; <i className="bi bi-square"/> </div>
                                 <div className="p-2">&nbsp;&nbsp;&nbsp;Disponible&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/></div>
                             </Grid>
                         </div>
                         <div className="col">
-                            <Grid className="camion">
+                            <Grid className="camion-1">
                                 <div className="p-2 ">&nbsp;&nbsp;&nbsp;Type&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;Camion Plateau</div>
-                                <div className="p-2">&nbsp;&nbsp;&nbsp;Volume&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;De 1 à 34m3</div>
+                                <div className="p-2">&nbsp;&nbsp;&nbsp;Volume&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;Depends container</div>
+                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Colis Fragile&nbsp;&nbsp;&nbsp; <i className="bi bi-square"/> </div>
+                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Colis Froid&nbsp;&nbsp;&nbsp; <i className="bi bi-square"/> </div>
                                 <div className="p-2">&nbsp;&nbsp;&nbsp;Disponible&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/></div>
                             </Grid>
                         </div>

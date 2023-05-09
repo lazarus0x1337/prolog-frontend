@@ -33,8 +33,17 @@ function Colis(props) {
 
     //succes and erreur envois packages :
     const [openErreur,setopenErreur]=useState(false);
+    const [openErreur2,setopenErreur2]=useState(false);
     const [openSucces,setopenSucces]=useState(false);
+    const handleModalFin=()=>{
+        setopenErreur2(true);
+        handleCloseModal2();
+        setopenErreur(false);
+        setopenSucces(false);
+    };
+
     const handleClose=()=>{
+        setopenErreur2(false);
         handleCloseModal2();
         setopenErreur(false);
         setopenSucces(false);
@@ -75,7 +84,7 @@ function Colis(props) {
 
         axios.get(`http://localhost:8080/api/v1/conteneur/ref/${reference}`,config)
             .then(response => {
-                if(response.status===200){
+                if(response.status===200 && !response.data.fin){
                     // Affichage du modal de validation
 
                     const {id,villeDepart,villeArrivee,driver} = response.data;
@@ -88,6 +97,8 @@ function Colis(props) {
                             setfullname(fullname);
                         })
                     handleInfoContainer();
+                } else {
+                    handleModalFin();
                 }
             })
             .catch(reason => {
@@ -161,7 +172,7 @@ function Colis(props) {
         .then(response => {
             if(!isChecked) setFactures(response.data);
             else{
-                const fact = response.data.filter(facture => facture.colis.inContainer === false);
+                const fact = response.data.filter(facture => facture.colis.inContainer !== true);
                 setFactures(fact);
             }
         });
@@ -198,6 +209,7 @@ function Colis(props) {
             "ref":reference,
             "villeDepart":villeDepart,
             "villeArrivee":villeArrivee,
+            "fin":false,
             "driver":{"id":Driver.id}
         }
         axios.post(
@@ -257,13 +269,13 @@ function Colis(props) {
                         <tr>
                             <th></th>
                             <th scope="col">Tracking Number</th>
-                            <th scope="col">Proprietaire</th>
+                            <th scope="col">Sender</th>
                             <th scope="col">Origin Address</th>
                             <th scope="col">Arrived Address</th>
                             <th scope="col">Weight(g)</th>
                             <th scope="col">Dim(L)</th>
                             <th scope="col">Fragile</th>
-                            <th scope="col">Froid</th>
+                            <th scope="col">Cold</th>
 
                         </tr>
                         </thead>
@@ -296,19 +308,36 @@ function Colis(props) {
                                 <td>{item.colis.poids}</td>
                                 <td>{item.colis.longueur * item.colis.largeur * item.colis.hauteur/1000}</td>
                                 <td>{item.colis.fragile ?
-                                    <i className="bi bi-box-fill " style={{color: "#00FF03", paddingLeft: "12px"}}/> :
+                                    <i className="bi bi-box-fill " style={{color: "var(--color-font-hover)", paddingTop:'5px',paddingLeft: "12px"}}/> :
                                     <i className="bi bi-box-fill "
-                                       style={{color: "#FF0000", paddingLeft: "12px"}}/>}</td>
+                                       style={{color: "var(--color-font)", paddingLeft: "12px"}}/>}</td>
                                 <td>{item.colis.froid ?
-                                    <i className="bi bi-box-fill " style={{color: "#00FF03", paddingLeft: "12px"}}/> :
+                                    <i className="bi bi-box-fill " style={{color: "var(--color-font-hover)", paddingTop:'5px',paddingLeft: "12px"}}/> :
                                     <i className="bi bi-box-fill "
-                                       style={{color: "#FF0000", paddingLeft: "12px"}}/>}</td>
+                                       style={{color: "var(--color-font)", paddingLeft: "12px"}}/>}</td>
                             </tr>
                         ))}
                         </tbody>
                     </Table>
                 </div>
             </div>
+
+            <Modal open={openErreur2} onClose={handleClose} >
+                <Box sx={style}>
+                    <Grid  sx={{ my: 1 }}>
+                        <Typography variant="h6" textAlign="center" gutterBottom>
+                            Ce conteneur est déja arrivé à destination
+                        </Typography>
+                        <Button onClick={handleClose} style={{
+                            backgroundColor: "var(--primary-blue)",
+                            color: "black",
+                            marginLeft: "180px",
+                            marginTop: "27px",
+                            padding: "10px"
+                        }}>Ok</Button>
+                    </Grid>
+                </Box>
+            </Modal>
 
             <Modal open={openErreur} onClose={handleClose} >
                 <Box sx={style}>

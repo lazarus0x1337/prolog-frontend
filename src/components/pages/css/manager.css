@@ -25,6 +25,17 @@
   color : #000000;
 }
 
+.table-table{
+  /*box-shadow:0 0 8px rgba(53,239,239, 0.8);*/
+  box-shadow:0 0 10px rgba(31,40,45, 0.8);
+  border-collapse: separate;
+  border-spacing: 20px 3px;
+  margin: 0 auto;
+  border-radius:5px;
+}
+.table-table th {
+  border-bottom: 2px dotted var(--color-font-hover);
+}
 
 .booking__title {
   font-size: 1.5rem;

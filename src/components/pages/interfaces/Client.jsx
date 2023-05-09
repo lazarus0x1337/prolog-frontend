@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import '../css/style.css';
 import {NavLink, useLocation, useNavigate, useParams} from "react-router-dom";
 import Colis from "../client/Colis";
@@ -10,6 +10,8 @@ import img1 from "../../images/logo/prolog1.png";
 import img2 from "../../images/logo/prolog2.png";
 import sessionStorage from 'sessionstorage';
 import Profile from "./Profile";
+import {Logout} from "../../api/authentification/Logout";
+import {GetUserById} from "../../api/user/GetUserById";
 
 const styleNavLink = {
     color: "var(--color-font)",
@@ -24,19 +26,29 @@ function Client() {
     const location = useLocation();
     const [id,setId] = useState(new URLSearchParams(location.search).get('id')) // Récupérer la valeur de l'id à partir des query parameters
     const [tk,setTk] = useState(new URLSearchParams(location.search).get('tk'))
-    const [fullname,setFullname] = useState(new URLSearchParams(location.search).get('fullname'))
+    const [fullname,setFullname] = useState("");
     const [toggle, setToggle] = useState(true);
+    const [user, setUser] = useState({});
     const Toggle = () => {  setToggle(!toggle) }
 
-    if(fullname) {
-        sessionStorage.setItem("fullname", fullname);
-    }
-    if(tk) {
-        sessionStorage.setItem("token", tk);
-    }
-    if(id) {
-        sessionStorage.setItem("ID", id);
-    }
+    useEffect( () => {
+
+        if(id) {
+            sessionStorage.setItem("ID", id);
+        }
+        if(tk) {
+            sessionStorage.setItem("token", tk);
+        }
+        GetUserById(tk,id).then( us => {
+            setUser(us);
+            setFullname(us.fullname);
+            sessionStorage.setItem("fullname", us.fullname);
+        })
+
+
+
+    }, []);
+
 
     const [showStep, setShowStep] = useState(true);
     const [showColis, setShowColis] = useState(false);
@@ -66,16 +78,8 @@ function Client() {
         setShowColis(false);
         setShowStep(false);
     }
-
-
-    const handleLogout = () => {
-        const config = {
-            headers: {
-                'Authorization': `Bearer ${sessionStorage.getItem("token")}` // Ajouter le token dans l'en-tête d'autorisation
-            }
-        };
-        axios.post("http://localhost:8080/api/v1/auth/logout",{},config)
-            .then(()=>{navigate('/home');})
+    function handleLogout(){
+        Logout(tk,navigate);
     }
 
     return (
@@ -145,7 +149,7 @@ function Client() {
                         {showStep && <StepProgress Toggle={Toggle}/> }
                         {showColis && <Colis Toggle={Toggle}/> }
                         {showVehi && <Vehicules Toggle={Toggle}/> }
-                        {showProfile && <Profile/> }
+                        {showProfile && <Profile Toggle={Toggle}/> }
                     </div>
                 </div>
             </div>

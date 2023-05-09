@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&display=swap');*/
 :root {
     --primary-white: #ffffff;
     --primary-blue: #00FFF0;
@@ -17,9 +17,9 @@
     --card-02-bg: linear-gradient(#01d293, #56c57a);
     --card-03-bg: #725cff;
     --card-04-bg: #2884ff;
-    --heading-color: #fff;
+    --heading-color: #ffffff;
     --small-text-color: #808191;
-
+    --color-test: #b0e6ff;
     /* Theme layout */
     --color-degrade3-1: #1f282d;
     --color-degrade3-2: #343f45;
@@ -31,6 +31,7 @@
     --color-degrade2-1: #313131;
     --color-degrade2-2: #383838;
     --color-degrade2-3: #434343;
+
 
     --color-menu: #1f282d;
     --color-menu-hover: #343f45;
@@ -185,7 +186,7 @@ nav ul li {
     font-size: 16px;
 }
 
-.income-form button[type="submit"]{
+.income-form button[type="button"]{
     font-family: "fangsong", "sans-serif";
     font-weight: bold;
     margin-top: 10px;
@@ -200,7 +201,7 @@ nav ul li {
     background: var(--primary-blue);
     color: #173636;
 }
-.income-form input[type="submit"]:hover{
+.income-form input[type="button"]:hover{
     background:var(--primary-dark-grey) ;
 }
 /*-------- TYPED TEXT ---------------*/
@@ -563,4 +564,16 @@ input#form1.form-control{
     color: var(--primary-blue);
 }
 
-
+/*------------------------------Nav Menu------------------------*/
+.Nav-Menu.show{
+    background-color: var(--color-menu);
+}
+.Nav-Menu a{
+    text-align: center;
+    background-color: var(--color-menu);
+    color:var(--color-font);
+}
+.Nav-Menu a:hover{
+    background-color: var(--color-menu-hover) !important;
+    color:var(--color-font-hover) !important;
+}

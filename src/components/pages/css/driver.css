@@ -1,0 +1,33 @@
+.TableDriver{
+    margin-top: 10px;
+    background-color: var(--color-menu);
+    border-top: 3px solid var(--color-font-hover);
+}
+.TableDriver td{
+    color:var(--color-font);
+}
+.TableDriver th{
+    color: var(--primary-blue);
+}
+
+.TableDriver2{
+    background-color: var(--color-menu-hover);
+    border-radius: 10px;
+    border: none;
+}
+
+.TableDriver2 th{
+    color: var(--color-degrade3-1);
+}
+.TableDriver2 td{
+    color:var(--color-cercle-small);
+    border: none;
+}
+
+.title-minitab {
+    color : var(--color-degrade3-1) !important;
+    font-weight: bold;
+}
+.MuiPaper-root{
+    background-color: var(--color-menu);
+}
