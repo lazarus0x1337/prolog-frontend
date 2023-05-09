@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GetFacturesById} from "./GetFacturesById";
+import {GetFacturesById} from "../facture/GetFacturesById";
 
 const API_URL = 'http://localhost:8080/api/v1';
 
