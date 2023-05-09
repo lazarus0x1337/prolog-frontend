@@ -269,13 +269,13 @@ function Colis(props) {
                         <tr>
                             <th></th>
                             <th scope="col">Tracking Number</th>
-                            <th scope="col">Proprietaire</th>
+                            <th scope="col">Sender</th>
                             <th scope="col">Origin Address</th>
                             <th scope="col">Arrived Address</th>
                             <th scope="col">Weight(g)</th>
                             <th scope="col">Dim(L)</th>
                             <th scope="col">Fragile</th>
-                            <th scope="col">Froid</th>
+                            <th scope="col">Cold</th>
 
                         </tr>
                         </thead>
@@ -308,13 +308,13 @@ function Colis(props) {
                                 <td>{item.colis.poids}</td>
                                 <td>{item.colis.longueur * item.colis.largeur * item.colis.hauteur/1000}</td>
                                 <td>{item.colis.fragile ?
-                                    <i className="bi bi-box-fill " style={{color: "#00FF03", paddingLeft: "12px"}}/> :
+                                    <i className="bi bi-box-fill " style={{color: "var(--color-font-hover)", paddingTop:'5px',paddingLeft: "12px"}}/> :
                                     <i className="bi bi-box-fill "
-                                       style={{color: "#FF0000", paddingLeft: "12px"}}/>}</td>
+                                       style={{color: "var(--color-font)", paddingLeft: "12px"}}/>}</td>
                                 <td>{item.colis.froid ?
-                                    <i className="bi bi-box-fill " style={{color: "#00FF03", paddingLeft: "12px"}}/> :
+                                    <i className="bi bi-box-fill " style={{color: "var(--color-font-hover)", paddingTop:'5px',paddingLeft: "12px"}}/> :
                                     <i className="bi bi-box-fill "
-                                       style={{color: "#FF0000", paddingLeft: "12px"}}/>}</td>
+                                       style={{color: "var(--color-font)", paddingLeft: "12px"}}/>}</td>
                             </tr>
                         ))}
                         </tbody>
