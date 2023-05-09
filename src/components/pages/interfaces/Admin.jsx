@@ -29,8 +29,6 @@ function Admin() {
     const [toggle, setToggle] = useState(true);
     const Toggle = () => {  setToggle(!toggle) }
 
-    const [role, setRole] = useState('');
-
     useEffect( () => {
 
         if(id) {
