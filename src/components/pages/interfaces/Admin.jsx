@@ -2,9 +2,9 @@ import React, {useEffect, useState} from "react";
 import '../css/style.css';
 import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import Dashboard from "../admin/Dashboard";
-import Managers from "../admin/Managers";
-import Clients from "../admin/Clients";
-import Driver from "../admin/Driver";
+import Colis from "../admin/Colis";
+import Containers from "../admin/Containers"
+import User from "../admin/User";
 import DespoVehicules from "../admin/DespoVehicules";
 import img1 from "../../images/logo/prolog1.png";
 import img2 from "../../images/logo/prolog2.png";
@@ -135,8 +135,8 @@ function Admin() {
                                         className={ (navClass) =>
                                             navClass.isActive ? "nav__active nav__link" : "nav__link"}>Containers</NavLink>
                                 </a>
-                                <a className='list-group-item py-2' onClick={handleClick3} >
-                                    <i className="bi bi-table fs-5 me-3"/>
+                                <a className='list-group-item py-2' onClick={() => handleClick("show3")} >
+                                    <i className="bi bi-grid-1x2 fs-5 me-3"></i>
                                     <NavLink
                                         style={styleNavLink}
                                         className={ (navClass) =>
@@ -195,12 +195,20 @@ function Admin() {
 
                     {toggle &&  <div className='col-4 col-md-2'/>}
                     <div className='col'>
-                        {show1 && <Dashboard Toggle={Toggle} /> }
-                        {show2 && <Managers Toggle={Toggle} /> }
-                        {show3 && <Clients Toggle={Toggle}/> }
-                        {show4 && <Driver Toggle={Toggle} /> }
-                        {show5 && <DespoVehicules Toggle={Toggle} /> }
-                        {show6 && <Profile Toggle={Toggle} /> }
+                        {showStates.map((state) => (
+                            state.value &&
+                            <React.Fragment key={state.name}>
+                                {state.name === 'show1' && <Dashboard Toggle={Toggle} />}
+                                {state.name === 'show2' && <Colis Toggle={Toggle} />}
+                                {state.name === 'show3' && <Containers Toggle={Toggle} />}
+                                {state.name === 'show4' && <User Toggle={Toggle} role="CLIENT" />}
+                                {state.name === 'show5' && <User Toggle={Toggle} role="DRIVER" />}
+                                {state.name === 'show6' && <User Toggle={Toggle} role="MANAGER" />}
+                                {state.name === 'show7' && <User Toggle={Toggle} role="ADMIN" />}
+                                {state.name === 'show8' && <DespoVehicules Toggle={Toggle} />}
+                                {state.name === 'show9' && <Profile Toggle={Toggle} />}
+                            </React.Fragment>
+                        ))}
                     </div>
                 </div>
             </div>

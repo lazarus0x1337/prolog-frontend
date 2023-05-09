@@ -1,11 +1,12 @@
 import "../css/Step.css";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Nav from "../admin/Nav";
 import {GetTrajetByTracking} from "../../api/tracking/GetTrajetByTracking";
 import {GetFactureByTrackingNumber} from "../../api/facture/GetFactureByTrackingNumber";
 import Typography from '@mui/material/Typography';
 import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
+import {useLocation} from "react-router-dom";
 
 
 const StepProgress = (props) =>{
@@ -20,6 +21,23 @@ const StepProgress = (props) =>{
     let [colisTracked,setColisTracked]=useState({});
     let [factureTracked,setFactureTracked]=useState({});
     let [trajet,setTrajet]=useState({});
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const token = searchParams.has('tk') ? searchParams.get('tk') : sessionStorage.getItem('token');
+
+    useEffect( () => {
+
+        if(token) sessionStorage.setItem('token',token);
+        if (localStorage.getItem('tracking') !== null) {
+            const track = localStorage.getItem('tracking');
+            GetTrajetByTracking(token, track).then(resp => { setTrajet(resp); })
+            GetFactureByTrackingNumber(token, track).then(resp => {
+                setFactureTracked(resp) ;
+                setShowTracking(true);
+                setShowError(false);
+            });
+        }
+    }, []);
 
     const handleSearchTracking = async () => {
         const token = sessionStorage.getItem('token');
@@ -40,6 +58,7 @@ const StepProgress = (props) =>{
             setShowTracking(false);
             setShowError(true);
         }
+        localStorage.removeItem('tracking');
     }
 
     return (
