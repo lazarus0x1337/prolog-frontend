@@ -10,7 +10,9 @@ import img1 from "../../images/logo/prolog1.png";
 import img2 from "../../images/logo/prolog2.png";
 import sessionStorage from 'sessionstorage';
 import Profile from "./Profile";
-import {Logout} from "../../api/Logout";
+import {Logout} from "../../api/authentification/Logout";
+import {GetUserById} from "../../api/user/GetUserById";
+
 const styleNavLink = {
     color: "var(--color-font)",
     textDecoration:'none',

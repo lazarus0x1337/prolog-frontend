@@ -1,8 +1,8 @@
 import "../css/Step.css";
 import React, {useState} from "react";
 import Nav from "../admin/Nav";
-import {GetTrajetByTracking} from "../../api/GetTrajetByTracking";
-import {GetFactureByTrackingNumber} from "../../api/GetFactureByTrackingNumber";
+import {GetTrajetByTracking} from "../../api/tracking/GetTrajetByTracking";
+import {GetFactureByTrackingNumber} from "../../api/facture/GetFactureByTrackingNumber";
 import Typography from '@mui/material/Typography';
 import Box from "@mui/material/Box";
 import { Button } from "@mui/material";

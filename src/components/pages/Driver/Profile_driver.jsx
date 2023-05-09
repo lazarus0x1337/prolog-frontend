@@ -7,8 +7,8 @@ import sessionStorage from "sessionstorage";
 import Box from "@mui/material/Box";
 import {style} from "../interfaces/Css_Modal";
 import Modal from "@mui/material/Modal";
-import {UpdateProfile} from "../../api/UpdateProfile";
-import {GetProfile} from "../../api/GetProfile";
+import {UpdateProfile} from "../../api/user/UpdateProfile";
+import {GetProfile} from "../../api/user/GetProfile";
 
 function Profile_driver(){
     const [profile, setProfile] = useState({});

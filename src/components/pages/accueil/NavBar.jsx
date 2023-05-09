@@ -62,7 +62,7 @@ const NavBar = () => {
                                 else if(role === "DRIVER")  indice = 2;
                                 else if(role === "CLIENT")  indice = 3;
                                 navigate(
-                                    '/'+redirection[indice]+`?id=${id}&tk=${access_token}&fullname=${fullname}`
+                                    '/'+redirection[indice]+`?id=${id}&tk=${access_token}`
                                 );
                             })
 
@@ -109,7 +109,7 @@ const NavBar = () => {
                             navigate(
                                 '/'
                                 +redirection[3]
-                                +`?id=${id}&tk=${access_token}&fullname=${fullname}`
+                                +`?id=${id}&tk=${access_token}`
                             );
                         })
 

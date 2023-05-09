@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import '../css/style.css';
 import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import Dashboard from "../admin/Dashboard";
@@ -11,6 +11,7 @@ import img2 from "../../images/logo/prolog2.png";
 import sessionStorage from "sessionstorage";
 import axios from "axios";
 import Profile from "./Profile";
+import {GetUserById} from "../../api/user/GetUserById";
 
 const styleNavLink = {
     color: "var(--color-font)",
@@ -23,19 +24,28 @@ function Admin() {
     const location = useLocation();
     const [id,setId] = useState(new URLSearchParams(location.search).get('id')) // Récupérer la valeur de l'id à partir des query parameters
     const [tk,setTk] = useState(new URLSearchParams(location.search).get('tk'))
-    const [fullname,setFullname] = useState(new URLSearchParams(location.search).get('fullname'))
+    const [fullname,setFullname] = useState('');
     const [toggle, setToggle] = useState(true);
     const Toggle = () => {  setToggle(!toggle) }
 
-    if(fullname) {
-        sessionStorage.setItem("fullname", fullname);
-    }
-    if(tk) {
-        sessionStorage.setItem("token", tk);
-    }
-    if(id) {
-        sessionStorage.setItem("ID", id);
-    }
+    useEffect( () => {
+
+        if(id) {
+            sessionStorage.setItem("ID", id);
+        }
+        if(tk) {
+            sessionStorage.setItem("token", tk);
+        }
+        GetUserById(tk,id).then( us => {
+            setUser(us);
+            setFullname(us.fullname);
+            sessionStorage.setItem("fullname", us.fullname);
+        })
+
+
+
+    }, []);
+
 
     const [show1, setShow1] = useState(true);
     const [show2, setShow2] = useState(false);
@@ -130,7 +140,7 @@ function Admin() {
                                     <NavLink
                                         style={styleNavLink}
                                         className={ (navClass) =>
-                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>Costumers</NavLink>
+                                            navClass.isActive ? "nav__active nav__link" : "nav__link"}>Customers</NavLink>
                                 </a>
                                 <a className='list-group-item py-2' onClick={handleClick2} >
                                     <i className="bi bi-person-gear fs-5 me-3"/>

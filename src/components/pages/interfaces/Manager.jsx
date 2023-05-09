@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import '../css/style.css';
 import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import img1 from "../../images/logo/prolog1.png";
@@ -10,6 +10,7 @@ import sessionStorage from "sessionstorage";
 import axios from "axios";
 import Driver from "../manager/Driver";
 import Profile from "./Profile";
+import {GetUserById} from "../../api/user/GetUserById";
 
 const styleNavLink = {
     color: "var(--color-font)",
@@ -23,16 +24,9 @@ function Manager() {
     const location = useLocation();
     const [id,setId] = useState(new URLSearchParams(location.search).get('id'))
     const [tk,setTk] = useState(new URLSearchParams(location.search).get('tk'))
-    const [fullname,setFullname] = useState(new URLSearchParams(location.search).get('fullname'))
-    if(fullname) {
-        sessionStorage.setItem("fullname", fullname);
-    }
-    if(tk) {
-        sessionStorage.setItem("token", tk);
-    }
-    if(id) {
-        sessionStorage.setItem("ID", id);
-    }
+    const [fullname,setFullname] = useState('');
+    const [user, setUser] = useState({});
+
     const handleLogout = () => {
         const config = {
             headers: {
@@ -50,6 +44,23 @@ function Manager() {
     const [show3, setShow3] = useState(false);
     const [show4, setShow4] = useState(false);
 
+    useEffect( () => {
+
+        if(id) {
+            sessionStorage.setItem("ID", id);
+        }
+        if(tk) {
+            sessionStorage.setItem("token", tk);
+        }
+        GetUserById(tk,id).then( us => {
+            setUser(us);
+            setFullname(us.fullname);
+            sessionStorage.setItem("fullname", us.fullname);
+        })
+
+
+
+    }, []);
 
     function handleClick1() {
         setShow1(true);

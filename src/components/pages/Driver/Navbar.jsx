@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import '../Driver/Driver.css';
-import {Logout} from "../../api/Logout";
+import {Logout} from "../../api/authentification/Logout";
 import sessionStorage from "sessionstorage";
 import {NavLink, useNavigate} from "react-router-dom";
 

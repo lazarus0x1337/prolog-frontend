@@ -23,12 +23,13 @@ import Box from "@mui/material/Box";
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {Checkbox, TextField} from "@mui/material";
 
-import {GetConteneurById} from "../../api/GetConteneurById";
-import {UpdateTracking} from '../../api/UpdateTracking';
-import {GetPointsRelais} from '../../api/GetPointsRelais';
-import {UpdateColis} from "../../api/UpdateColis";
+import {GetConteneurById} from "../../api/conteneur/GetConteneurById";
+import {UpdateTracking} from '../../api/tracking/UpdateTracking';
+import {GetPointsRelais} from '../../api/PointRelais/GetPointsRelais';
+import {UpdateColis} from "../../api/colis/UpdateColis";
 import Profile_driver from "../Driver/Profile_driver";
 import axios from "axios";
+import {GetUserById} from "../../api/user/GetUserById";
 
 
 export default function Driver() {
@@ -62,6 +63,13 @@ export default function Driver() {
 
 
     useEffect(() => {
+        if(id) {
+            sessionStorage.setItem("ID", id);
+        }
+        if(tk) {
+            sessionStorage.setItem("token", tk);
+        }
+
         loadContainers().then(conteneurs => {
             setConteneurs(conteneurs);
             if (conteneurs.length === 0) {

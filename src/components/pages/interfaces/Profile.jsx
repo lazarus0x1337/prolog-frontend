@@ -9,8 +9,8 @@ import sessionStorage from "sessionstorage";
 import Box from "@mui/material/Box";
 import {style} from "./Css_Modal";
 import Modal from "@mui/material/Modal";
-import {UpdateProfile} from "../../api/UpdateProfile";
-import {GetProfile} from "../../api/GetProfile";
+import {UpdateProfile} from "../../api/user/UpdateProfile";
+import {GetProfile} from "../../api/user/GetProfile";
 
 function Profile(props) {
 
@@ -40,6 +40,9 @@ function Profile(props) {
         }
         UpdateProfile(token,user,id);
         handlecheckModal();
+        if (fullname !== sessionStorage.getItem('fullname')) {
+            sessionStorage.setItem('fullname', fullname);
+        }
     }
     
     const [ShowModal, setShow] = useState(false);
