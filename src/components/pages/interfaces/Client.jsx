@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import '../css/style.css';
 import {NavLink, useLocation, useNavigate, useParams} from "react-router-dom";
 import Colis from "../client/Colis";
@@ -26,19 +26,29 @@ function Client() {
     const location = useLocation();
     const [id,setId] = useState(new URLSearchParams(location.search).get('id')) // Récupérer la valeur de l'id à partir des query parameters
     const [tk,setTk] = useState(new URLSearchParams(location.search).get('tk'))
-    const [fullname,setFullname] = useState(new URLSearchParams(location.search).get('fullname'))
+    const [fullname,setFullname] = useState("");
     const [toggle, setToggle] = useState(true);
+    const [user, setUser] = useState({});
     const Toggle = () => {  setToggle(!toggle) }
 
-    if(fullname) {
-        sessionStorage.setItem("fullname", fullname);
-    }
-    if(tk) {
-        sessionStorage.setItem("token", tk);
-    }
-    if(id) {
-        sessionStorage.setItem("ID", id);
-    }
+    useEffect( () => {
+
+        if(id) {
+            sessionStorage.setItem("ID", id);
+        }
+        if(tk) {
+            sessionStorage.setItem("token", tk);
+        }
+        GetUserById(tk,id).then( us => {
+            setUser(us);
+            setFullname(us.fullname);
+            sessionStorage.setItem("fullname", us.fullname);
+        })
+
+
+
+    }, []);
+
 
     const [showStep, setShowStep] = useState(true);
     const [showColis, setShowColis] = useState(false);

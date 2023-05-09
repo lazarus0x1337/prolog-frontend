@@ -46,20 +46,12 @@ export default function Driver() {
     const location = useLocation();
     const [id, setId] = useState(new URLSearchParams(location.search).get('id'));
     const [tk, setTk] = useState(new URLSearchParams(location.search).get('tk'));
-    const [fullname, setFullname] = useState(new URLSearchParams(location.search).get('fullname'));
-
+    const [fullname, setFullname] = useState('');
+    const [user, setUser] = useState({});
     const [recupValues, setRecupValues] = useState({}); // état pour stocker si chaque colis a été récupéré
     const [deliveredValues, setDeliveredValues] = useState({}); // état pour stocker si chaque colis a été livré
 
-    if (fullname) {
-        sessionStorage.setItem("fullname", fullname);
-    }
-    if (tk) {
-        sessionStorage.setItem("token", tk);
-    }
-    if (id) {
-        sessionStorage.setItem("ID", id);
-    }
+
 
 
     useEffect(() => {
