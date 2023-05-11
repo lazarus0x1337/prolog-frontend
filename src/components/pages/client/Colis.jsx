@@ -442,7 +442,7 @@ function Colis(props) {
                 <Box sx={style}>
                     <Typography variant="h6" component="h2" sx={{mb: 2}}>
                         <Typography variant="h6" gutterBottom>
-                            Destinataire :
+                            Receiver :
                         </Typography>
                         <Grid container spacing={3}>
                             <Grid item xs={12} sm={6}>
@@ -475,7 +475,7 @@ function Colis(props) {
                                     onChange={(e) => settelAdd(e.target.value)}
                                     value={telAdd}
                                     name="telephone"
-                                    label="Telephone"
+                                    label="Phone Number"
                                     fullWidth
                                     autoComplete="tel"
                                     variant="standard"
@@ -486,7 +486,7 @@ function Colis(props) {
                                     required
                                     onChange={(e) => setaddressDES(e.target.value)}
                                     value={addressDES}
-                                    label="Address Destinataire"
+                                    label="Receiver Address"
                                     fullWidth
                                     autoComplete="address-line1"
                                     variant="standard"
@@ -502,7 +502,7 @@ function Colis(props) {
                                     required
                                     onChange={(e) => setAddColis(e.target.value)}
                                     value={AddColis}
-                                    label="Address Source"
+                                    label="Source Address"
                                     fullWidth
                                     autoComplete="given-name"
                                     variant="standard"
@@ -513,7 +513,7 @@ function Colis(props) {
                                     required
                                     onChange={(e) => setLength(e.target.value)}
                                     value={Length}
-                                    label="length (cm)"
+                                    label="Length (cm)"
                                     fullWidth
                                     type="number"
                                     variant="standard"
@@ -561,7 +561,7 @@ function Colis(props) {
                                     required
                                     onChange={(e) => setPoids(e.target.value)}
                                     value={Poids}
-                                    label="Poids (g)"
+                                    label="Weight (g)"
                                     fullWidth
                                     type="number"
                                     variant="standard"
@@ -571,12 +571,12 @@ function Colis(props) {
                             <Grid item xs={12}>
                                 <FormControlLabel
                                     control={<Checkbox/>}
-                                    label="Cold"
+                                    label="Fragile"
                                     checked={checkedFragile}
                                     onChange={(e) => setCheckedFragile(e.target.checked)}/>
                                 <FormControlLabel
                                     control={<Checkbox/>}
-                                    label="Froid"
+                                    label="Cold"
                                     checked={checkedFroid}
                                     onChange={(e) => setCheckedFriod(e.target.checked)}/>
                             </Grid>
@@ -622,7 +622,7 @@ function Colis(props) {
                                             readOnly: true,
                                         }}
                                         value={Poids}
-                                        label="Poids (g)"
+                                        label="Weight (g)"
                                         fullWidth
                                         type="number"
                                         variant="standard"
@@ -635,7 +635,7 @@ function Colis(props) {
                                         readOnly: true,
                                     }}
                                     value={AddColis}
-                                    label="Address Source"
+                                    label="Source Address"
                                     fullWidth
                                     type="text"
                                     variant="standard"
@@ -649,7 +649,7 @@ function Colis(props) {
                                     disabled/>
                                 <FormControlLabel
                                     control={<Checkbox/>}
-                                    label="Froid"
+                                    label="Cold"
                                     checked={checkedFroid}
                                     disabled
                                 />
@@ -657,7 +657,7 @@ function Colis(props) {
                         </Grid>
                         <Grid>
                             <Typography variant="h6" gutterBottom>
-                                Destinataire :
+                                Receiver :
                             </Typography>
                             <Grid container spacing={2}>
                                 <Grid item xs={12} sm={6}>
@@ -694,7 +694,7 @@ function Colis(props) {
                                     }}
                                     value={telAdd}
                                     name="telephone"
-                                    label="Telephone"
+                                    label="Phone Number"
                                     fullWidth
                                     autoComplete="tel"
                                     variant="standard"
@@ -706,7 +706,7 @@ function Colis(props) {
                                         readOnly: true,
                                     }}
                                     value={addressDES}
-                                    label="Address Destinataire"
+                                    label="Receiver Address"
                                     fullWidth
                                     type="text"
                                     variant="standard"
@@ -715,7 +715,7 @@ function Colis(props) {
                         </Grid>
                         <Grid sx={{ my: 1 }}>
                             <Typography variant="h6" gutterBottom>
-                                Prix :
+                                Price :
                             </Typography>
                             <Grid item xs={12}>
                                 <TextField
@@ -723,7 +723,7 @@ function Colis(props) {
                                         readOnly: true,
                                     }}
                                     value={Prix}
-                                    label="Prix d'envoie (MAD)"
+                                    label="Shipping price (MAD)"
                                     fullWidth
                                     type="number"
                                     variant="standard"
@@ -741,7 +741,7 @@ function Colis(props) {
                                 marginLeft: "170px",
                                 marginTop: "27px",
                                 padding: "10px"
-                            }}>Valider</Button>
+                            }}>Confirm</Button>
                         </div>
                     </Grid>
 
