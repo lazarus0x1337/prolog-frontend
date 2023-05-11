@@ -85,6 +85,7 @@ const StepProgress = (props) =>{
                         </div>
                     </div>
                     <br/>
+
                     { Showtracking &&
                     <div className="col-md-12 col-lg-12  step-tracking">
                         <ul className="list-unstyled events ">
@@ -106,6 +107,24 @@ const StepProgress = (props) =>{
                                 </div>
                             </li>
                             ))}
+                            { factureTracked.colis?.recup &&
+                                <li className="event" >
+                                    <div className="event-time">
+                                        <strong></strong>
+                                        <span></span>
+                                    </div>
+                                    <div className="event-dot"/>
+                                    <div className="event-content">
+                                        <strong>Parcel Pick-Up</strong>
+                                        <span className="location">{factureTracked.colis.adresse}, MAR</span>
+                                        <div className="carrier">
+                                            <div className="courier-icon courier-icon-sytrack"/>
+                                            prolog post
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+
                             {factureTracked &&
                                 <li className="event" >
                                     <div className="event-time">
@@ -123,6 +142,7 @@ const StepProgress = (props) =>{
                                     </div>
                                 </li>
                             }
+
 
                         </ul>
                     </div>

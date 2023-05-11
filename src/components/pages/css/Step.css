@@ -311,3 +311,27 @@
     border-radius: 10px;
     overflow: hidden;
 }
+.event#end {
+    /*background-color: var(--color-font) !important;*/
+}
+.event#end .event-content{
+    color : var(--color-font-hover);
+}
+.event#end .event-content span {
+    color : var(--color-font);
+}
+
+.event#end .event-content .event-content-arrived  {
+    color: #364c54;
+    background-color : rgba(55, 245, 237, 0.83);
+    border-radius: 5px;
+    margin-top: 5px;
+    padding: 10px;
+    width: 63%;
+    font-weight: bold;
+
+}
+
+/*#arrived{*/
+/*    background-color: white;*/
+/*}*/
