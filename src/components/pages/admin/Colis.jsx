@@ -43,7 +43,7 @@ const Colis=(props)=>{
                         <th scope="col">Source Address</th>
                         <th scope="col">Destination Address</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Price</th>
+                        <th scope="col">Price(Dhs)</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
@@ -56,7 +56,7 @@ const Colis=(props)=>{
                             <td>{item.colis.destinataire.adresse}</td>
                             <td>{item.date.substring(0,10)} {item.date.substring(11,19)}</td>
                             <td>{item.prix}</td>
-                            <td >
+                            <td>
                                 <Stack direction="row" spacing={2}>
                                     <Button variant="contained" endIcon={<UpdateIcon />}
                                              style={{

@@ -301,14 +301,7 @@ function Colis(props) {
             factureWindow.close();
             window.focus();
         };
-        // Masquer la fenêtre d'impression pour l'utilisateur
-        // factureWindow.document.close();
-        // factureWindow.focus();
-        // factureWindow.print();
-        // factureWindow.close();
 
-        // Réafficher la page après l'impression
-        // window.focus();
     }
 
 
