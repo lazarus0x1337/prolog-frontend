@@ -13,7 +13,7 @@ import axios from 'axios';
 import sessionStorage from "sessionstorage";
 import ReactDOM from 'react-dom';
 import QRCode from 'react-qr-code';
-
+import { BiPrinter } from 'react-icons/bi';
 // TODO: restore const config as before and add config value to axios call
 
 function Colis(props) {
@@ -157,7 +157,7 @@ function Colis(props) {
             + "</style></head><body>");
 
         factureWindow.document.write("<div style='page-break-after: always;'>");
-        factureWindow.document.write("<img src="+logo+"/>");
+        // factureWindow.document.write("<img src="+logo+"/>");
         // factureWindow.document.write("<h1>PROLOG</h1>");
             factureWindow.document.write("<div style='margin-top: 80px;'>");
                 factureWindow.document.write("<h2>Facture</h2>");
@@ -207,7 +207,7 @@ function Colis(props) {
                 factureWindow.document.write("<th>Numero de tracking</th>");
                 factureWindow.document.write("<th>Poids (g)</th>");
                 factureWindow.document.write("<th>Dimension</th>");
-                factureWindow.document.write("<th>Froid</th>");
+                factureWindow.document.write("<th>Cold</th>");
                 factureWindow.document.write("<th>Fragile</th>");
                 factureWindow.document.write("</tr>");
                 factureWindow.document.write("<tr>");
@@ -230,7 +230,7 @@ function Colis(props) {
                 factureWindow.document.write("<div class='container'>");
 
                 factureWindow.document.write("<div><h2>Tracking : "+facture.colis.trackingNumber.trackingNumber+"</h2></div>");
-                factureWindow.document.write("<table class='a-coller', border='1'><thead><tr>");
+                factureWindow.document.write("<table class='a-coller' border='1'><thead><tr>");
                 factureWindow.document.write("<th></th>");
                 factureWindow.document.write("<th>Name</th>");
                 factureWindow.document.write("<th>Phone Number</th>");
@@ -400,8 +400,8 @@ function Colis(props) {
                             <th scope="col">Weight(g)</th>
                             <th scope="col">Dimension(L)</th>
                             <th scope="col">Fragile</th>
-                            <th scope="col">Froid</th>
-                            <th scope="col">facture</th>
+                            <th scope="col">Cold</th>
+                            <th scope="col">Facture</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -421,7 +421,17 @@ function Colis(props) {
                                     <i className="bi bi-box-fill " style={{color: "var(--color-font-hover)", paddingLeft: "12px"}}/> :
                                     <i className="bi bi-box-fill "
                                        style={{color: "var(--color-font)", paddingLeft: "12px"}}/>}</td>
-                                <td><Button onClick={() => handlePrint(item)}>Imprimer</Button></td>
+                                <td><Button
+                                    variant="outlined"
+                                    endIcon={<BiPrinter />}
+                                    style={{
+                                        color: "var(--color-font-hover)",
+                                        backgroundColor: "var(--color-menu)",
+                                        outline: '1px dashed var(--color-font-hover)'
+                                    }}
+                                    onClick={() => handlePrint(item)}>
+                                    PRINT
+                                </Button></td>
                             </tr>
                         ))}
                         </tbody>
@@ -561,7 +571,7 @@ function Colis(props) {
                             <Grid item xs={12}>
                                 <FormControlLabel
                                     control={<Checkbox/>}
-                                    label="Fragile"
+                                    label="Cold"
                                     checked={checkedFragile}
                                     onChange={(e) => setCheckedFragile(e.target.checked)}/>
                                 <FormControlLabel
