@@ -466,6 +466,7 @@ export default function Driver() {
                                             checked={recupValues[colis.id]}
                                             onChange={(e) => handleCheckboxChange(e, colis.id)}
                                             name={colis.id}
+                                            style={{ color: 'var(--color-font-hover)' }}
                                         />
                                     </td>
                                     <td>
@@ -474,6 +475,7 @@ export default function Driver() {
                                             checked={deliveredValues[colis.id]}
                                             onChange={(e) => handleCheckboxChange(e, colis.id)}
                                             name={colis.id}
+                                            style={{ color: 'var(--color-font-hover)' }}
                                         />
                                     </td>
 
