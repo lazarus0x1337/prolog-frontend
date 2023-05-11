@@ -56,8 +56,8 @@ function Container(props) {
                         <thead>
                         <tr >
                             <th scope="col">Reference</th>
-                            <th scope="col">Nombre de colis</th>
-                            <th scope="col">Trajet</th>
+                            <th scope="col">Number of Packages</th>
+                            <th scope="col">Route</th>
                             <th scope="col">Driver</th>
                             <th scope="col">Status</th>
 
@@ -72,7 +72,7 @@ function Container(props) {
                                     <td>{container.colis.length}</td>
                                     <td>{container.villeDepart} to {container.villeArrivee}</td>
                                     <td>{container.driver.fullname}</td>
-                                    <td>{container.fin?"Arrivé":"En cours"}</td>
+                                    <td>{container.fin?"Arrived":"In progress"}</td>
                                 </tr>
                                 {selectedContainer && selectedContainer.id === container.id && (
                                     <tr key={`${i}-details`} style={{backgroundColor:"var(--color-menu-hover)"}}>
@@ -90,7 +90,7 @@ function Container(props) {
                                                         <td>{item.trackingNumber.trackingNumber}</td>
                                                         <td>{item.adresse}</td>
                                                         <td>{item.destinataire.adresse}</td>
-                                                        <td>{item.delivered?"Délivré":"Non"}</td>
+                                                        <td>{item.delivered?"Délivred":"No"}</td>
                                                     </tr>
                                                 ))}
                                                 </tbody>

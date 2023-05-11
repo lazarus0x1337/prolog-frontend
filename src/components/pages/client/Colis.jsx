@@ -11,6 +11,8 @@ import {style} from "../interfaces/Css_Modal";
 import logo from "../../images/logo/prologBW.png";
 import axios from 'axios';
 import sessionStorage from "sessionstorage";
+import ReactDOM from 'react-dom';
+import QRCode from 'react-qr-code';
 
 // TODO: restore const config as before and add config value to axios call
 
@@ -140,25 +142,29 @@ function Colis(props) {
     const handlePrint = (facture) => {
         const factureWindow = window.open("", "Facture", "height=600,width=800");
 
-        factureWindow.document.write("<html><head><title>Prolog Facture Colis</title></head><body>");
+        factureWindow.document.write("<html><head><title>Prolog Facture Colis</title></head>");
         factureWindow.document.write("<style>"
             + "body { position: relative; }"
             + "h1 { margin: 0 auto; }"
             + "table { margin: auto; border='10'; border-collapse: collapse;}"
             + "td { padding: 4px 10px; }"
             + "th { padding: 4px 10px; }"
-            + "img { position: absolute; right: 10px; top:10px;}"
+            + "div.container { display: flex; justify-content: center; flex-direction: column;}"
+            + ".bas-page { text-align: center; display: flex; position: fixed; bottom: 0; justify-content: center; }"
+            + ".haut-page { text-align: center; display: flex; position: fixed; top: 0; justify-content: center; }"
+            + "@media print { .print-only { display: block !important; }}"
+            + ".img-responsive {margin: 50px 300px !important;}"
             + "</style></head><body>");
 
         factureWindow.document.write("<div style='page-break-after: always;'>");
         factureWindow.document.write("<img src="+logo+"/>");
-        factureWindow.document.write("<h1>PROLOG</h1>");
+        // factureWindow.document.write("<h1>PROLOG</h1>");
             factureWindow.document.write("<div style='margin-top: 80px;'>");
                 factureWindow.document.write("<h2>Facture</h2>");
                 factureWindow.document.write("<p><span style='font-weight: bold'>Ref : </span> #" + facture.id + "</br>");
                 factureWindow.document.write("<span style='font-weight: bold'>Date : </span>" + facture.date.substring(0,10) + "</br>");
                 factureWindow.document.write("<span style='font-weight: bold'>Heure : </span>" + facture.date.substring(11,19) + "</p>");
-            factureWindow.document.write("<hr>");
+                factureWindow.document.write("<hr>");
                 factureWindow.document.write("<h2>Client</h2>");
                 factureWindow.document.write("<table border='1' >");
                 factureWindow.document.write("<tr>");
@@ -213,48 +219,96 @@ function Colis(props) {
                 factureWindow.document.write("</tr>");
                 factureWindow.document.write("</table>");
                 factureWindow.document.write("<p style='text-align: right; font-size: 2em;'><span style='font-weight: bold'>Montant TTC : </span>" + facture.prix + "Dhs</p>");
-        factureWindow.document.write("<hr>");
-            factureWindow.document.write("</div>");
-
-
-
-            factureWindow.document.write("<div style='display: flex; position: absolute; bottom: 100px; justify-content: center;'>");
-            factureWindow.document.write("<div style='margin-left : 3%; margin-right : 3%;'><h4>Prolog</h4>" +
-                "<p>22, Avenue Voltaire</br>" +
-                "13000 Rabat</br>" +
-                "Maroc</br>" +
-                "N° Siren ou Siret : xxxxxDEVIS n° 123</br>" +
-                "N° TVA intra. : MAXX 999999999</p></div>");
-            factureWindow.document.write("<div style='margin-left : 3%; margin-right : 3%;'><h4>Coordonnées</h4>" +
-                "<p>Nadir Ouzlim</br>" +
-                "Téléphone : +2125 0000-0000</br>" +
-                "E-mail : nadir@prolog.fr</br>" +
-                "www.macompagnie.ma</p></div>");
-            factureWindow.document.write("<div style='margin-left : 3%; margin-right : 3%;'><h4>Détails bancaires</h4>" +
-                "<p>Banque BNP</br>" +
-                "Code banque 10000000</br>" +
-                "N° de compte 12345678</br>" +
-                "IBAN MA2341124098234</br>" +
-                "SWIFT/BIC MAHHCXX1001</p></div>");
-
+                factureWindow.document.write("<hr>");
             factureWindow.document.write("</div>");
 
         factureWindow.document.write("</div>");
 
-        factureWindow.document.write("<div style='page-break-before: always;'>");
-        factureWindow.document.write("<p>Veuillez coller ce document dans votre colis</p>");
+        // 2eme page de l'imprimé
+            factureWindow.document.write("<div style='page-break-before: always;'>");
+                factureWindow.document.write("<p style='text-align: right;'>Veuillez coller ce document dans votre colis</p>");
+                factureWindow.document.write("<div class='container'>");
+
+                factureWindow.document.write("<div><h2>Tracking : "+facture.colis.trackingNumber.trackingNumber+"</h2></div>");
+                factureWindow.document.write("<table class='a-coller', border='1'><thead><tr>");
+                factureWindow.document.write("<th></th>");
+                factureWindow.document.write("<th>Name</th>");
+                factureWindow.document.write("<th>Phone Number</th>");
+                factureWindow.document.write("<th>Address</th></tr></thead>");
+                factureWindow.document.write("<tbody><tr>");
+                factureWindow.document.write("<td>FROM</td>");
+                factureWindow.document.write("<td>"+facture.client.fullname+"</td>");
+                factureWindow.document.write("<td>"+facture.client.telephone+"</td>");
+                factureWindow.document.write("<td>"+facture.colis.adresse+"</td></tr>");
+                factureWindow.document.write("<tr>");
+                factureWindow.document.write("<td>TO</td>");
+                factureWindow.document.write("<td>"+facture.colis.destinataire.firstname + " " + facture.colis.destinataire.lastname + "</td>");
+                factureWindow.document.write("<td>"+facture.colis.destinataire.telephone+"</td>");
+                factureWindow.document.write("<td>"+facture.colis.destinataire.adresse+"</td>");
+                factureWindow.document.write("</tr></tbody></table>");
+                factureWindow.document.write("</div>");
+
+                // Generation du QR CODE
+                const qrCodeImg = document.createElement('img');
+                qrCodeImg.src = 'https://chart.googleapis.com/chart?cht=qr&chl=tel:+' + facture.colis.destinataire.telephone + '&chs=250x250&chld=L|0';
+                qrCodeImg.classList.add('qr-code', 'img-thumbnail', 'img-responsive');
+                const qrCodeContainer = document.createElement('div');
+                qrCodeContainer.appendChild(qrCodeImg);
+                qrCodeContainer.classList.add('print-only');
+                factureWindow.document.body.appendChild(qrCodeContainer);
+
+            factureWindow.document.write("</div>");
+        factureWindow.document.write("</div>");
+
+
+        factureWindow.document.write("<div class='haut-page'>");
+        factureWindow.document.write("<h1>PROLOG</h1>");
+
+        // const logoImg = document.createElement('img');
+        // logoImg.src = logo;
+        // const hautPageDiv = factureWindow.document.querySelector('.haut-page');
+        // hautPageDiv.appendChild(logoImg);
+
+        factureWindow.document.write("</div>");
+
+        factureWindow.document.write("<div class='bas-page'>");
+        factureWindow.document.write("<div style='margin-left : 3%; margin-right : 3%;'><h4>Prolog</h4>" +
+            "<p>22, Avenue Voltaire</br>" +
+            "13000 Rabat</br>" +
+            "Maroc</br>" +
+            "N° Siren ou Siret : xxxxxDEVIS n° 123</br>" +
+            "N° TVA intra. : MAXX 999999999</p></div>");
+        factureWindow.document.write("<div style='margin-left : 3%; margin-right : 3%;'><h4>Coordonnées</h4>" +
+            "<p>Nadir Ouzlim</br>" +
+            "Téléphone : +2125 0000-0000</br>" +
+            "E-mail : nadir@prolog.fr</br>" +
+            "www.macompagnie.ma</p></div>");
+        factureWindow.document.write("<div style='margin-left : 3%; margin-right : 3%;'><h4>Détails bancaires</h4>" +
+            "<p>Banque BNP</br>" +
+            "Code banque 10000000</br>" +
+            "N° de compte 12345678</br>" +
+            "IBAN MA2341124098234</br>" +
+            "SWIFT/BIC MAHHCXX1001</p></div>");
+
         factureWindow.document.write("</div>");
 
         factureWindow.document.write("</body></html>");
 
+        qrCodeImg.onload = function() {
+            factureWindow.document.close();
+            factureWindow.focus();
+            factureWindow.print();
+            factureWindow.close();
+            window.focus();
+        };
         // Masquer la fenêtre d'impression pour l'utilisateur
-        factureWindow.document.close();
-        factureWindow.focus();
-        factureWindow.print();
-        factureWindow.close();
+        // factureWindow.document.close();
+        // factureWindow.focus();
+        // factureWindow.print();
+        // factureWindow.close();
 
         // Réafficher la page après l'impression
-        window.focus();
+        // window.focus();
     }
 
 
