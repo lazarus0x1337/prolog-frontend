@@ -9,8 +9,8 @@ function Dashboard(props){
             <Nav Toggle={props.Toggle} fullname={sessionStorage.getItem("fullname")}/>
           <div className="container-fluid px-lg-4">
            <div className="row g-3 my-2 ">
-               <div className="col-md-3 p-1">
-                   <div className="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+               <div className="col-md-3 p-1 cadre_admin">
+                   <div className="p-3  shadow-sm d-flex justify-content-around align-items-center rounded ">
                        <div>
                            <h3 className="fs-2">200</h3>
                            <p className="fs-2">packages</p>
@@ -18,8 +18,8 @@ function Dashboard(props){
                        <i className="bi bi-cart-plus p-3 fs-1"/>
                    </div>
                </div>
-               <div className="col-md-3 p-1">
-                   <div className="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+               <div className="col-md-3 p-1 cadre_admin">
+                   <div className="p-3  shadow-sm d-flex justify-content-around align-items-center rounded">
                        <div>
                            <h3 className="fs-2">200</h3>
                            <p className="fs-2">Bénéfice</p>
@@ -27,8 +27,8 @@ function Dashboard(props){
                        <i className="bi bi-currency-dollar p-3 fs-1"/>
                    </div>
                </div>
-               <div className="col-md-3 p-1">
-                   <div className="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+               <div className="col-md-3 p-1 cadre_admin">
+                   <div className="p-3  shadow-sm d-flex justify-content-around align-items-center rounded">
                        <div>
                            <h3 className="fs-2">200</h3>
                            <p className="fs-2">Delivery</p>
@@ -36,8 +36,8 @@ function Dashboard(props){
                        <i className="bi bi-truck p-3 fs-1"/>
                    </div>
                </div>
-               <div className="col-md-3 p-1">
-                   <div className="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+               <div className="col-md-3 p-1 cadre_admin">
+                   <div className="p-3  shadow-sm d-flex justify-content-around align-items-center rounded">
                        <div>
                            <h3 className="fs-2">20%</h3>
                            <p className="fs-2">Increase</p>

@@ -1,0 +1,12 @@
+.cadre_admin div{
+    background-color: var(--color-degrade3-1);
+
+}
+.justify-content-around{
+    border: 2px solid var(--primary-blue);
+    box-shadow: 3px 3px 3px var(--primary-blue);
+}
+
+.cadre_admin h3,p,i{
+    color:var(--primary-blue);
+}
