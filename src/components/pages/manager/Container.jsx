@@ -1,9 +1,7 @@
 import Nav from "../admin/Nav";
 import {Button} from "@mui/material";
 import {Table} from "react-bootstrap";
-import manager from "../services/Manager_data";
 import {useState} from "react";
-import "../css/manager.css";
 import sessionStorage from "sessionstorage";
 import axios from "axios";
 import * as React from "react";
@@ -81,9 +79,9 @@ function Container(props) {
                                                 <tbody>
                                                 <tr>
                                                     <th>Tracking Number</th>
-                                                    <th>Adresse Source</th>
-                                                    <th>Adresse Destinataire</th>
-                                                    <th>Livré</th>
+                                                    <th>Source Address</th>
+                                                    <th>Destination Address</th>
+                                                    <th>Delivered</th>
                                                 </tr>
                                                 {selectedContainer.colis.map((item, j) => (
                                                     <tr key={`${i}-${j}`}>

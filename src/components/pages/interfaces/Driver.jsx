@@ -201,6 +201,18 @@ export default function Driver() {
         setShow3(false);
         setShow4(true);
     }
+    //
+    const ButtonEndOfTrip=()=>{
+        console.log("hi");
+        const token = sessionStorage.getItem('token');
+
+        FinTravel(token, Conteneur.id).then(() => {
+            handleClickChangeToShow1();
+            setConteneur({});
+        });
+
+    }
+
 
     return (
         <>
@@ -356,6 +368,7 @@ export default function Driver() {
                          justifyContent="center">
                         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                             <Button
+                                onClick={ButtonEndOfTrip}
                                 variant="contained"
                                 sx={{
                                     fontWeight:'bold',

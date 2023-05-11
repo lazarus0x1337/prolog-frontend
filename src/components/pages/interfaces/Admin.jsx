@@ -3,7 +3,6 @@ import '../css/style.css';
 import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import Dashboard from "../admin/Dashboard";
 import Colis from "../admin/Colis";
-import Containers from "../admin/Containers"
 import User from "../admin/User";
 import DespoVehicules from "../admin/DespoVehicules";
 import img1 from "../../images/logo/prolog1.png";
@@ -12,6 +11,7 @@ import sessionStorage from "sessionstorage";
 import axios from "axios";
 import Profile from "./Profile";
 import {GetUserById} from "../../api/user/GetUserById";
+import Container from "../manager/Container";
 
 const styleNavLink = {
     color: "var(--color-font)",
@@ -185,7 +185,7 @@ function Admin() {
                             <React.Fragment key={state.name}>
                                 {state.name === 'show1' && <Dashboard Toggle={Toggle} />}
                                 {state.name === 'show2' && <Colis Toggle={Toggle} />}
-                                {state.name === 'show3' && <Containers Toggle={Toggle} />}
+                                {state.name === 'show3' && <Container Toggle={Toggle} />}
                                 {state.name === 'show4' && <User Toggle={Toggle} role="CLIENT" />}
                                 {state.name === 'show5' && <User Toggle={Toggle} role="DRIVER" />}
                                 {state.name === 'show6' && <User Toggle={Toggle} role="MANAGER" />}

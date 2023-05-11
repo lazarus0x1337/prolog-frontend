@@ -376,6 +376,7 @@ function Colis(props) {
 
     return (
         <>
+
             <Nav Toggle={props.Toggle} fullname={sessionStorage.getItem("fullname")}/>
             <div className="manager">
                 <h2 className="booking__title">Colis : </h2>
@@ -783,7 +784,6 @@ function Colis(props) {
                     </Grid>
                 </Box>
             </Modal>
-
         </>
     );
 }

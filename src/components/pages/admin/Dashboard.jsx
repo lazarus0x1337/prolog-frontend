@@ -1,5 +1,6 @@
 import  Nav from "./Nav";
 import React from "react";
+import "../css/dashboard.css";
 
 function Dashboard(props){
     return(

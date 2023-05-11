@@ -70,8 +70,7 @@ const User = (props) => {
         <>
             <Nav Toggle={props.Toggle} fullname={sessionStorage.getItem("fullname")}/>
 
-    <div className="client">
-      <div className="sell__car-wrapper">
+    <div className="manager">
         <h2 className="title">{props.role==='CLIENT'?'CUSTOMER':props.role}S : </h2>
           <div className="input-group">
               <div className="container search-form">
@@ -125,7 +124,6 @@ const User = (props) => {
                   ))}
                   </tbody>
               </Table>
-          </div>
       </div>
     </div>
 
@@ -212,7 +210,7 @@ const User = (props) => {
                 <Box sx={style}>
                     <Grid  sx={{ my: 1 }}>
                         <Typography variant="h6" textAlign="center" gutterBottom>
-                            Les packages envoyé avec succès !
+                            Successfully modified !
                         </Typography>
                         <Button onClick={CloseModalUpdate} style={{
                             backgroundColor: "var(--primary-blue)",
