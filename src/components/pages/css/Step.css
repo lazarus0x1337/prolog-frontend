@@ -335,3 +335,8 @@
 /*#arrived{*/
 /*    background-color: white;*/
 /*}*/
+
+.step-tracking ul {
+    border-radius: 10px !important;
+    overflow: hidden !important;
+}
