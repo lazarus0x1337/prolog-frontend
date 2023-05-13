@@ -54,7 +54,7 @@ function Container(props) {
                         <tr >
                             <th scope="col">Fullname</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Telephone</th>
+                            <th scope="col">Phone Number</th>
 
                         </tr>
                         </thead>

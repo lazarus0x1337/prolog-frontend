@@ -42,43 +42,43 @@ function Vehicules(props) {
                     <div className="row row-cols-1 row-cols-2 row-cols-3 row-cols-4 vehicules">
                         <div className="col">
                             <Grid className="camion-1">
-                                <div className="p-2 ">&nbsp;&nbsp;&nbsp;Type&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;Camion Benne</div>
+                                <div className="p-2 ">&nbsp;&nbsp;&nbsp;Type&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;Benne Truck</div>
                                 <div className="p-2">&nbsp;&nbsp;&nbsp;Volume&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;40 000 L</div>
-                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Colis Fragile&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/> </div>
-                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Colis Froid&nbsp;&nbsp;&nbsp; <i className="bi bi-square"/> </div>
-                                <div className="p-2">&nbsp;&nbsp;&nbsp;Disponible&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/></div>
+                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Fragile Packages&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/> </div>
+                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Cold Packages&nbsp;&nbsp;&nbsp; <i className="bi bi-square"/> </div>
+                                <div className="p-2">&nbsp;&nbsp;&nbsp;Available&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/></div>
                             </Grid>
                         </div>
                         <div className="col">
                             <Grid className="camion-1">
-                                <div className="p-2 ">&nbsp;&nbsp;&nbsp;Type&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;Camion Frigo</div>
+                                <div className="p-2 ">&nbsp;&nbsp;&nbsp;Type&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;Frigo Truck</div>
                                 <div className="p-2">&nbsp;&nbsp;&nbsp;Volume&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;50 000 L</div>
-                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Colis Fragile&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/> </div>
-                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Colis Froid&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/> </div>
-                                <div className="p-2">&nbsp;&nbsp;&nbsp;Disponible&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/></div>
+                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Fragile Packages&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/> </div>
+                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Cold Packages&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/> </div>
+                                <div className="p-2">&nbsp;&nbsp;&nbsp;Available&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/></div>
                             </Grid>
                         </div>
                         <div className="col">
                             <Grid className="camion-1">
-                                <div className="p-2 ">&nbsp;&nbsp;&nbsp;Type&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;Camion Fourgon</div>
+                                <div className="p-2 ">&nbsp;&nbsp;&nbsp;Type&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;Fourgon Truck</div>
                                 <div className="p-2">&nbsp;&nbsp;&nbsp;Volume&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;60 500 L</div>
-                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Colis Fragile&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/> </div>
-                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Colis Froid&nbsp;&nbsp;&nbsp; <i className="bi bi-square"/> </div>
-                                <div className="p-2">&nbsp;&nbsp;&nbsp;Disponible&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/></div>
+                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Fragile Packages&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/> </div>
+                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Cold Packages&nbsp;&nbsp;&nbsp; <i className="bi bi-square"/> </div>
+                                <div className="p-2">&nbsp;&nbsp;&nbsp;Available&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/></div>
                             </Grid>
                         </div>
                         <div className="col">
                             <Grid className="camion-1">
-                                <div className="p-2 ">&nbsp;&nbsp;&nbsp;Type&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;Camion Plateau</div>
+                                <div className="p-2 ">&nbsp;&nbsp;&nbsp;Type&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;Plateau Truck</div>
                                 <div className="p-2">&nbsp;&nbsp;&nbsp;Volume&nbsp;&nbsp;&nbsp;&nbsp; <i className="bi bi-arrow-right"/>&nbsp;&nbsp;&nbsp;Depends container</div>
-                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Colis Fragile&nbsp;&nbsp;&nbsp; <i className="bi bi-square"/> </div>
-                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Colis Froid&nbsp;&nbsp;&nbsp; <i className="bi bi-square"/> </div>
-                                <div className="p-2">&nbsp;&nbsp;&nbsp;Disponible&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/></div>
+                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Fragile Packages&nbsp;&nbsp;&nbsp; <i className="bi bi-square"/> </div>
+                                <div className="p-2">&nbsp;&nbsp;&nbsp;Support Cold Packages&nbsp;&nbsp;&nbsp; <i className="bi bi-square"/> </div>
+                                <div className="p-2">&nbsp;&nbsp;&nbsp;Available&nbsp;&nbsp;&nbsp; <i className="bi bi-check-square-fill"/></div>
                             </Grid>
                         </div>
                     </div>
                     <div className="row row-cols-1 row-cols-2 row-cols-3 row-cols-4 vehicules">
-                        <Button onClick={handleClick} >Rent a Camion </Button>
+                        <Button onClick={handleClick} >Rent a Truck </Button>
                     </div>
                 </div>
 

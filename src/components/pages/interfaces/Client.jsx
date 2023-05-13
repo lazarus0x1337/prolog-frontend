@@ -15,8 +15,7 @@ import {GetUserById} from "../../api/user/GetUserById";
 
 const styleNavLink = {
     color: "var(--color-font)",
-    textDecoration:'none',
-    ':hover': {color: "var(--color-font-hover)"}
+    textDecoration:'none'
 };
 
 

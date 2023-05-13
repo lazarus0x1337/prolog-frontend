@@ -1,9 +1,7 @@
 import Nav from "../admin/Nav";
 import {Button} from "@mui/material";
 import {Table} from "react-bootstrap";
-import manager from "../services/Manager_data";
 import {useState} from "react";
-import "../css/manager.css";
 import sessionStorage from "sessionstorage";
 import axios from "axios";
 import * as React from "react";
@@ -56,8 +54,8 @@ function Container(props) {
                         <thead>
                         <tr >
                             <th scope="col">Reference</th>
-                            <th scope="col">Nombre de colis</th>
-                            <th scope="col">Trajet</th>
+                            <th scope="col">Number of Packages</th>
+                            <th scope="col">Route</th>
                             <th scope="col">Driver</th>
                             <th scope="col">Status</th>
 
@@ -72,7 +70,7 @@ function Container(props) {
                                     <td>{container.colis.length}</td>
                                     <td>{container.villeDepart} to {container.villeArrivee}</td>
                                     <td>{container.driver.fullname}</td>
-                                    <td>{container.fin?"Arrivé":"En cours"}</td>
+                                    <td>{container.fin?"Arrived":"In progress"}</td>
                                 </tr>
                                 {selectedContainer && selectedContainer.id === container.id && (
                                     <tr key={`${i}-details`} style={{backgroundColor:"var(--color-menu-hover)"}}>
@@ -81,16 +79,16 @@ function Container(props) {
                                                 <tbody>
                                                 <tr>
                                                     <th>Tracking Number</th>
-                                                    <th>Adresse Source</th>
-                                                    <th>Adresse Destinataire</th>
-                                                    <th>Livré</th>
+                                                    <th>Source Address</th>
+                                                    <th>Destination Address</th>
+                                                    <th>Delivered</th>
                                                 </tr>
                                                 {selectedContainer.colis.map((item, j) => (
                                                     <tr key={`${i}-${j}`}>
                                                         <td>{item.trackingNumber.trackingNumber}</td>
                                                         <td>{item.adresse}</td>
                                                         <td>{item.destinataire.adresse}</td>
-                                                        <td>{item.delivered?"Délivré":"Non"}</td>
+                                                        <td>{item.delivered?"Délivred":"No"}</td>
                                                     </tr>
                                                 ))}
                                                 </tbody>

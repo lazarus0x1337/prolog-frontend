@@ -29,7 +29,7 @@ import {GetPointsRelais} from '../../api/PointRelais/GetPointsRelais';
 import {UpdateColis} from "../../api/colis/UpdateColis";
 import Profile_driver from "../Driver/Profile_driver";
 import axios from "axios";
-import {GetUserById} from "../../api/user/GetUserById";
+import {FinTravel} from "../../api/conteneur/FinTravel";
 
 
 export default function Driver() {
@@ -50,6 +50,7 @@ export default function Driver() {
     const [user, setUser] = useState({});
     const [recupValues, setRecupValues] = useState({}); // état pour stocker si chaque colis a été récupéré
     const [deliveredValues, setDeliveredValues] = useState({}); // état pour stocker si chaque colis a été livré
+    const [refetch, setRefetch] = useState(false);
 
 
 
@@ -62,13 +63,12 @@ export default function Driver() {
             sessionStorage.setItem("token", tk);
         }
 
-        loadContainers().then(conteneurs => {
-            setConteneurs(conteneurs);
-            if (conteneurs.length === 0) {
+        loadContainers().then(cont => {
+            setConteneurs(cont);
+            if (cont.length === 0)
                 NoDataFound();
-            }
         });
-    }, []);
+    }, [refetch]);
 
     const loadContainers = async () => {
 
@@ -80,9 +80,9 @@ export default function Driver() {
         };
 
         return axios.get(`${API_URL}/conteneur`, config)
-                .then(response => {
+                .then(async response => {
                     if (response.status === 200) {
-                        return response.data.filter(cc => cc.driver.id == driverId);
+                        return response.data.filter(cc => cc.driver.id == driverId && !cc.fin);
                     }
                 })
                 .catch(reason => {
@@ -200,6 +200,20 @@ export default function Driver() {
         setShow3(false);
         setShow4(true);
     }
+    //
+    const ButtonEndOfTrip=()=>{
+        console.log("hi");
+        const token = sessionStorage.getItem('token');
+
+        FinTravel(token, Conteneur.id).then(() => {
+            setConteneur({});
+            setRefetch(prevState => !prevState);
+
+
+        }).finally(handleClickChangeToShow1());
+
+    }
+
 
     return (
         <>
@@ -355,6 +369,7 @@ export default function Driver() {
                          justifyContent="center">
                         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                             <Button
+                                onClick={ButtonEndOfTrip}
                                 variant="contained"
                                 sx={{
                                     fontWeight:'bold',
@@ -451,6 +466,7 @@ export default function Driver() {
                                             checked={recupValues[colis.id]}
                                             onChange={(e) => handleCheckboxChange(e, colis.id)}
                                             name={colis.id}
+                                            style={{ color: 'var(--color-font-hover)' }}
                                         />
                                     </td>
                                     <td>
@@ -459,6 +475,7 @@ export default function Driver() {
                                             checked={deliveredValues[colis.id]}
                                             onChange={(e) => handleCheckboxChange(e, colis.id)}
                                             name={colis.id}
+                                            style={{ color: 'var(--color-font-hover)' }}
                                         />
                                     </td>
 

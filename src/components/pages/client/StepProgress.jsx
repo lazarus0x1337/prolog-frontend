@@ -16,6 +16,7 @@ const StepProgress = (props) =>{
 
     let [valueSearch,setValueSearch]=useState(localStorage.getItem('tracking'));
 
+
     let [pointsDeRelais,setPointsDeRelais]=useState([]);
     let [dateChemin,setDateChemin]=useState([]);
     let [colisTracked,setColisTracked]=useState({});
@@ -85,9 +86,32 @@ const StepProgress = (props) =>{
                         </div>
                     </div>
                     <br/>
+
                     { Showtracking &&
                     <div className="col-md-12 col-lg-12  step-tracking">
                         <ul className="list-unstyled events ">
+
+                            { factureTracked.colis?.delivered &&
+                            <li className="event" id="end">
+                                <div className="event-time">
+                                    <strong>- -</strong>
+                                    <span> - - </span>
+                                </div>
+                                <div className="event-dot"/>
+                                <div className="event-content">
+                                    <strong>Package Arrived To Destination</strong>
+                                    <span className="location">{factureTracked.colis.destinataire.adresse}, MAR</span>
+                                    <div className="event-content-arrived" >
+                                        This is the final status. Carrier doesn't provide further tracking updates.
+                                    </div>
+                                    <div className="carrier">
+                                        <div className="courier-icon courier-icon-sytrack"/>
+                                        prolog post
+                                    </div>
+                                </div>
+                            </li>
+                           }
+
                             { trajet && trajet.pointsDeRelais.reverse().map((item,i) => (
                                 <li className="event" key={i} >
                                     {trajet.dateChemin &&
@@ -106,6 +130,24 @@ const StepProgress = (props) =>{
                                 </div>
                             </li>
                             ))}
+                            { factureTracked.colis?.recup &&
+                                <li className="event" >
+                                    <div className="event-time">
+                                        <strong></strong>
+                                        <span></span>
+                                    </div>
+                                    <div className="event-dot"/>
+                                    <div className="event-content">
+                                        <strong>Parcel Pick-Up</strong>
+                                        <span className="location">{factureTracked.colis.adresse}, MAR</span>
+                                        <div className="carrier">
+                                            <div className="courier-icon courier-icon-sytrack"/>
+                                            prolog post
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+
                             {factureTracked &&
                                 <li className="event" >
                                     <div className="event-time">
@@ -123,6 +165,7 @@ const StepProgress = (props) =>{
                                     </div>
                                 </li>
                             }
+
 
                         </ul>
                     </div>
@@ -142,21 +185,6 @@ const StepProgress = (props) =>{
                 </div>
 
             </section>
-
-
-
-
-
-            {/*<Modal open={loginOpen} >*/}
-            {/*    <Box sx={style}>*/}
-            {/*        <Typography variant="h6" component="h2" sx={{ mb: 2 }}>*/}
-
-
-
-            {/*        </Typography>*/}
-
-            {/*    </Box>*/}
-            {/*</Modal>*/}
 
 </>
     );

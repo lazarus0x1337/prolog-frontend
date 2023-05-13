@@ -8,12 +8,22 @@ body {
 }
 
 .list-group a:hover{
-    background-color:var(--color-menu-hover);
-    color : var(--color-font-hover);
+    background-color: var(--color-menu-hover);
+    color : var(--color-font-hover) !important;
     cursor: pointer;
     border-radius: 5px;
 }
+
+.list-group a:hover i {
+    color: var(--color-font-hover);
+}
+
 .list-group a{
+    color : var(--color-font);
+    background-color: transparent;
+}
+
+.list-group a i {
     color : var(--color-font);
     background-color: transparent;
 }
@@ -76,11 +86,10 @@ body {
 }
 
 /*----------------------img------------------------*/
-.img1{
-
- height: 23px;
-
+.img1 {
+    height: 23px;
 }
+
 .img2{
     margin-top: 10px;
     margin-right: 8px;
@@ -88,7 +97,7 @@ body {
 }
 
 .form-check input{
-background-color: #00FFF0 !important;
+    background-color: #00FFF0 !important;
     color: #00FFF0!important;
 }
 

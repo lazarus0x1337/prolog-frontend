@@ -361,7 +361,7 @@ function Colis(props) {
                 <Box sx={style}>
                     <Grid  sx={{ my: 1 }}>
                         <Typography variant="h6" textAlign="center" gutterBottom>
-                            Les packages envoyé avec succès !
+                            Packages Sent Successfully!
                         </Typography>
                         <Button onClick={handleClose} style={{
                             backgroundColor: "var(--primary-blue)",
@@ -379,7 +379,7 @@ function Colis(props) {
                 <Box sx={style}>
                     <Grid  sx={{ my: 1 }}>
                         <Typography variant="h6" textAlign="center" gutterBottom>
-                            Veuillez selectionner au moins un colis !
+                            Please Select At Least One Package!
                         </Typography>
                         <Button onClick={handleCloseModal1} style={{
                             backgroundColor: "var(--primary-blue)",
@@ -416,7 +416,7 @@ function Colis(props) {
                     </Grid>
                     <Grid  sx={{ my: 1 }}>
                         <Typography variant="h6" textAlign="left" gutterBottom>
-                            Colis à ajouter au conteneur :
+                            Packages to add to container:
                         </Typography>
                         <Grid style={style_Tracking}>
                             {selectedIds.map(item => (
@@ -459,7 +459,7 @@ function Colis(props) {
                                        type="text"
                             />
                             <TextField sx={{ my: 1 }}
-                                       label="Ville Depart"
+                                       label="Start City"
                                        onChange={(e) => setvilleDepart(e.target.value)}
                                        value={villeDepart}
                                        fullWidth
@@ -467,7 +467,7 @@ function Colis(props) {
                                        required
                             />
                             <TextField sx={{ my: 1 }}
-                                       label="Ville Arrivée"
+                                       label="Arrived City"
                                        onChange={(e) => setvilleArrivee(e.target.value)}
                                        value={villeArrivee}
                                        fullWidth
@@ -494,7 +494,7 @@ function Colis(props) {
                     </Grid>
                     <Grid  sx={{ my: 1 }}>
                         <Typography variant="h6" textAlign="left" gutterBottom>
-                            Colis à ajouter au conteneur :
+                            Packages to add to container:
                         </Typography>
                         <Grid style={style_Tracking}>
                             {selectedIds.map(item => (
@@ -548,7 +548,7 @@ function Colis(props) {
                                        InputProps={{
                                            readOnly: true,
                                        }}
-                                       label="Ville Depart :"
+                                       label="Start City :"
                                        value={villeDepart}
                                        fullWidth
                                        type="text"
@@ -557,7 +557,7 @@ function Colis(props) {
                                        InputProps={{
                                            readOnly: true,
                                        }}
-                                       label="Ville Arrivee :"
+                                       label="Arrived City :"
                                        value={villeArrivee}
                                        fullWidth
                                        type="text"
@@ -566,7 +566,7 @@ function Colis(props) {
                                        InputProps={{
                                            readOnly: true,
                                        }}
-                                       label="Chauffeur :"
+                                       label="Driver :"
                                        value={fullname}
                                        fullWidth
                                        type="text"
@@ -575,7 +575,7 @@ function Colis(props) {
                     </Grid>
                     <Grid  sx={{ my: 1 }} >
                         <Typography variant="h6" textAlign="left" gutterBottom>
-                            Colis à ajouter au conteneur :
+                            Packages to add to container:
                         </Typography>
                         <Grid style={style_Tracking}>
                             {selectedIds.map(item => (
