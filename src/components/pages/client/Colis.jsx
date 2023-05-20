@@ -11,8 +11,6 @@ import {style} from "../interfaces/Css_Modal";
 import logo from "../../images/logo/prologBW.png";
 import axios from 'axios';
 import sessionStorage from "sessionstorage";
-import ReactDOM from 'react-dom';
-import QRCode from 'react-qr-code';
 import { BiPrinter } from 'react-icons/bi';
 // TODO: restore const config as before and add config value to axios call
 
@@ -218,7 +216,7 @@ function Colis(props) {
                 factureWindow.document.write("<td>"+ (facture.colis.fragile?'Oui':'Non') +"</td>");
                 factureWindow.document.write("</tr>");
                 factureWindow.document.write("</table>");
-                factureWindow.document.write("<p style='text-align: right; font-size: 2em;'><span style='font-weight: bold'>Montant TTC : </span>" + facture.prix + "Dhs</p>");
+                factureWindow.document.write("<p style='text-align: right; font-size: 2em;'><span style='font-weight: bold'>Montant TTC : </span>" + facture.prix.toFixed(2) + "Dhs</p>");
                 factureWindow.document.write("<hr>");
             factureWindow.document.write("</div>");
 

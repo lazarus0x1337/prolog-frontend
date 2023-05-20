@@ -7,6 +7,10 @@
     box-shadow: 3px 3px 3px var(--primary-blue);
 }
 
-.cadre_admin h3,p,i{
+.cadre_admin h3,i{
+    color:var(--primary-blue);
+}
+
+.pb {
     color:var(--primary-blue);
 }

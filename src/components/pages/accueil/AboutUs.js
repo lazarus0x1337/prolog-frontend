@@ -5,7 +5,6 @@ const AboutUs = () => {
   return (
     <div id="about" className="container-fluid py-5" style={{
       backgroundColor: "white",
-      width: "95vw",
       position: "relative",
       zIndex: 1
     }}>
