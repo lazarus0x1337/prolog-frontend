@@ -1,9 +1,10 @@
 import  Nav from "./Nav";
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import "../css/dashboard.css";
 import sessionStorage from "sessionstorage";
 import {GetAllColis} from "../../api/colis/GetAllColis";
 import {GetAllFacturesColis} from "../../api/facture/GetAllFacturesColis";
+import {AdminContext} from "../interfaces/Admin";
 
 function Dashboard(props){
 
@@ -12,8 +13,9 @@ function Dashboard(props){
     let [arrivedColis,setArrivedColis]=useState(0);
     let [facturesAujourdhui,setFacturesAujourdhui]=useState(0);
     let [troisPremieresFactures,setTroisPremieresFactures]=useState([]);
+    const { token } = useContext(AdminContext);
+
     useEffect( () => {
-        const token = sessionStorage.getItem("token");
         GetAllColis(token).then((colis) => {
             setcountAllColis(colis.length);
             const arrivedColis = colis.filter(coli => coli.delivered).length;
@@ -48,7 +50,7 @@ function Dashboard(props){
                    <div className="p-3  shadow-sm d-flex justify-content-around align-items-center rounded ">
                        <div>
                            <h3 className="fs-2">{countAllColis}</h3>
-                           <p className="fs-2">Packages</p>
+                           <p className="fs-2 pb">Packages</p>
                        </div>
                        <i className="bi bi-cart-plus p-3 fs-1"/>
                    </div>
@@ -56,8 +58,8 @@ function Dashboard(props){
                <div className="col-md-3 p-1 cadre_admin">
                    <div className="p-3  shadow-sm d-flex justify-content-around align-items-center rounded">
                        <div>
-                           <h3 className="fs-2">{sommePrix*0.1}</h3>
-                           <p className="fs-2">Earnings</p>
+                           <h3 className="fs-2">{(sommePrix*0.1).toFixed(3)}</h3>
+                           <p className="fs-2 pb">Earnings</p>
                        </div>
                        <i className="bi bi-currency-dollar p-3 fs-1"/>
                    </div>
@@ -66,7 +68,7 @@ function Dashboard(props){
                    <div className="p-3  shadow-sm d-flex justify-content-around align-items-center rounded">
                        <div>
                            <h3 className="fs-2">{arrivedColis}</h3>
-                           <p className="fs-2">Delivery</p>
+                           <p className="fs-2 pb">Delivery</p>
                        </div>
                        <i className="bi bi-truck p-3 fs-1"/>
                    </div>
@@ -75,7 +77,7 @@ function Dashboard(props){
                    <div className="p-3  shadow-sm d-flex justify-content-around align-items-center rounded">
                        <div>
                            <h3 className="fs-2">{facturesAujourdhui}</h3>
-                           <p className="fs-2">    Today</p>
+                           <p className="fs-2 pb">Today</p>
                        </div>
                        <i className="bi bi-graph-up-arrow p-3 fs-1"/>
                    </div>

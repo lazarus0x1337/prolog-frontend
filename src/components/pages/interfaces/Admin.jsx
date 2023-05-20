@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {createContext, useEffect, useState} from "react";
 import '../css/style.css';
 import {NavLink, useLocation, useNavigate} from "react-router-dom";
 import Dashboard from "../admin/Dashboard";
@@ -79,7 +79,9 @@ function Admin() {
     }
     return (
 
-        <>
+        <AdminContext.Provider value={{
+            token: tk
+        }}>
             <div className='container-fluid  min-vh-100 '>
                 <div className='row ' style={{position: "relative"}}>
                     {toggle && <div className='col-4 col-md-2 class1 vh-100 position-fixed'>
@@ -198,7 +200,9 @@ function Admin() {
                 </div>
             </div>
 
-        </>
+        </AdminContext.Provider>
     );
 }
 export default Admin;
+
+export const AdminContext = createContext();
