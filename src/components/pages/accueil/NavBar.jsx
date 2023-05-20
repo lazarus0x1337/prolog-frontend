@@ -70,7 +70,7 @@ const NavBar = () => {
 
 
             },fail=>{
-                alert("incorrect email and password not mutch");
+                alert("incorrect email and password not match");
                 console.error(fail); //error
             });
         }

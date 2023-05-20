@@ -91,7 +91,7 @@ const StepProgress = (props) =>{
                     <div className="col-md-12 col-lg-12  step-tracking">
                         <ul className="list-unstyled events ">
 
-                            { factureTracked.colis?.delivered &&
+                            { factureTracked?.colis?.delivered &&
                             <li className="event" id="end">
                                 <div className="event-time">
                                     <strong>- -</strong>
@@ -100,7 +100,7 @@ const StepProgress = (props) =>{
                                 <div className="event-dot"/>
                                 <div className="event-content">
                                     <strong>Package Arrived To Destination</strong>
-                                    <span className="location">{factureTracked.colis.destinataire.adresse}, MAR</span>
+                                    <span className="location">{factureTracked?.colis.destinataire.adresse}, MAR</span>
                                     <div className="event-content-arrived" >
                                         This is the final status. Carrier doesn't provide further tracking updates.
                                     </div>
@@ -112,7 +112,7 @@ const StepProgress = (props) =>{
                             </li>
                            }
 
-                            { trajet && trajet.pointsDeRelais.reverse().map((item,i) => (
+                            { trajet && trajet.pointsDeRelais?.reverse().map((item,i) => (
                                 <li className="event" key={i} >
                                     {trajet.dateChemin &&
                                         <div className="event-time">
@@ -130,7 +130,7 @@ const StepProgress = (props) =>{
                                 </div>
                             </li>
                             ))}
-                            { factureTracked.colis?.recup &&
+                            { factureTracked?.colis?.recup &&
                                 <li className="event" >
                                     <div className="event-time">
                                         <strong></strong>
@@ -139,7 +139,7 @@ const StepProgress = (props) =>{
                                     <div className="event-dot"/>
                                     <div className="event-content">
                                         <strong>Parcel Pick-Up</strong>
-                                        <span className="location">{factureTracked.colis.adresse}, MAR</span>
+                                        <span className="location">{factureTracked?.colis.adresse}, MAR</span>
                                         <div className="carrier">
                                             <div className="courier-icon courier-icon-sytrack"/>
                                             prolog post
@@ -157,7 +157,7 @@ const StepProgress = (props) =>{
                                     <div className="event-dot"/>
                                     <div className="event-content">
                                         <strong>Pre-Shipment Info Sent to Dest</strong>
-                                        <span className="location">{factureTracked.colis.adresse}, MAR</span>
+                                        <span className="location">{factureTracked?.colis.adresse}, MAR</span>
                                         <div className="carrier">
                                             <div className="courier-icon courier-icon-sytrack"/>
                                             prolog post

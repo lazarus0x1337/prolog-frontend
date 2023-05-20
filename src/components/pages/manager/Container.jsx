@@ -31,12 +31,7 @@ function Container(props) {
     }
 
     const handleRowClick = (container) => {
-         setSelectedContainer((prevState) => {
-             if(prevState?.id === container?.id) {
-                 return { id: 0 };
-             }
-             return container
-         });
+         setSelectedContainer((prevState) => prevState?.id === container?.id ? {id: 0} : container);
     };
 
     return(
