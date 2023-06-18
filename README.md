@@ -49,20 +49,7 @@ Clone the repository for the backend and follow the steps above:
 4. Launch the backend application by running the master class NomDeVotreApplication.java.
 
 
-## Captures d'écran
-- **Home Page**
 
-![Home Page]()
-
-
-- **Login**
-
-![Login]()
-
-
-- **Registration**
-
-![Registration]()
 
 ## contribute
 
