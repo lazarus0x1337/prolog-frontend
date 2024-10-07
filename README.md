@@ -57,4 +57,4 @@ If you want to contribute to this project, you can open a new issue to report a 
 
 ## Auteur
 
-Fanidi Abdellah  - [Contactez-moi](mailto:abdellahfanidi997@gmail.com)
+Fanidi Abdellah  - [Contactez-moi](mailto:abdellahfanidiyt@gmail.com)
